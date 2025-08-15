@@ -62,7 +62,7 @@ export default function HomePage() {
 					</button>
 					<button className={styles.ownerBtn}>
 						<img
-							src="/briefCase.svg"
+							src="/briefcase.svg"
 							alt="logo"
 							style={{ width: 22, height: 22 }}
 						/>
