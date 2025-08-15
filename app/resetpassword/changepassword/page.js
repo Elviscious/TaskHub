@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import styles from "@/app/signin/page.module.css";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const ChangePassword = () => {
 	const [selectedRadio, setSelectedRadio] = useState("worker");
@@ -12,7 +13,7 @@ const ChangePassword = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const router = useRouter();
+	const router = useRouter();
 
 	const handleOptionChange = (e) => {
 		setSelectedRadio(e.target.value);
@@ -64,7 +65,7 @@ const ChangePassword = () => {
 		setPasswordError("");
 		// Proceed with form submission logic here
 
-        router.push("/dashboard");
+		router.push("/dashboard");
 	};
 
 	return (

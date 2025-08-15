@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "@/app/login/page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Login = () => {
 	const [password, setPassword] = useState("");

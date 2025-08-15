@@ -4,14 +4,15 @@ import React, { useState, useRef, useContext, use } from "react";
 import codeStyles from "@/app/resetpassword/inputcode/page.module.css";
 import { AppContext } from "@/app/context/resetcontext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Code = () => {
 	const [otp, setOtp] = useState(["", "", "", "", ""]);
 	const inputRefs = useRef([]);
 	const [verifiedOtp, setVerifiedOtp] = useState("");
 	const { email } = useContext(AppContext);
-    const router = useRouter();
-    const OTP = 123456;
+	const router = useRouter();
+	const OTP = 123456;
 
 	const handleChange = (e, index) => {
 		const value = e.target.value;
@@ -36,7 +37,7 @@ const Code = () => {
 		e.preventDefault();
 		const fullOtp = otp.join("");
 		setVerifiedOtp(fullOtp);
-        router.push("/resetpassword/changepassword");
+		router.push("/resetpassword/changepassword");
 	};
 
 	return (

@@ -5,20 +5,21 @@ import { useRouter } from "next/navigation";
 // import styles from "@/app/login/page.module.css";
 import resetStyles from "@/app/resetpassword/page.module.css";
 import { AppContext } from "../context/resetcontext";
+import Image from "next/image";
 
 const Reset = () => {
 	const [activeEmail, setActiveEmail] = useState("");
-  const {email, setEmail} = useContext(AppContext);
+	const { email, setEmail } = useContext(AppContext);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-    setEmail(activeEmail);
+		setEmail(activeEmail);
 		router.push("/resetpassword/inputcode");
 	};
 
 	const handleChange = (e) => {
-    setActiveEmail(e.target.value);
-  };
+		setActiveEmail(e.target.value);
+	};
 
 	const router = useRouter();
 
@@ -41,7 +42,14 @@ const Reset = () => {
 							>
 								Input your email
 							</label>
-							<input type="email" id="email" name="email" onChange={handleChange} value={activeEmail} required />
+							<input
+								type="email"
+								id="email"
+								name="email"
+								onChange={handleChange}
+								value={activeEmail}
+								required
+							/>
 						</div>
 						<p className={resetStyles.errorMessage}></p>
 					</div>
