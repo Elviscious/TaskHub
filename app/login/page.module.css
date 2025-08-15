@@ -1,0 +1,150 @@
+.loginBg {
+  background-image: url("/57541.png");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginContainer {
+  min-width: 430px;
+  padding: 70px 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  opacity: 0.9;
+  margin: 0 30px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* height: 100%; */
+  width: 100%;
+  gap: 20px;
+  /* width: 80%; */
+}
+
+.loginHeader {
+  text-align: left;
+}
+.formGroup {
+  position: relative;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* width: 480px; */
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="password"] {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px #3b82f6 solid;
+  background-color: white;
+  color: black;
+  padding: 0 20px;
+  font-size: 16px;
+  outline: none;
+}
+
+.loginForm label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.loginForm h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  /* width: 480px; */
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  background-color: #3b82f6;
+  color: white;
+  opacity: 1 !important;
+  z-index: 1;
+}
+
+.btn:hover {
+  background-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+}
+
+.showPassword {
+  position: absolute;
+  cursor: pointer;
+  right: 5%;
+  margin-top: 35px;
+  z-index: 2;
+  width: 25px;
+}
+
+.formGroup input[type="password"],
+.formGroup input[type="text"] {
+  padding-right: 52px;
+}
+
+.errorMessage {
+  font-weight: 400;
+  color: red;
+  font-size: 12px;
+}
+.info {
+  font-size: 12px;
+}
+.highlight {
+  cursor: pointer;
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+@media (max-width: 385px) {
+  .loginForm h1 {
+    font-size: 25px;
+  }
+  .loginForm {
+    gap: 15px;
+  }
+
+  .loginContainer {
+    padding: auto 0px;
+  }
+}
+
+@media (max-width: 470px) {
+  .loginContainer {
+    min-width: 280px;
+  }
+}

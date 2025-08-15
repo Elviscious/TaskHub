@@ -1,0 +1,422 @@
+.header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-shadow: 0px 4px 6px -1px rgba(59, 130, 246, 0.5);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.logo {
+  width: 60px;
+  height: 50px;
+}
+.callToAction {
+  transform: translateX(0%);
+  position: unset;
+  background: none;
+  height: auto;
+}
+.buttonsDisplay {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginBtn {
+  border: 1px solid #3b82f6;
+  border-radius: 7px;
+  background-color: white;
+  padding: 10px 25px;
+  color: #3b82f6;
+}
+
+.signUpBtn {
+  border: 0;
+  background-color: #3b82f6;
+  border-radius: 7px;
+  padding: 10px 25px;
+  color: white;
+}
+.hamburger {
+  display: none;
+
+  img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.main {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.95) 35%,
+      rgba(255, 255, 255, 0) 98%
+    ),
+    url("/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 820px;
+  padding: 30px 30px 0 30px;
+}
+.mainEarn {
+  font-size: 60px;
+  max-width: 520px;
+  line-height: 60px;
+  margin-top: 110px;
+  color: black;
+  margin-bottom: 40px;
+}
+.mainText {
+  max-width: 550px;
+  font-size: 22px;
+  margin-bottom: 30px;
+  color: #4b5563;
+}
+.userBtnContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.workerBtn {
+  border: 0;
+  background-color: #3b82f6;
+  border-radius: 7px;
+  padding: 15px 25px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.ownerBtn {
+  border: 2px solid #3b82f6;
+  border-radius: 7px;
+  background-color: white;
+  padding: 15px 25px;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.mainDetails {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 45px;
+}
+
+.activeUser {
+  text-align: center;
+}
+.taskCompleted {
+  text-align: center;
+}
+.earnedWorkers {
+  text-align: center;
+}
+.detailsBold {
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+}
+.detailsThin {
+  color: #4b5563;
+  font-size: 14px;
+  margin: 0;
+}
+
+.taskhub {
+  padding: 50px 30px;
+  background: #faf9fe;
+}
+
+.taskPlatform {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+.platform {
+  background-color: white;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 35px 20px;
+  width: 29%;
+  /* height: 16rem; */
+}
+.platformImg {
+  background-color: #faf9fe;
+  border-radius: 3px;
+  padding: 8px;
+  margin-bottom: 13px;
+}
+.platformH2 {
+  margin-bottom: 10px;
+  margin-top: 0;
+  color: black;
+}
+.platformParagraph {
+  margin: 0;
+  color: #4b5563;
+  /* max-width: 330px; */
+}
+
+.guideline {
+  padding: 30px 30px 40px 30px;
+  background-color: #fff;
+  color: black;
+}
+.guidelineText {
+  margin-top: 2rem;
+}
+.guidelineOption {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.worker {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 25px 15px;
+  width: 45%;
+  min-height: 30rem;
+}
+
+.workerContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3rem;
+
+  h3 {
+    background-color: #3b82f6;
+    border-radius: 50%;
+    padding: 10px 15px;
+    margin: 0;
+    color: white;
+  }
+}
+.firstText {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.owner {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 25px 15px;
+  width: 45%;
+  min-height: 30rem;
+}
+.ownerContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3rem;
+
+  h3 {
+    background-color: #a52a2a;
+    border-radius: 50%;
+    padding: 10px 15px;
+    margin: 0;
+    color: white;
+  }
+}
+
+.getStarted {
+  background-color: #faf9fe;
+  padding: 60px 30px;
+  text-align: center;
+
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 35px;
+    color: black;
+  }
+  span {
+    color: #3b82f6;
+  }
+  p {
+    font-size: 20px;
+    line-height: 20px;
+    margin-top: 0;
+    margin-bottom: 35px;
+    color: black;
+  }
+  button {
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 1.3em 5em;
+    font-size: 14px;
+    margin: 0;
+    border: 0;
+  }
+}
+
+.footer {
+  background-color: black;
+  padding: 50px 30px;
+}
+.footerDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.socialIcons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  width: 30%;
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem;
+  width: 69%;
+}
+.footerText {
+  h3 {
+    color: white;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 0 0 5px 0;
+  }
+
+  p {
+    color: #fff;
+    opacity: 70%;
+    font-size: 19px;
+    margin: 1rem 0 0 0;
+  }
+}
+.footerBottomText {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+@media (max-width: 610px) {
+  .main {
+    background-image: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0.95) 65%,
+        rgba(255, 255, 255, 0) 98%
+      ),
+      url("/background.jpg");
+  }
+  .mainEarn {
+    text-align: center;
+  }
+  .userBtnContainer {
+    justify-content: center;
+  }
+  .mainDetails {
+    justify-content: center;
+  }
+  .callToAction {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    width: 70%;
+    height: 50vh;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .callToAction.active {
+    transform: translateX(0);
+  }
+  .buttonsDisplay {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .buttonsDisplay.active {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    z-index: 20;
+  }
+}
+
+@media (max-width: 900px) {
+  .taskPlatform {
+    display: block;
+    justify-items: center;
+  }
+  .platform {
+    width: 100%;
+    /* height: 19rem; */
+    margin-bottom: 2rem;
+    padding: 90px 20px;
+    text-align: center;
+    max-width: 510px;
+  }
+  .platformParagraph {
+    text-align: center;
+    /* max-width: 440px; */
+  }
+  .guidelineOption {
+    display: block;
+    justify-items: center;
+  }
+  .worker {
+    width: 100%;
+    margin-bottom: 2rem;
+    max-width: 510px;
+  }
+  .owner {
+    width: 100%;
+    max-width: 510px;
+  }
+
+  .footerDisplay {
+    display: block;
+  }
+  .socialIcons {
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 0 30px;
+    justify-items: center;
+  }
+  .footerContent {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  .footerText {
+    margin-top: 2.5rem;
+  }
+  .footerBottomText {
+    justify-content: center;
+  }
+}
