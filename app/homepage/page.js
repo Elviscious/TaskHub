@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import styles from "@/app/homepage/page.module.css";
 import Link from "next/link";
+import Image from "next/image";
 export default function HomePage() {
 	const [menu, setMenu] = useState(false);
 
@@ -13,7 +14,7 @@ export default function HomePage() {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.logoContainer}>
-					<img src="/Money.svg" alt="logo" className={styles.logo} />
+					<Image src="/Money.svg" alt="logo" className={styles.logo} width={20} height={30}/>
 					<p
 						style={{
 							color: "#3B82F6",
@@ -40,9 +41,9 @@ export default function HomePage() {
 				</div>
 				<div className={styles.hamburger} onClick={() => toggleMenu()}>
 					{menu === false ? (
-						<img src="/Menu.svg" alt="" />
+						<Image width={20} height={20} src="/Menu.svg" alt="" />
 					) : (
-						<img src="/Close_round.svg" alt="" className={styles.cancel} />
+						<Image width={20} height={20} src="/Close_round.svg" alt="" className={styles.cancel} />
 					)}
 				</div>
 			</div>
@@ -57,11 +58,15 @@ export default function HomePage() {
 				</p>
 				<div className={styles.userBtnContainer}>
 					<button className={styles.workerBtn}>
-						<img src="/User.svg" alt="logo" style={{ width: 22, height: 22 }} />
+						<Image width={20} height={20}
+							src="/User.svg"
+							alt="logo"
+							style={{ width: 22, height: 22 }}
+						/>
 						<p style={{ fontSize: 15, margin: 0 }}> I&apos;m a Worker</p>
 					</button>
 					<button className={styles.ownerBtn}>
-						<img
+						<Image width={20} height={20}
 							src="/briefcase.svg"
 							alt="logo"
 							style={{ width: 22, height: 22 }}
@@ -112,7 +117,7 @@ export default function HomePage() {
 				</div>
 				<div className={styles.taskPlatform}>
 					<div className={styles.platform}>
-						<img
+						<Image width={20} height={20}
 							src="/money-receive.png"
 							alt="logo"
 							className={styles.platformImg}
@@ -125,7 +130,7 @@ export default function HomePage() {
 						</p>
 					</div>
 					<div className={styles.platform}>
-						<img
+						<Image width={20} height={20}
 							src="/money-receive.png"
 							alt="logo"
 							className={styles.platformImg}
@@ -138,7 +143,7 @@ export default function HomePage() {
 						</p>
 					</div>
 					<div className={styles.platform}>
-						<img
+						<Image width={20} height={20}
 							src="/money-receive.png"
 							alt="logo"
 							className={styles.platformImg}
@@ -273,10 +278,10 @@ export default function HomePage() {
 			<div className={styles.footer}>
 				<div className={styles.footerDisplay}>
 					<div className={styles.socialIcons}>
-						<img src="/Facebook.png" alt="" />
-						<img src="/Instagram.png" alt="" />
-						<img src="/Twitter.png" alt="" />
-						<img src="/LinkedIn.png" alt="" />
+						<Image width={50} height={50} src="/Facebook.png" alt="" />
+						<Image width={50} height={50} src="/Instagram.png" alt="" />
+						<Image width={50} height={50} src="/Twitter.png" alt="" />
+						<Image width={50} height={50} src="/LinkedIn.png" alt="" />
 					</div>
 					<div className={styles.footerContent}>
 						<div className={styles.footerText}>
@@ -308,7 +313,7 @@ export default function HomePage() {
 					}}
 				/>
 				<div className={styles.footerBottomText}>
-					<img src="/copyright.png" alt="" />
+					<Image width={20} height={20} src="/copyright.png" alt="" />
 					<p
 						style={{
 							color: "#faf9fe",

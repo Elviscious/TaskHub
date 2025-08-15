@@ -11,6 +11,7 @@ const Login = () => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
 	const handlePassword = (e) => {
 		if (e.target.name === "password") {
@@ -20,19 +21,6 @@ const Login = () => {
 		}
 	};
 
-	const showPasswordIcon = (e) => {
-		const inputField = e.target.nextElementSibling;
-		if (password === "") {
-			return;
-		}
-		if (inputField.type === "password") {
-			inputField.type = "text";
-			e.target.src = "/View_hide.png";
-		} else {
-			inputField.type = "password";
-			e.target.src = "/View.png";
-		}
-	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -66,13 +54,21 @@ const Login = () => {
 							>
 								Password
 							</label>
-							<img
-								src="/View.png"
-								className={styles.showPassword}
-								onClick={showPasswordIcon}
-							/>
+							<div onClick={()=>{
+                if(password === "") return;
+                {showPassword? setShowPassword(false) : setShowPassword(true)}; 
+              }}>
+								<Image
+									width={10}
+									height={20}
+									alt="show"
+									src={showPassword ? "/View_hide.png" : "/View.png"}
+									className={styles.showPassword}
+								/>
+							</div>
+
 							<input
-								type="password"
+								type={showPassword? "text" : "password"}
 								id="password"
 								name="password"
 								value={password}

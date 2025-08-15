@@ -28,10 +28,16 @@ const ChangePassword = () => {
 	};
 
 	const togglePasswordVisibility = () => {
+		if (password === "") {
+			return;
+		}
 		setShowPassword(!showPassword);
 	};
 
 	const toggleConfirmPasswordVisibility = () => {
+		if (confirmPassword === "") {
+			return;
+		}
 		setShowConfirmPassword(!showConfirmPassword);
 	};
 
@@ -82,10 +88,16 @@ const ChangePassword = () => {
 							<label htmlFor="password" style={{ color: "black" }}>
 								Password
 							</label>
-							<img
+							<Image
+								alt="show"
+								width={20}
+								height={20}
 								src={showPassword ? "/View_hide.png" : "/View.png"}
 								className={styles.showPassword}
 								onClick={togglePasswordVisibility}
+								style={{
+									marginTop: "43px",
+								}}
 							/>
 							<input
 								type={showPassword ? "text" : "password"}
@@ -100,10 +112,16 @@ const ChangePassword = () => {
 							<label htmlFor="confirm-password" style={{ color: "black" }}>
 								Confirm Password
 							</label>
-							<img
+							<Image
+								alt="show"
+								width={20}
+								height={20}
 								src={showConfirmPassword ? "/View_hide.png" : "/View.png"}
 								className={styles.showPassword}
 								onClick={toggleConfirmPasswordVisibility}
+								style={{
+									marginTop: "43px",
+								}}
 							/>
 							<input
 								type={showConfirmPassword ? "text" : "password"}

@@ -10,6 +10,8 @@ const SignUp = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
+	const [confirmShowPassword, setconfirmShowPassword] = useState(false);
 	const router = useRouter();
 
 	const handleOptionChange = (e) => {
@@ -21,20 +23,6 @@ const SignUp = () => {
 			setPassword(e.target.value);
 		} else if (e.target.name === "confirm-password") {
 			setConfirmPassword(e.target.value);
-		}
-	};
-
-	const showPasswordIcon = (e) => {
-		const inputField = e.target.nextElementSibling;
-		if (password === "") {
-			return;
-		}
-		if (inputField.type === "password") {
-			inputField.type = "text";
-			e.target.src = "/View_hide.png";
-		} else {
-			inputField.type = "password";
-			e.target.src = "/View.png";
 		}
 	};
 
@@ -83,13 +71,26 @@ const SignUp = () => {
 							<label htmlFor="password" style={{ color: "black" }}>
 								Password
 							</label>
-							<image
-								src="/View.png"
-								className={styles.showPassword}
-								onClick={showPasswordIcon}
-							/>
+							<div
+								onClick={() => {
+									if (password === "") return;
+									{
+										showPassword
+											? setShowPassword(false)
+											: setShowPassword(true);
+									}
+								}}
+							>
+								<Image
+									width={10}
+									height={20}
+									alt="show"
+									src={showPassword ? "/View_hide.png" : "/View.png"}
+									className={styles.showPassword}
+								/>
+							</div>
 							<input
-								type="password"
+								type={showPassword ? "text" : "password"}
 								id="password"
 								name="password"
 								value={password}
@@ -101,13 +102,26 @@ const SignUp = () => {
 							<label htmlFor="confirm-password" style={{ color: "black" }}>
 								Confirm Password
 							</label>
-							<image
-								src="/View.png"
-								className={styles.showPassword}
-								onClick={showPasswordIcon}
-							/>
+							<div
+								onClick={() => {
+									if (confirmPassword === "") return;
+									{
+										confirmShowPassword
+											? setconfirmShowPassword(false)
+											: setconfirmShowPassword(true);
+									}
+								}}
+							>
+								<Image
+									width={10}
+									height={20}
+									alt="show"
+									src={confirmShowPassword ? "/View_hide.png" : "/View.png"}
+									className={styles.showPassword}
+								/>
+							</div>
 							<input
-								type="password"
+								type={confirmShowPassword ? "text" : "password"}
 								id="confirm-password"
 								name="confirm-password"
 								value={confirmPassword}
