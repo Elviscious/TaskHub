@@ -1,18 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "@/app/signin/page.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { AppContext } from "../context/resetcontext";
 
 const SignUp = () => {
 	const [selectedRadio, setSelectedRadio] = useState("worker");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [passwordError, setPasswordError] = useState("");
+	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
+	const [passwordError, setPasswordError] = useState([]);
 	const [showPassword, setShowPassword] = useState(false);
 	const [confirmShowPassword, setconfirmShowPassword] = useState(false);
+	const [apiError, setApiError] = useState("");
+
 	const router = useRouter();
+	// const { baseUrl } = useContext(AppContext);
+	const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
 
 	const handleOptionChange = (e) => {
 		setSelectedRadio(e.target.value);
@@ -26,23 +33,73 @@ const SignUp = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const errors = [];
 
+		if (password.length < 8) {
+			errors.push("At least 8 characters required.");
+		}
+		if (!/[a-z]/.test(password)) {
+			errors.push("Must include at least one lowercase letter.");
+		}
+		if (!/[A-Z]/.test(password)) {
+			errors.push("Must include at least one uppercase letter.");
+		}
+		if (!/\d/.test(password)) {
+			errors.push("Must include at least one digit.");
+		}
+		if (/[^A-Za-z\d]/.test(password)) {
+			errors.push("No special characters allowed.");
+		}
 		if (password !== confirmPassword) {
-			setPasswordError("Passwords don't match");
-			return;
+			errors.push("Password doesn't match");
 		}
 
-		if (password.length < 6) {
-			setPasswordError("Password is too short");
-			return;
+		// setVerifyPassword(true);
+
+		setPasswordError(errors);
+		// setPasswordError("");
+		console.log(passwordError);
+
+		const signUpData = {
+			FullName: username,
+			Email: email,
+			CreatePassword: password,
+			ConfirmPassword: password,
+			Role: selectedRadio === "worker" ? 1 : 2,
+		};
+
+		if (errors.length > 0) {
+			return; // Stop submission if there are errors
 		}
 
-		setPasswordError("");
 		// Proceed with form submission logic here
+		try {
+			const response = await fetch(`${baseUrl}/api/Auth/signup`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(signUpData),
+			});
 
-		router.push("/dashboard");
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.error || "Failed to sign up");
+			}
+			console.log("Sign up successful:", data);
+			router.push("/dashboard");
+		} catch (error) {
+			console.error("Error during sign up:", error.message);
+
+			const errorMessages = error.message.split(",").map((msg) => msg.trim());
+			const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
+			setApiError(emailError || "Email error occurred");
+		}
+
+		// router.push("/dashboard");
 	};
 
 	return (
@@ -59,13 +116,31 @@ const SignUp = () => {
 							<label htmlFor="username" style={{ color: "black" }}>
 								Full Name
 							</label>
-							<input type="text" id="username" name="username" required />
+							<input
+								type="text"
+								id="username"
+								name="username"
+								value={username}
+								required
+								onChange={(e) => {
+									setUsername(e.target.value);
+								}}
+							/>
 						</div>
 						<div className={styles.formGroup}>
 							<label htmlFor="email" style={{ color: "black" }}>
 								Email
 							</label>
-							<input type="email" id="email" name="email" required />
+							<input
+								type="email"
+								id="email"
+								name="email"
+								value={email}
+								required
+								onChange={(e) => {
+									setEmail(e.target.value);
+								}}
+							/>
 						</div>
 						<div className={styles.formGroup}>
 							<label htmlFor="password" style={{ color: "black" }}>
@@ -129,7 +204,15 @@ const SignUp = () => {
 								required
 							/>
 						</div>
-						<p className={styles.errorMessage}>{passwordError}</p>
+						<ul>
+							{passwordError.map((error, index) => (
+								<li key={index} className={styles.errorMessage}>
+									{error}
+								</li>
+							))}
+						</ul>
+						{apiError && <p className={styles.errorMessage}>{apiError}</p>}
+
 						<h3 style={{ color: "black" }}>Select Role:</h3>
 					</div>
 					<div className="role">
