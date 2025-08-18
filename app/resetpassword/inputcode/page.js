@@ -9,8 +9,7 @@ import Image from "next/image";
 const Code = () => {
 	const [otp, setOtp] = useState(["", "", "", "", ""]);
 	const inputRefs = useRef([]);
-	const [verifiedOtp, setVerifiedOtp] = useState("");
-	const { email } = useContext(AppContext);
+	const { email, baseUrl } = useContext(AppContext);
 	const router = useRouter();
 	const OTP = 123456;
 
@@ -33,11 +32,37 @@ const Code = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const fullOtp = otp.join("");
-		setVerifiedOtp(fullOtp);
-		router.push("/resetpassword/changepassword");
+
+		const verifyData = {
+			Email: email,
+			Code: fullOtp,
+		};
+
+		try {
+			const response = await fetch(`${baseUrl}/api/Auth/verifyResetCode`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+
+				body: JSON.stringify(verifyData),
+			});
+
+			const data = await response.text();
+
+			if (!response.ok) {
+				console.log("Response status:", response.status);
+				console.log("Response data:", data);
+				throw new Error(data.error || "Invalid email");
+			}
+			console.log("Sign up successful:", data);
+			router.push("/resetpassword/changepassword");
+		} catch (error) {
+			console.log("Error: ", error.message);
+		}
 	};
 
 	return (

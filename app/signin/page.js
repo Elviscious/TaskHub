@@ -18,8 +18,8 @@ const SignUp = () => {
 	const [apiError, setApiError] = useState("");
 
 	const router = useRouter();
-	// const { baseUrl } = useContext(AppContext);
-	const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
+	const { baseUrl } = useContext(AppContext);
+	// const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
 
 	const handleOptionChange = (e) => {
 		setSelectedRadio(e.target.value);
@@ -67,7 +67,7 @@ const SignUp = () => {
 			Email: email,
 			CreatePassword: password,
 			ConfirmPassword: password,
-			Role: selectedRadio === "worker" ? 1 : 2,
+			Role: selectedRadio === "worker" ? 0 : 1,
 		};
 
 		if (errors.length > 0) {

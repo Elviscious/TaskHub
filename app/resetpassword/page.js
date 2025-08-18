@@ -9,19 +9,45 @@ import Image from "next/image";
 
 const Reset = () => {
 	const [activeEmail, setActiveEmail] = useState("");
-	const { email, setEmail } = useContext(AppContext);
+	const { email, setEmail, baseUrl } = useContext(AppContext);
+	const router = useRouter();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setEmail(activeEmail);
-		router.push("/resetpassword/inputcode");
+
+		// router.push("/resetpassword/inputcode");
+		const forget = {
+			Email: activeEmail,
+		};
+
+		try {
+			const response = await fetch(`${baseUrl}/api/Auth/forgotPassword`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+
+				body: JSON.stringify(forget),
+			});
+
+			const data = await response.text();
+
+			if (!response.ok) {
+				console.log("Response status:", response.status);
+				console.log("Response data:", data);
+				throw new Error(data.error || "Invalid email");
+			}
+			console.log("Sign up successful:", data);
+			router.push("/resetpassword/inputcode");
+		} catch (error) {
+			console.log("Error: ", error.message);
+		}
 	};
 
 	const handleChange = (e) => {
 		setActiveEmail(e.target.value);
 	};
-
-	const router = useRouter();
 
 	return (
 		<div className={resetStyles.loginBg}>

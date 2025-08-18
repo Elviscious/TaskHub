@@ -1,31 +1,65 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "@/app/login/page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { AppContext } from "../context/resetcontext";
 
 const Login = () => {
 	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
+	const [email, setEmail] = useState("");
 	const [passwordError, setPasswordError] = useState("");
+	const [apiError, setApiError] = useState("");
 	const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
+	const { baseUrl } = useContext(AppContext);
 
 	const handlePassword = (e) => {
 		if (e.target.name === "password") {
 			setPassword(e.target.value);
-		} else if (e.target.name === "confirm-password") {
-			setConfirmPassword(e.target.value);
+		} else if (e.target.name === "email") {
+			setEmail(e.target.value);
 		}
 	};
 
-
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		router.push("/dashboard");
+		const loginData = {
+			Email: email,
+			Password: password,
+		};
+
+		// Proceed with form submission logic here
+		try {
+			const response = await fetch(`${baseUrl}/api/Auth/login`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(loginData),
+			});
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.error || "Failed to sign up");
+			}
+			console.log("Sign up successful:", data);
+			router.push("/dashboard");
+		} catch (error) {
+			console.error("Error during sign up:", error.message);
+
+			// const errorMessages = error.message.split(",").map((msg) => msg.trim());
+			// const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
+			setApiError(
+				error.message === "Invalid login attempt."
+					? "Wrong password"
+					: error.message
+			);
+		}
 	};
 
 	return (
@@ -45,7 +79,14 @@ const Login = () => {
 							>
 								Email
 							</label>
-							<input type="email" id="email" name="email" required />
+							<input
+								type="email"
+								id="email"
+								name="email"
+								value={email}
+								required
+								onChange={handlePassword}
+							/>
 						</div>
 						<div className={styles.formGroup}>
 							<label
@@ -54,10 +95,16 @@ const Login = () => {
 							>
 								Password
 							</label>
-							<div onClick={()=>{
-                if(password === "") return;
-                {showPassword? setShowPassword(false) : setShowPassword(true)}; 
-              }}>
+							<div
+								onClick={() => {
+									if (password === "") return;
+									{
+										showPassword
+											? setShowPassword(false)
+											: setShowPassword(true);
+									}
+								}}
+							>
 								<Image
 									width={10}
 									height={20}
@@ -68,7 +115,7 @@ const Login = () => {
 							</div>
 
 							<input
-								type={showPassword? "text" : "password"}
+								type={showPassword ? "text" : "password"}
 								id="password"
 								name="password"
 								value={password}
@@ -76,6 +123,7 @@ const Login = () => {
 								required
 							/>
 						</div>
+						{apiError && <p className={styles.errorMessage}>{apiError}</p>}
 						<div className={styles.info}>
 							<Link href="/resetpassword" className={styles.highlight}>
 								<p>Forgot Password?</p>

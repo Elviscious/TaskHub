@@ -1,19 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "@/app/signin/page.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { AppContext } from "@/app/context/resetcontext";
 
 const ChangePassword = () => {
 	const [selectedRadio, setSelectedRadio] = useState("worker");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [passwordError, setPasswordError] = useState("");
+	const [passwordError, setPasswordError] = useState([]);
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 	const router = useRouter();
+	const { email, baseUrl } = useContext(AppContext);
 
 	const handleOptionChange = (e) => {
 		setSelectedRadio(e.target.value);
@@ -41,37 +43,69 @@ const ChangePassword = () => {
 		setShowConfirmPassword(!showConfirmPassword);
 	};
 
-	// const showPasswordIcon = (e) => {
-	// 	const inputField = e.target.nextElementSibling;
-	// 	if (password === "") {
-	// 		return;
-	// 	}
-	// 	if (inputField.type === "password") {
-	// 		inputField.type = "text";
-	// 		e.target.src = "/View_hide.png";
-	// 	} else {
-	// 		inputField.type = "password";
-	// 		e.target.src = "/View.png";
-	// 	}
-	// };
-
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const errors = [];
+
+		if (password.length < 8) {
+			errors.push("At least 8 characters required.");
+		}
+		if (!/[a-z]/.test(password)) {
+			errors.push("Must include at least one lowercase letter.");
+		}
+		if (!/[A-Z]/.test(password)) {
+			errors.push("Must include at least one uppercase letter.");
+		}
+		if (!/\d/.test(password)) {
+			errors.push("Must include at least one digit.");
+		}
+		if (/[^A-Za-z\d]/.test(password)) {
+			errors.push("No special characters allowed.");
+		}
 		if (password !== confirmPassword) {
-			setPasswordError("Passwords don't match");
-			return;
+			errors.push("Password doesn't match");
 		}
 
-		if (password.length < 6) {
-			setPasswordError("Password is too short");
-			return;
+		// setVerifyPassword(true);
+
+		setPasswordError(errors);
+		// setPasswordError("");
+
+		const signUpData = {
+			Email: email,
+			NewPassword: password,
+			ConfirmPassword: password,
+		};
+
+		if (errors.length > 0) {
+			return; // Stop submission if there are errors
 		}
 
-		setPasswordError("");
 		// Proceed with form submission logic here
+		try {
+			const response = await fetch(`${baseUrl}/api/Auth/resetPassword`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(signUpData),
+			});
 
-		router.push("/dashboard");
+			const data = await response.text();
+
+			if (!response.ok) {
+				throw new Error(data.error || "Failed to sign up");
+			}
+			console.log("Sign up successful:", data);
+			router.push("/dashboard");
+		} catch (error) {
+			console.error("Error during sign up:", error.message);
+
+			// const errorMessages = error.message.split(",").map((msg) => msg.trim());
+			// const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
+			// setApiError(emailError || "Email error occurred");
+		}
 	};
 
 	return (
@@ -132,7 +166,13 @@ const ChangePassword = () => {
 								required
 							/>
 						</div>
-						<p className={styles.errorMessage}>{passwordError}</p>
+						<ul>
+							{passwordError.map((error, index) => (
+								<li key={index} className={styles.errorMessage}>
+									{error}
+								</li>
+							))}
+						</ul>
 					</div>
 					<button type="submit" className={styles.btn}>
 						Login
