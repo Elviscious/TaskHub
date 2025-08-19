@@ -30,7 +30,7 @@ function Dashboard() {
 							<p>Dashboard</p>
 						</li>
 						<li className={styles.navItem}>
-							<Image src="/paper.png" alt="" width={30} height={30} />
+							<Image src="/Paper.png" alt="" width={30} height={30} />
 							<p>Available Tasks</p>
 						</li>
 						<li className={styles.navItem}>
