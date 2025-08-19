@@ -6,6 +6,8 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
 	const [email, setEmail] = useState("");
+	const [loggedIn, setLoggedIn] = useState(false);
+	// Base URL for API requests, can be changed based on environment
 	const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
 
 	return (
@@ -14,6 +16,8 @@ export function AppProvider({ children }) {
 				email,
 				setEmail,
 				baseUrl,
+				loggedIn,
+				setLoggedIn,
 			}}
 		>
 			{children}

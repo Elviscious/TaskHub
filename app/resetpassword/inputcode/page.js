@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useContext, use } from "react";
 import codeStyles from "@/app/resetpassword/inputcode/page.module.css";
-import { AppContext } from "@/app/context/resetcontext";
+import { AppContext } from "@/app/context/context";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -59,6 +59,8 @@ const Code = () => {
 				throw new Error(data.error || "Invalid email");
 			}
 			console.log("Sign up successful:", data);
+			document.cookie = `codeVerified=true; path=/; max-age=300`;
+
 			router.push("/resetpassword/changepassword");
 		} catch (error) {
 			console.log("Error: ", error.message);

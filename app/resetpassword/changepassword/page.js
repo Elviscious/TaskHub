@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import styles from "@/app/signin/page.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { AppContext } from "@/app/context/resetcontext";
+import { AppContext } from "@/app/context/context";
 
 const ChangePassword = () => {
 	const [selectedRadio, setSelectedRadio] = useState("worker");

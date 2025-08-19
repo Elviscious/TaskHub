@@ -14,7 +14,13 @@ export default function HomePage() {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.logoContainer}>
-					<Image src="/Money.svg" alt="logo" className={styles.logo} width={20} height={30}/>
+					<Image
+						src="/Money.svg"
+						alt="logo"
+						className={styles.logo}
+						width={20}
+						height={30}
+					/>
 					<p
 						style={{
 							color: "#3B82F6",
@@ -43,7 +49,13 @@ export default function HomePage() {
 					{menu === false ? (
 						<Image width={20} height={20} src="/Menu.svg" alt="" />
 					) : (
-						<Image width={20} height={20} src="/Close_round.svg" alt="" className={styles.cancel} />
+						<Image
+							width={20}
+							height={20}
+							src="/Close_round.svg"
+							alt=""
+							className={styles.cancel}
+						/>
 					)}
 				</div>
 			</div>
@@ -58,7 +70,9 @@ export default function HomePage() {
 				</p>
 				<div className={styles.userBtnContainer}>
 					<button className={styles.workerBtn}>
-						<Image width={20} height={20}
+						<Image
+							width={20}
+							height={20}
 							src="/User.svg"
 							alt="logo"
 							style={{ width: 22, height: 22 }}
@@ -66,7 +80,9 @@ export default function HomePage() {
 						<p style={{ fontSize: 15, margin: 0 }}> I&apos;m a Worker</p>
 					</button>
 					<button className={styles.ownerBtn}>
-						<Image width={20} height={20}
+						<Image
+							width={20}
+							height={20}
 							src="/briefcase.svg"
 							alt="logo"
 							style={{ width: 22, height: 22 }}
@@ -117,7 +133,9 @@ export default function HomePage() {
 				</div>
 				<div className={styles.taskPlatform}>
 					<div className={styles.platform}>
-						<Image width={20} height={20}
+						<Image
+							width={50}
+							height={50}
 							src="/money-receive.png"
 							alt="logo"
 							className={styles.platformImg}
@@ -130,7 +148,9 @@ export default function HomePage() {
 						</p>
 					</div>
 					<div className={styles.platform}>
-						<Image width={20} height={20}
+						<Image
+							width={50}
+							height={50}
 							src="/money-receive.png"
 							alt="logo"
 							className={styles.platformImg}
@@ -143,7 +163,9 @@ export default function HomePage() {
 						</p>
 					</div>
 					<div className={styles.platform}>
-						<Image width={20} height={20}
+						<Image
+							width={50}
+							height={50}
 							src="/money-receive.png"
 							alt="logo"
 							className={styles.platformImg}

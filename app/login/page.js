@@ -5,7 +5,7 @@ import styles from "@/app/login/page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { AppContext } from "../context/resetcontext";
+import { AppContext } from "../context/context";
 
 const Login = () => {
 	const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
 	const [apiError, setApiError] = useState("");
 	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
-	const { baseUrl } = useContext(AppContext);
+	const { baseUrl, setLoggedIn } = useContext(AppContext);
 
 	const handlePassword = (e) => {
 		if (e.target.name === "password") {
@@ -48,6 +48,8 @@ const Login = () => {
 				throw new Error(data.error || "Failed to sign up");
 			}
 			console.log("Sign up successful:", data);
+			setLoggedIn(true);
+			document.cookie = `loggedIn=true; path=/; max-age=3600`;
 			router.push("/dashboard");
 		} catch (error) {
 			console.error("Error during sign up:", error.message);

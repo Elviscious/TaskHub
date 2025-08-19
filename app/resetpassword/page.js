@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 // import styles from "@/app/login/page.module.css";
 import resetStyles from "@/app/resetpassword/page.module.css";
-import { AppContext } from "../context/resetcontext";
+import { AppContext } from "../context/context";
 import Image from "next/image";
 
 const Reset = () => {
@@ -39,6 +39,9 @@ const Reset = () => {
 				throw new Error(data.error || "Invalid email");
 			}
 			console.log("Sign up successful:", data);
+			document.cookie = `emailEntered=true; path=/; max-age=300`; // expires in 5 mins
+			document.cookie = "codeVerified=; path=/; max-age=0";
+
 			router.push("/resetpassword/inputcode");
 		} catch (error) {
 			console.log("Error: ", error.message);
