@@ -1,5 +1,121 @@
-import react from "react";
+// src/app/workerdashboard/page.jsx
 
-export default function OwnerDashBoard() {
-  return <div>Owner Dashboard</div>;
+"use client";
+
+import React, { useState, useEffect } from "react";
+import styles from "@/app/ownerdashboard/page.module.css";
+import Image from "next/image";
+
+function Dashboard() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("navOpen");
+    } else {
+      document.body.classList.remove("navOpen");
+    }
+  }, [isOpen]);
+
+  return (
+    <div className={styles.container}>
+      {/* Hamburger menu for mobile view */}
+
+      <div className={`${styles.navigationBar} ${isOpen ? styles.open : ""}`}>
+        <nav>
+          <h1>MAIN MENU</h1>
+          <ul className={styles.navUl}>
+            <li className={`${styles.navItem} ${styles.active}`}>
+              <Image src="/Home.png" alt="" width={30} height={30} />
+              <p>Dashboard</p>
+            </li>
+            <li className={styles.navItem}>
+              <Image src="/Paper.png" alt="" width={30} height={30} />
+              <p>Available Tasks</p>
+            </li>
+            <li className={styles.navItem}>
+              <Image src="/Upload.png" alt="" width={30} height={30} />
+              <p>Submitted Tasks</p>
+            </li>
+            <li className={styles.navItem}>
+              <Image src="/Folders_line.png" alt="" width={30} height={30} />
+              <p>Earning History</p>
+            </li>
+            <li className={styles.navItem}>
+              <Image src="/Wallet.png" alt="" width={30} height={30} />
+              <p>Wallet</p>
+            </li>
+            <li className={styles.navItem}>
+              <Image
+                src="/Setting_alt_line.png"
+                alt=""
+                width={30}
+                height={30}
+              />
+              <p>Settings</p>
+            </li>
+          </ul>
+          <div className={styles.logOut}>
+            <Image src="/Sign_out_squre.png" alt="" width={30} height={30} />
+            <p>Log Out</p>
+          </div>
+        </nav>
+      </div>
+
+      <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+        <Image
+          src={isOpen ? "/Close_round.png" : "/Menu.png"}
+          alt="menu toggle"
+          width={44}
+          height={44}
+        />
+      </button>
+      <div className={styles.mainContent}>
+        <div className={styles.topMenu}>
+          <h1>Overview</h1>
+          <button className={styles.topMenuBtn}>
+            <Image src="/plus.png" width={20} height={20} alt="plus sign" />
+            <span>Post new job</span>
+          </button>
+        </div>
+
+        <h2>My Tasks</h2>
+        <div className={styles.myTaskContainer}>
+          <div className={styles.taskContainer}>
+            <p>Available</p>
+            <h2>7</h2>
+          </div>
+          <div className={styles.taskContainer}>
+            <p>Pending</p>
+            <h2>3</h2>
+          </div>
+          <div className={styles.taskContainer}>
+            <p>Completed</p>
+            <h2>9</h2>
+          </div>
+        </div>
+
+        <div className={styles.submissions}>
+          <h2>Submissions</h2>
+          <div className={styles.myTaskContainer}>
+            <div className={styles.taskContainer}>
+              <p>Approved</p>
+              <h2>5</h2>
+            </div>
+            <div className={styles.taskContainer}>
+              <p>Rejected</p>
+              <h2>10</h2>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.walletBalance}>
+          <p>Wallet Balance</p>
+          <h2>$2,000.00</h2>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+export default Dashboard;
