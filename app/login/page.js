@@ -8,145 +8,145 @@ import Image from "next/image";
 import { AppContext } from "../context/context";
 
 const Login = () => {
-	const [password, setPassword] = useState("");
-	const [email, setEmail] = useState("");
-	const [passwordError, setPasswordError] = useState("");
-	const [apiError, setApiError] = useState("");
-	const router = useRouter();
-	const [showPassword, setShowPassword] = useState(false);
-	const { baseUrl, setLoggedIn } = useContext(AppContext);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [apiError, setApiError] = useState("");
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const { baseUrl, setLoggedIn } = useContext(AppContext);
 
-	const handlePassword = (e) => {
-		if (e.target.name === "password") {
-			setPassword(e.target.value);
-		} else if (e.target.name === "email") {
-			setEmail(e.target.value);
-		}
-	};
+  const handlePassword = (e) => {
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+    } else if (e.target.name === "email") {
+      setEmail(e.target.value);
+    }
+  };
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-		const loginData = {
-			Email: email,
-			Password: password,
-		};
+    const loginData = {
+      Email: email,
+      Password: password,
+    };
 
-		// Proceed with form submission logic here
-		try {
-			const response = await fetch(`${baseUrl}/api/Auth/login`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(loginData),
-			});
+    // Proceed with form submission logic here
+    try {
+      const response = await fetch(`${baseUrl}/api/Auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
 
-			const data = await response.json();
+      const data = await response.json();
 
-			if (!response.ok) {
-				throw new Error(data.error || "Failed to sign up");
-			}
-			console.log("Sign up successful:", data);
-			setLoggedIn(true);
-			document.cookie = `loggedIn=true; path=/; max-age=3600`;
-			router.push("/dashboard");
-		} catch (error) {
-			console.error("Error during sign up:", error.message);
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to sign up");
+      }
+      console.log("Sign up successful:", data);
+      setLoggedIn(true);
+      document.cookie = `loggedIn=true; path=/; max-age=3600`;
+      router.push("/workerdashboard");
+    } catch (error) {
+      console.error("Error during sign up:", error.message);
 
-			// const errorMessages = error.message.split(",").map((msg) => msg.trim());
-			// const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
-			setApiError(
-				error.message === "Invalid login attempt."
-					? "Wrong password"
-					: error.message
-			);
-		}
-	};
+      // const errorMessages = error.message.split(",").map((msg) => msg.trim());
+      // const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
+      setApiError(
+        error.message === "Invalid login attempt."
+          ? "Wrong password"
+          : error.message
+      );
+    }
+  };
 
-	return (
-		<div className={styles.loginBg}>
-			<div className={styles.loginContainer}>
-				<form
-					className={styles.loginForm}
-					method="post"
-					onSubmit={handleSubmit}
-				>
-					<h1 style={{ color: "black" }}>Login</h1>
-					<div className={styles.inputFields}>
-						<div className={styles.formGroup}>
-							<label
-								htmlFor="email"
-								style={{ color: "black", marginBottom: 5 }}
-							>
-								Email
-							</label>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								value={email}
-								required
-								onChange={handlePassword}
-							/>
-						</div>
-						<div className={styles.formGroup}>
-							<label
-								htmlFor="password"
-								style={{ color: "black", marginBottom: 5 }}
-							>
-								Password
-							</label>
-							<div
-								onClick={() => {
-									if (password === "") return;
-									{
-										showPassword
-											? setShowPassword(false)
-											: setShowPassword(true);
-									}
-								}}
-							>
-								<Image
-									width={10}
-									height={20}
-									alt="show"
-									src={showPassword ? "/View_hide.png" : "/View.png"}
-									className={styles.showPassword}
-								/>
-							</div>
+  return (
+    <div className={styles.loginBg}>
+      <div className={styles.loginContainer}>
+        <form
+          className={styles.loginForm}
+          method="post"
+          onSubmit={handleSubmit}
+        >
+          <h1 style={{ color: "black" }}>Login</h1>
+          <div className={styles.inputFields}>
+            <div className={styles.formGroup}>
+              <label
+                htmlFor="email"
+                style={{ color: "black", marginBottom: 5 }}
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                required
+                onChange={handlePassword}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label
+                htmlFor="password"
+                style={{ color: "black", marginBottom: 5 }}
+              >
+                Password
+              </label>
+              <div
+                onClick={() => {
+                  if (password === "") return;
+                  {
+                    showPassword
+                      ? setShowPassword(false)
+                      : setShowPassword(true);
+                  }
+                }}
+              >
+                <Image
+                  width={10}
+                  height={20}
+                  alt="show"
+                  src={showPassword ? "/View_hide.png" : "/View.png"}
+                  className={styles.showPassword}
+                />
+              </div>
 
-							<input
-								type={showPassword ? "text" : "password"}
-								id="password"
-								name="password"
-								value={password}
-								onChange={handlePassword}
-								required
-							/>
-						</div>
-						{apiError && <p className={styles.errorMessage}>{apiError}</p>}
-						<div className={styles.info}>
-							<Link href="/resetpassword" className={styles.highlight}>
-								<p>Forgot Password?</p>
-							</Link>
-							<p style={{ color: "black" }}>
-								Don&apos;t have an acount?
-								<Link href="/signin" className={styles.highlight}>
-									{" "}
-									SignUp Here.
-								</Link>
-							</p>
-						</div>
-						<p className={styles.errorMessage}>{passwordError}</p>
-					</div>
-					<button type="submit" className={styles.btn}>
-						Login
-					</button>
-				</form>
-			</div>
-		</div>
-	);
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+                required
+              />
+            </div>
+            {apiError && <p className={styles.errorMessage}>{apiError}</p>}
+            <div className={styles.info}>
+              <Link href="/resetpassword" className={styles.highlight}>
+                <p>Forgot Password?</p>
+              </Link>
+              <p style={{ color: "black" }}>
+                Don&apos;t have an acount?
+                <Link href="/signin" className={styles.highlight}>
+                  {" "}
+                  SignUp Here.
+                </Link>
+              </p>
+            </div>
+            <p className={styles.errorMessage}>{passwordError}</p>
+          </div>
+          <button type="submit" className={styles.btn}>
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
