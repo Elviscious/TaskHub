@@ -1,7 +1,7 @@
 /* src/app/workerdashboard/page.module.css */
 
 /* Global style to prevent scrolling when nav is open */
-:global(body.navOpen) {
+.navOpen {
     overflow: hidden;
 }
 
@@ -176,7 +176,7 @@
 
 /* Mobile Styles */
 @media (max-width: 600px) {
-        :global(body.navOpen) .mainContent {
+        .open ~ .mainContent {
                 display: none !important;
             }
     .container {
@@ -207,6 +207,9 @@
     }
     .topMenu h1{
         margin: auto 20px;
+    }
+    .open + .hamburger{
+        position: fixed;
     }
     .hamburger {
         display: block;
