@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AppContext } from "../context/context";
+import Logo from "../components/logo";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -50,7 +51,7 @@ const Login = () => {
       console.log("Sign up successful:", data);
       setLoggedIn(true);
       document.cookie = `loggedIn=true; path=/; max-age=3600`;
-      router.push("/workerdashboard");
+      router.push("/ownerdashboard");
     } catch (error) {
       console.error("Error during sign up:", error.message);
 
@@ -66,6 +67,7 @@ const Login = () => {
 
   return (
     <div className={styles.loginBg}>
+        <Logo route={router}/>
       <div className={styles.loginContainer}>
         <form
           className={styles.loginForm}

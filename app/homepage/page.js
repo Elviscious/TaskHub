@@ -136,7 +136,7 @@ export default function HomePage() {
 						<Image
 							width={50}
 							height={50}
-							src="/money-receive.png"
+							src="/money-recive.png"
 							alt="logo"
 							className={styles.platformImg}
 						/>
@@ -151,7 +151,7 @@ export default function HomePage() {
 						<Image
 							width={50}
 							height={50}
-							src="/money-receive.png"
+							src="/Chield_check.png"
 							alt="logo"
 							className={styles.platformImg}
 						/>
@@ -166,7 +166,7 @@ export default function HomePage() {
 						<Image
 							width={50}
 							height={50}
-							src="/money-receive.png"
+							src="/global.png"
 							alt="logo"
 							className={styles.platformImg}
 						/>

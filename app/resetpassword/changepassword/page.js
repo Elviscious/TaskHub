@@ -5,6 +5,7 @@ import styles from "@/app/signin/page.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AppContext } from "@/app/context/context";
+import Logo from "@/app/components/logo";
 
 const ChangePassword = () => {
 	const [selectedRadio, setSelectedRadio] = useState("worker");
@@ -98,7 +99,7 @@ const ChangePassword = () => {
 				throw new Error(data.error || "Failed to sign up");
 			}
 			console.log("Sign up successful:", data);
-			router.push("/dashboard");
+			router.push("/ownerdashboard");
 		} catch (error) {
 			console.error("Error during sign up:", error.message);
 
@@ -110,6 +111,7 @@ const ChangePassword = () => {
 
 	return (
 		<div className={styles.signupBg}>
+			<Logo route={router} />
 			<div className={styles.signupContainer}>
 				<form
 					className={styles.signupForm}

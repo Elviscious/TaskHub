@@ -4,7 +4,7 @@ import React, { useState, useRef, useContext, use } from "react";
 import codeStyles from "@/app/resetpassword/inputcode/page.module.css";
 import { AppContext } from "@/app/context/context";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import Logo from "@/app/components/logo";
 
 const Code = () => {
 	const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -69,6 +69,7 @@ const Code = () => {
 
 	return (
 		<div className={codeStyles.loginBg}>
+		<Logo route={router}/>
 			<div className={`${codeStyles.loginContainer}`}>
 				<form
 					className={codeStyles.loginForm}

@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 // import styles from "@/app/login/page.module.css";
 import resetStyles from "@/app/resetpassword/page.module.css";
 import { AppContext } from "../context/context";
-import Image from "next/image";
+import Logo from "../components/logo";
 
 const Reset = () => {
 	const [activeEmail, setActiveEmail] = useState("");
 	const { email, setEmail, baseUrl } = useContext(AppContext);
+	const [apiError, setApiError] = useState("");
 	const router = useRouter();
 
 	const handleSubmit = async (e) => {
@@ -38,6 +39,9 @@ const Reset = () => {
 				console.log("Response data:", data);
 				throw new Error(data.error || "Invalid email");
 			}
+			// if (data === "User not found.") {
+			// 	throw new Error("User not found");
+			// }
 			console.log("Sign up successful:", data);
 			document.cookie = `emailEntered=true; path=/; max-age=300`; // expires in 5 mins
 			document.cookie = "codeVerified=; path=/; max-age=0";
@@ -45,6 +49,9 @@ const Reset = () => {
 			router.push("/resetpassword/inputcode");
 		} catch (error) {
 			console.log("Error: ", error.message);
+			setApiError(error.message);
+			document.cookie = "emailEntered=false; path=/; max-age=300"; // expires
+			
 		}
 	};
 
@@ -54,6 +61,7 @@ const Reset = () => {
 
 	return (
 		<div className={resetStyles.loginBg}>
+		<Logo route={router}/>
 			<div
 				className={` ${resetStyles.resetContainer} ${resetStyles.loginContainer}`}
 			>
@@ -80,7 +88,7 @@ const Reset = () => {
 								required
 							/>
 						</div>
-						<p className={resetStyles.errorMessage}></p>
+						<p className={resetStyles.errorMessage}>{apiError}</p>
 					</div>
 					<button type="submit" className={resetStyles.btn}>
 						Send Code

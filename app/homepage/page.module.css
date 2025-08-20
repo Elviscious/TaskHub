@@ -32,16 +32,32 @@
   border: 1px solid #3b82f6;
   border-radius: 7px;
   background-color: white;
-  padding: 10px 25px;
+  padding: 12px 35px;
   color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginBtn:hover {
+  background-color: #3b82f6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
 }
 
 .signUpBtn {
   border: 0;
   background-color: #3b82f6;
   border-radius: 7px;
-  padding: 10px 25px;
+  padding: 12px 35px;
   color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.signUpBtn:hover {
+  background-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
 }
 .hamburger {
   display: none;
@@ -267,7 +283,14 @@
     font-size: 14px;
     margin: 0;
     border: 0;
+    cursor: pointer;
+    transition: all .3s ease;
   }
+    button:hover {
+      background-color: #3b82f6;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    }
 }
 
 .footer {
