@@ -279,6 +279,10 @@
     z-index: 1000;
   }
 
+  .active{
+  color: #3b82f6 !important;
+  }
+
   .open + .hamburger {
     position: fixed; /* keeps it fixed even when nav is open */
   }

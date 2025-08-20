@@ -12,7 +12,7 @@ const Code = () => {
 	const { email, baseUrl } = useContext(AppContext);
 	const [apiError, setApiError] = useState("");
 	const router = useRouter();
-	const OTP = 123456;
+	const [loading, setLoading] = useState(false);
 
 	const handleChange = (e, index) => {
 		const value = e.target.value;
@@ -41,6 +41,7 @@ const Code = () => {
 			Email: email,
 			Code: fullOtp,
 		};
+		setLoading(true);
 
 		try {
 			const response = await fetch(`${baseUrl}/api/Auth/verifyResetCode`, {
@@ -66,13 +67,14 @@ const Code = () => {
 			router.push("/resetpassword/changepassword");
 		} catch (error) {
 			console.log("Error: ", error.message);
-			
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
 		<div className={codeStyles.loginBg}>
-		<Logo route={router}/>
+			<Logo route={router} />
 			<div className={`${codeStyles.loginContainer}`}>
 				<form
 					className={codeStyles.loginForm}
@@ -111,8 +113,16 @@ const Code = () => {
 						))}
 					</div>
 					{/* </div> */}
-					<button type="submit" className={codeStyles.btn}>
-						Confirm
+					<button
+						type="submit"
+						className={codeStyles.btn}
+						disabled={loading}
+						style={{
+							cursor: loading ? "not-allowed" : "pointer",
+							opacity: loading ? 0.7 : 1,
+						}}
+					>
+						{loading ? "Verifying..." : "Verify Code"}
 					</button>
 				</form>
 			</div>

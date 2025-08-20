@@ -14,6 +14,7 @@ const ChangePassword = () => {
 	const [passwordError, setPasswordError] = useState([]);
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
 	const { email, baseUrl } = useContext(AppContext);
@@ -82,7 +83,7 @@ const ChangePassword = () => {
 		if (errors.length > 0) {
 			return; // Stop submission if there are errors
 		}
-
+		setLoading(true);
 		// Proceed with form submission logic here
 		try {
 			const response = await fetch(`${baseUrl}/api/Auth/resetPassword`, {
@@ -98,6 +99,7 @@ const ChangePassword = () => {
 			if (!response.ok) {
 				throw new Error(data.error || "Failed to sign up");
 			}
+			document.cookie = `loggedIn=true; path=/; max-age=3600`;
 			console.log("Sign up successful:", data);
 			router.push("/ownerdashboard");
 		} catch (error) {
@@ -176,8 +178,16 @@ const ChangePassword = () => {
 							))}
 						</ul>
 					</div>
-					<button type="submit" className={styles.btn}>
-						Login
+					<button
+						type="submit"
+						className={styles.btn}
+						disabled={loading}
+						style={{
+							cursor: loading ? "not-allowed" : "pointer",
+							opacity: loading ? 0.7 : 1,
+						}}
+					>
+						{loading ? "Changing Password..." : "Change Password"}
 					</button>
 				</form>
 			</div>

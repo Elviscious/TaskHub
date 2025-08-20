@@ -12,6 +12,7 @@ const Reset = () => {
 	const { email, setEmail, baseUrl } = useContext(AppContext);
 	const [apiError, setApiError] = useState("");
 	const router = useRouter();
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -21,6 +22,7 @@ const Reset = () => {
 		const forget = {
 			Email: activeEmail,
 		};
+		setLoading(true);
 
 		try {
 			const response = await fetch(`${baseUrl}/api/Auth/forgotPassword`, {
@@ -51,7 +53,8 @@ const Reset = () => {
 			console.log("Error: ", error.message);
 			setApiError(error.message);
 			document.cookie = "emailEntered=false; path=/; max-age=300"; // expires
-			
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -61,7 +64,7 @@ const Reset = () => {
 
 	return (
 		<div className={resetStyles.loginBg}>
-		<Logo route={router}/>
+			<Logo route={router} />
 			<div
 				className={` ${resetStyles.resetContainer} ${resetStyles.loginContainer}`}
 			>
@@ -90,8 +93,16 @@ const Reset = () => {
 						</div>
 						<p className={resetStyles.errorMessage}>{apiError}</p>
 					</div>
-					<button type="submit" className={resetStyles.btn}>
-						Send Code
+					<button
+						type="submit"
+						className={resetStyles.btn}
+						disabled={loading}
+						style={{
+							cursor: loading ? "not-allowed" : "pointer",
+							opacity: loading ? 0.7 : 1,
+						}}
+					>
+						{loading ? "Sending Code..." : "Send Code"}
 					</button>
 				</form>
 			</div>

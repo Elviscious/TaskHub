@@ -29,7 +29,7 @@ function Dashboard() {
 					<ul className={styles.navUl}>
 						<li className={`${styles.navItem} ${styles.active}`}>
 							<Image src="/Home.png" alt="" width={30} height={30} />
-							<p>Dashboard</p>
+							<p className={styles.active}>Dashboard</p>
 						</li>
 						<li className={styles.navItem}>
 							<Image src="/Paper.png" alt="" width={30} height={30} />
@@ -82,7 +82,7 @@ function Dashboard() {
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
 					<button className={styles.topMenuBtn}>
-						<Image src="/plus.png" width={20} height={20} alt="plus sign" />
+						<Image src="/plus.png" width={20} height={20} alt="plus sign" style={{filter: "brightness(100)"}}/>
 						<span>Post new job</span>
 					</button>
 				</div>

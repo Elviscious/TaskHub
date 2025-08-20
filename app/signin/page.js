@@ -17,6 +17,8 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [confirmShowPassword, setconfirmShowPassword] = useState(false);
   const [apiError, setApiError] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const router = useRouter();
   const { baseUrl, setLoggedIn, selectedRadio, setSelectedRadio } = useContext(AppContext);
@@ -62,7 +64,7 @@ const SignUp = () => {
     setPasswordError(errors);
     // setPasswordError("");
     console.log(passwordError);
-
+    
     const signUpData = {
       FullName: username,
       Email: email,
@@ -74,7 +76,7 @@ const SignUp = () => {
     if (errors.length > 0) {
       return; // Stop submission if there are errors
     }
-
+setLoading(true);
     // Proceed with form submission logic here
     try {
       const response = await fetch(`${baseUrl}/api/Auth/signup`, {
@@ -104,8 +106,9 @@ const SignUp = () => {
       const errorMessages = error.message.split(",").map((msg) => msg.trim());
       const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
       setApiError(emailError || "Email error occurred");
+    } finally{
+      setLoading(false);
     }
-
     // router.push("/dashboard");
   };
 
@@ -279,8 +282,8 @@ const SignUp = () => {
 							Owner
 						</label>
 					</div>
-					<button type="submit" className={styles.btn}>
-						Sign Up
+					<button type="submit" className={styles.btn} disabled={loading} style={{cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1}}>
+						{loading? "Signing Up...": "Sign Up"}
 					</button>
           <p className={styles.loginText}> Already have an account? <span className={styles.highlight} onClick={()=>{
             router.push("/login");

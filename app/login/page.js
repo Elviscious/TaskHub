@@ -16,6 +16,7 @@ const Login = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const { baseUrl, setLoggedIn } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
 
   const handlePassword = (e) => {
     if (e.target.name === "password") {
@@ -32,7 +33,7 @@ const Login = () => {
       Email: email,
       Password: password,
     };
-
+    setLoading(true);
     // Proceed with form submission logic here
     try {
       const response = await fetch(`${baseUrl}/api/Auth/login`, {
@@ -67,6 +68,8 @@ const Login = () => {
           ? "Wrong password"
           : error.message
       );
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -147,8 +150,8 @@ const Login = () => {
             </div>
             <p className={styles.errorMessage}>{passwordError}</p>
           </div>
-          <button type="submit" className={styles.btn}>
-            Login
+          <button type="submit" className={styles.btn} disabled={loading} style={{cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1}}>
+            {loading? "Logging In...": "Login"}
           </button>
         </form>
       </div>
