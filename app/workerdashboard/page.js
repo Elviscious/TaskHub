@@ -28,10 +28,14 @@ function Dashboard() {
 					<h1>MAIN MENU</h1>
 					<ul className={styles.navUl}>
 						<li className={`${styles.navItem} ${styles.active}`}>
-							<Image src="/Home.png" alt="" width={30} height={30} style={{
-								filter: "brightness(0)"
-							}}/>
-							<p>Dashboard</p>
+							<Image src="/Home.png" alt="" width={30} height={30} />
+							<p
+								style={{
+									color: "#3b82f6",
+								}}
+							>
+								Dashboard
+							</p>
 						</li>
 						<li className={styles.navItem}>
 							<Image src="/Paper.png" alt="" width={30} height={30} />
