@@ -8,7 +8,7 @@ import { AppContext } from "../context/context";
 import Logo from "../components/logo";
 
 const SignUp = () => {
-  const [selectedRadio, setSelectedRadio] = useState("worker");
+  
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const SignUp = () => {
   const [apiError, setApiError] = useState("");
 
   const router = useRouter();
-  const { baseUrl, setLoggedIn } = useContext(AppContext);
+  const { baseUrl, setLoggedIn, selectedRadio, setSelectedRadio } = useContext(AppContext);
   // const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
 
   const handleOptionChange = (e) => {
@@ -255,7 +255,7 @@ const SignUp = () => {
 
 						<h3 style={{ color: "black" }}>Select Role:</h3>
 					</div>
-					<div className="role">
+					<div className={styles.role}>
 						<input
 							type="radio"
 							name="role"
@@ -282,6 +282,9 @@ const SignUp = () => {
 					<button type="submit" className={styles.btn}>
 						Sign Up
 					</button>
+          <p className={styles.loginText}> Already have an account? <span className={styles.highlight} onClick={()=>{
+            router.push("/login");
+          }}>Login</span></p>
 				</form>
 			</div>
 		</div>

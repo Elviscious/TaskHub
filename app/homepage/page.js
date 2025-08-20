@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "@/app/homepage/page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { AppContext } from "../context/context";
+import { useRouter } from "next/navigation";
+
 export default function HomePage() {
 	const [menu, setMenu] = useState(false);
+	const { selectedRadio, setSelectedRadio } = useContext(AppContext);
+	const router = useRouter();
 
 	const toggleMenu = () => {
 		setMenu(!menu);
@@ -69,7 +74,16 @@ export default function HomePage() {
 					get work done, or complete simple task and earn money instantly
 				</p>
 				<div className={styles.userBtnContainer}>
-					<button className={styles.workerBtn}>
+					<button
+						className={styles.workerBtn}
+						onClick={() => {
+							setSelectedRadio("worker");
+							router.push("/signin");
+						}}
+						style={{
+							cursor: "pointer",
+						}}
+					>
 						<Image
 							width={20}
 							height={20}
@@ -79,7 +93,16 @@ export default function HomePage() {
 						/>
 						<p style={{ fontSize: 15, margin: 0 }}> I&apos;m a Worker</p>
 					</button>
-					<button className={styles.ownerBtn}>
+					<button
+						className={styles.ownerBtn}
+						onClick={() => {
+							setSelectedRadio("owner");
+							router.push("/signin");
+						}}
+						style={{
+							cursor: "pointer",
+						}}
+					>
 						<Image
 							width={20}
 							height={20}

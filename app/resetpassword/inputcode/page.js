@@ -10,6 +10,7 @@ const Code = () => {
 	const [otp, setOtp] = useState(["", "", "", "", ""]);
 	const inputRefs = useRef([]);
 	const { email, baseUrl } = useContext(AppContext);
+	const [apiError, setApiError] = useState("");
 	const router = useRouter();
 	const OTP = 123456;
 
@@ -51,11 +52,12 @@ const Code = () => {
 				body: JSON.stringify(verifyData),
 			});
 
-			const data = await response.text();
+			const data = await response.json();
 
 			if (!response.ok) {
 				console.log("Response status:", response.status);
 				console.log("Response data:", data);
+				setApiError(data.Message);
 				throw new Error(data.error || "Invalid email");
 			}
 			console.log("Sign up successful:", data);
@@ -64,6 +66,7 @@ const Code = () => {
 			router.push("/resetpassword/changepassword");
 		} catch (error) {
 			console.log("Error: ", error.message);
+			
 		}
 	};
 
@@ -93,7 +96,7 @@ const Code = () => {
 							Check your email <b>{email}</b> for a 5-digit code
 						</p>
 					</div>
-					<p className={codeStyles.errorMessage}></p>
+					<p className={codeStyles.errorMessage}>{apiError}</p>
 					<div className={codeStyles.inputCode}>
 						{otp.map((digit, index) => (
 							<input

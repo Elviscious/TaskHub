@@ -250,6 +250,8 @@
   .topMenuBtn {
     width: 100%; /* button takes full width */
     justify-content: center;
+    align-self: center;
+    max-width: 150px;
   }
   .topMenu h1 {
     margin: auto 20px;

@@ -51,7 +51,12 @@ const Login = () => {
       console.log("Sign up successful:", data);
       setLoggedIn(true);
       document.cookie = `loggedIn=true; path=/; max-age=3600`;
-      router.push("/ownerdashboard");
+    if (data.message.includes("Worker")) {
+			router.push("/workerdashboard")
+		} else if (data.message.includes("Owner")) {
+			router.push("/ownerdashboard");
+		}
+      
     } catch (error) {
       console.error("Error during sign up:", error.message);
 
