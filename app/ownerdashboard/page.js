@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/app/ownerdashboard/page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Navbar from "../components/navbar";
 
 function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,83 +21,13 @@ function Dashboard() {
   }, [isOpen]);
 
   return (
-		<div className={styles.container}>
+		<div >
 			{/* Hamburger menu for mobile view */}
 
-			<div className={`${styles.navigationBar} ${isOpen ? styles.open : ""}`}>
-				<nav>
-					<h1>MAIN MENU</h1>
-					<ul className={styles.navUl}>
-						<li className={`${styles.navItem} ${styles.active}`}>
-							<Image src="/Home.png" alt="" width={30} height={30} />
-							<p
-								style={{
-									color: "#3b82f6",
-								}}
-							>
-								Dashboard
-							</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/plus.png" alt="" width={30} height={30} />
-							<p>Post New Task</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/book.png" alt="" width={30} height={30} />
-							<p>My Tasks</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/folder.png" alt="" width={30} height={30} />
-							<p>Submissions</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Wallet.png" alt="" width={30} height={30} />
-							<p>Wallet</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image
-								src="/Setting_alt_line.png"
-								alt=""
-								width={30}
-								height={30}
-							/>
-							<p>Settings</p>
-						</li>
-					</ul>
-					<div
-						className={styles.logOut}
-						onClick={() => {
-							document.cookie = "loggedIn=false; path=/; max-age=0";
-							router.push("/login");
-						}}
-					>
-						<Image src="/Sign_out_squre.png" alt="" width={30} height={30} />
-						<p>Log Out</p>
-					</div>
-				</nav>
-			</div>
-
-			<button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
-				<Image
-					src={isOpen ? "/Close_round.png" : "/Menu.png"}
-					alt="menu toggle"
-					width={44}
-					height={44}
-				/>
-			</button>
-			<div className={styles.mainContent}>
+				
+			<div >
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
-					<button className={styles.topMenuBtn}>
-						<Image
-							src="/plus.png"
-							width={20}
-							height={20}
-							alt="plus sign"
-							style={{ filter: "brightness(100)" }}
-						/>
-						<span>Post new job</span>
-					</button>
 				</div>
 
 				<h2>My Tasks</h2>

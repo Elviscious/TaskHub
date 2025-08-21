@@ -70,20 +70,27 @@
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }
+.navItem img {
+  filter: brightness(0);
+}
+.active {
+  color: #3b82f6;
+  /* Example highlight color */
+  /* border-left: 4px solid #0070f3; */
+  img{
+    filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(1000%) hue-rotate(200deg) brightness(100%) contrast(100%);
+  }
+}
 
 .navItem:hover {
-  color: #3b82f6;
+
 }
 
 .navItem:hover img {
-  filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(1000%)
-    hue-rotate(200deg) brightness(100%) contrast(100%);
+
 }
 
-.navItem.active img {
-  filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(1000%)
-    hue-rotate(200deg) brightness(100%) contrast(100%);
-}
+
 
 .logOut {
   display: flex;
@@ -119,10 +126,16 @@
 
 .myTaskContainer {
   display: flex;
-  gap: 30px;
+  gap: 50px;
   flex-wrap: wrap;
   margin-top: 20px;
   width: 100%;
+}
+.main {
+  flex: 1;
+  /* Fill remaining space */
+  padding: 40px 60px;
+  background: #fff;
 }
 
 .taskContainer {
@@ -131,7 +144,7 @@
   padding: 20px 20px;
   border-radius: 12px;
   /* padding-right: 180px; */
-  max-width: 250px;
+  max-width: 300px;
   height: 130px;
   display: flex;
   flex-direction: column;
@@ -190,22 +203,9 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
   margin-bottom: 20px;
-}
-.topMenuBtn {
-  display: flex;
-  gap: 8px;
-  padding: 10px 16px;
-  background-color: #3b82f6;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border: none; /* ensures clean button look */
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .topMenuBtn:hover {

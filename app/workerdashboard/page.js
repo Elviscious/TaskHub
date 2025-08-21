@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/app/workerdashboard/page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Navbar from "../components/navbar";
 
 function Dashboard() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -23,67 +24,24 @@ function Dashboard() {
 		<div className={styles.container}>
 			{/* Hamburger menu for mobile view */}
 
-			<div className={`${styles.navigationBar} ${isOpen ? styles.open : ""}`}>
-				<nav>
-					<h1>MAIN MENU</h1>
-					<ul className={styles.navUl}>
-						<li className={`${styles.navItem} ${styles.active}`}>
-							<Image src="/Home.png" alt="" width={30} height={30} />
-							<p
-								style={{
-									color: "#3b82f6",
-								}}
-							>
-								Dashboard
-							</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Paper.png" alt="" width={30} height={30} />
-							<p>Available Tasks</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Upload.png" alt="" width={30} height={30} />
-							<p>Submitted Tasks</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Folders_line.png" alt="" width={30} height={30} />
-							<p>Earning History</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Wallet.png" alt="" width={30} height={30} />
-							<p>Wallet</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image
-								src="/Setting_alt_line.png"
-								alt=""
-								width={30}
-								height={30}
-							/>
-							<p>Settings</p>
-						</li>
-					</ul>
-					<div
-						className={styles.logOut}
-						onClick={() => {
-							document.cookie = "loggedIn=false; path=/; max-age=0";
-							router.push("/login");
-						}}
-					>
-						<Image src="/Sign_out_squre.png" alt="" width={30} height={30} />
-						<p>Log Out</p>
-					</div>
-				</nav>
-			</div>
-
-			<button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
-				<Image
-					src={isOpen ? "/Close_round.png" : "/Menu.png"}
-					alt="menu toggle"
-					width={44}
-					height={44}
-				/>
-			</button>
+			<Navbar
+				list1="Dashboard"
+				list2="My Task"
+				list3="Submitted Tasks"
+				list4="Earning History"
+				list5="Wallet"
+				src1="/Home.png"
+				src2="/book.png"
+				src3="/upload.png"
+				src4="/Folders_line.png"
+				src5="/Wallet.png"
+				link1="/workerdashboard"
+				link2="/workerdashboard"
+				link3="/workerdashboard"
+				link4="/workerdashboard"
+				link5="/workerdashboard"
+				link6="/workerdashboard"
+			/>
 			<div className={styles.mainContent}>
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
