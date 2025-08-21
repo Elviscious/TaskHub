@@ -25,6 +25,7 @@ function Dashboard() {
 			{/* Hamburger menu for mobile view */}
 
 			<Navbar
+				name="worker"
 				list1="Dashboard"
 				list2="My Task"
 				list3="Submitted Tasks"
@@ -36,11 +37,11 @@ function Dashboard() {
 				src4="/Folders_line.png"
 				src5="/Wallet.png"
 				link1="/workerdashboard"
-				link2="/workerdashboard"
-				link3="/workerdashboard"
-				link4="/workerdashboard"
-				link5="/workerdashboard"
-				link6="/workerdashboard"
+				link2="/workerdashboard/mytask"
+				link3="/workerdashboard/submittedtask"
+				link4="/workerdashboard/earninghistory"
+				link5="/workerdashboard/wallet"
+				link6="/workerdashboard/settings"
 			/>
 			<div className={styles.mainContent}>
 				<div className={styles.topMenu}>

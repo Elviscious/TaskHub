@@ -1,10 +1,14 @@
 import Navbar from "../components/navbar";
 import styles from "./page.module.css"
+import Submissions from "./submissions/page";
 
 export default function DashboardLayout({ children }) {
+    const task = [1,2,3,4]
 	return (
 		<div className={styles.container}>
+       
 			<Navbar
+                name="owner"
 				list1="Dashboard"
 				list2="Post New Task"
 				list3="My Tasks"

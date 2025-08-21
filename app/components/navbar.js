@@ -7,9 +7,10 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
 function Navbar(props) {
+	const [dropDown, setdropDown] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
-    const pathname = usePathname();
+	const pathname = usePathname();
 
 	useEffect(() => {
 		if (isOpen) {
@@ -42,13 +43,59 @@ function Navbar(props) {
 							<li
 								key={index}
 								className={`${
-									pathname === link.href ? styles.active : ""
+									pathname === link.href && index !== 1 ? styles.active : ""
 								}`}
+								style={{ position: "relative" }}
+								onClick={() => (index === 1 ? setdropDown(!dropDown) : null)}
 							>
-								<Link href={link.href} className={styles.navItem}>
+								<Link
+									href={index !== 1 ? link.href : ""}
+									className={styles.navItem}
+								>
 									<Image src={link.src} alt="" width={30} height={30} />
 									<p>{link.text}</p>
+									{index === 1 && props.name === "owner" ? (
+										<Image
+											src="/down.png"
+											alt=""
+											width={15}
+											height={10}
+											style={{
+												position: "absolute",
+												right: "0%",
+												transform: dropDown ? "rotate(180deg)" : "rotate(0deg)",
+											}}
+											onClick={() => setdropDown(!dropDown)}
+										/>
+									) : null}
 								</Link>
+								{index === 1 && props.name === "owner" && dropDown ? (
+									<ul
+										className={styles.dropdown}
+										onClick={(e) => {
+											e.stopPropagation(); // Prevents triggering parent onClick
+										}}
+									>
+										<Link
+											href={props.link2}
+											className={`${
+												pathname === "/ownerdashboard/PostJob" ? styles.active : ""
+											}`}
+										>
+											<li>Post Job</li>
+										</Link>
+										<Link
+											href="/ownerdashboard/draft"
+											className={`${
+												pathname === "/ownerdashboard/draft"
+													? styles.active
+													: ""
+											}`}
+										>
+											<li>View Draft</li>
+										</Link>
+									</ul>
+								) : null}
 							</li>
 						))}
 					</ul>
