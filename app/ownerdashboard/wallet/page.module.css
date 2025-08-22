@@ -1,9 +1,9 @@
-.container{
-    max-width: 90%;
+.Container{
+    max-width: 100%;
     position: relative;
     left: 50%;
-    top: 10%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .walletHeader {
@@ -90,22 +90,24 @@
     scroll-behavior: smooth;
 }
 .payoutLists::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    /* thinner scrollbar */
 }
 
 .payoutLists::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
+    background: transparent;
+    /* no track background */
 }
 
 .payoutLists::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6a11cb, #2575fc);
+    background: rgba(0, 0, 0, 0.25);
+    /* soft gray thumb */
     border-radius: 10px;
-    border: 2px solid #f0f0f0;
 }
 
 .payoutLists::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #8e2de2, #4a00e0);
+    background: rgba(0, 0, 0, 0.4);
+    /* slightly darker on hover */
 }
 
 .payout{
@@ -124,5 +126,12 @@
     .money + p{
         font-size: 14px;
         font-weight: 300;
+    }
+}
+
+@media (max-width:600px) {
+    .Container{
+        /* top:10%; */
+        transform: translate(-50%,10%);
     }
 }

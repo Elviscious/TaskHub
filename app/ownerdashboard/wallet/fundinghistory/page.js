@@ -56,7 +56,7 @@ export default function Wallet() {
 		},
 	];
 	return (
-		<div className={styles.container}>
+		<div className={styles.Container}>
 			<WalletHeader text="Payout History" link="/ownerdashboard/wallet" />
 			<WalletLayout title="Funding History" payoutData={data} />
 		</div>

@@ -11,7 +11,7 @@ export default function Wallet() {
 			{ id: 2, type: "Auto Payout", date: "Aug 9, 2025; 20:33", amount: -50 },
 		];
 	return (
-		<div className={styles.container}>
+		<div className={styles.Container}>
 			<WalletHeader
 				text="Funding History"
 				link="/ownerdashboard/wallet/fundinghistory"
