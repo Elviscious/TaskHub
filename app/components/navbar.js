@@ -32,6 +32,12 @@ function Navbar(props) {
 			text: "Settings",
 		},
 	];
+	const isActive = (href) => {
+		if (href === "/ownerdashboard") {
+			return pathname === "/ownerdashboard"; // only exact dashboard
+		}
+		return pathname.startsWith(href);
+	};
 
 	return (
 		<>
@@ -43,7 +49,9 @@ function Navbar(props) {
 							<li
 								key={index}
 								className={`${
-									pathname === link.href && index !== 1 ? styles.active : ""
+									isActive(link.href) && index !== 1
+										? styles.active
+										: ""
 								}`}
 								style={{ position: "relative" }}
 								onClick={() => (index === 1 ? setdropDown(!dropDown) : null)}
@@ -79,7 +87,9 @@ function Navbar(props) {
 										<Link
 											href={props.link2}
 											className={`${
-												pathname === "/ownerdashboard/PostJob" ? styles.active : ""
+												pathname === "/ownerdashboard/PostJob"
+													? styles.active
+													: ""
 											}`}
 										>
 											<li>Post Job</li>
