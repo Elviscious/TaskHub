@@ -1,0 +1,30 @@
+.input {
+  color: #0000ff80;
+  padding: 5px 0;
+  border: 0;
+  background: 0;
+  font-size: 15px;
+  outline: 0;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1.2px solid #3b82f6;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+.taskList {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px 50px;
+  box-shadow: 0 0 10px 6px rgba(59, 130, 246, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
