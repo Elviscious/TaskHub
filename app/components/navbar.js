@@ -49,9 +49,7 @@ function Navbar(props) {
 							<li
 								key={index}
 								className={`${
-									isActive(link.href) && index !== 1
-										? styles.active
-										: ""
+									isActive(link.href) && index !== 1 ? styles.active : ""
 								}`}
 								style={{ position: "relative" }}
 								onClick={() => (index === 1 ? setdropDown(!dropDown) : null)}
@@ -72,6 +70,8 @@ function Navbar(props) {
 												position: "absolute",
 												right: "0%",
 												transform: dropDown ? "rotate(180deg)" : "rotate(0deg)",
+
+												transition: "transform 0.3s ease",
 											}}
 											onClick={() => setdropDown(!dropDown)}
 										/>
