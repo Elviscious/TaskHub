@@ -28,3 +28,16 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+.listContainer {
+  margin-top: 30;
+  overflow-y: scroll;
+  height: 420px;
+  padding: 10px;
+  scrollbar-width: none;
+}
+
+@media (max-width: 800px) {
+  .listContainer {
+    height: 800px;
+  }
+}
