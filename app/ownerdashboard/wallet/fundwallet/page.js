@@ -5,6 +5,7 @@ export default function FundWallet() {
 		<div className={styles.fundWallet}>
 			<div className={styles.paymentMethods}>
 				<div>Pay with Bank Transfer</div>
+                <span></span>
 				<div>Pay with Credit Card</div>
 			</div>
 		</div>

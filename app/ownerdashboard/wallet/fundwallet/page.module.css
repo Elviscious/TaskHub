@@ -11,4 +11,24 @@
     flex-direction: column;
     gap: 20px;
     text-align: center;
+    border: 1px solid #ddd;
+    max-width: 300px;
+    padding: 20px 0px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    span{
+        background: black;
+        width: 100%;
+        height: 1px;
+        display: block;
+        /* margin: 0px 20px; */
+    }
+}
+.paymentMethods div{
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+    font-weight: 600;
+    color: rgba(75, 85, 99, 1);
+    font-family: var(--font-inter);
 }
