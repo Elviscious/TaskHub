@@ -30,7 +30,7 @@
   font-weight: 500;
 }
 
-.formGroup input, .dropDown {
+.formGroup input, .dropDown, .formGroup textarea {
   flex: 1;
   padding: 10px;
   border: 2px solid #3b82f6;
@@ -48,6 +48,11 @@
   margin: 0;
 }
 
+.formGroup textarea{
+  height: 70px;
+  padding: 20px 20px;
+  scrollbar-width: none;
+}
 /* Checkbox row */
 .formCheckBox {
   display: flex;
@@ -64,6 +69,10 @@
   justify-content: right;
   gap: 60px;
   margin-top: 10px;
+}
+.jobForm p{
+  font-size: 13px;
+  text-align: center;
 }
 
 .btn {

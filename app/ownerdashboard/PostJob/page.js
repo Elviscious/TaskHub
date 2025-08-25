@@ -10,6 +10,7 @@ export default function PostJob() {
   const [budget, setBudget] = useState("");
   const [worker, setWorker] = useState("");
   const [inputLink, setinputLink] = useState("");
+  const [Error, setError] = useState(null)
 
   const PostJobData = {
     title: jobTitle,
@@ -26,9 +27,21 @@ export default function PostJob() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(Error) {
+      return
+    }
 
     console.log(PostJobData);
   };
+
+  const checkLink = (value) =>{
+    if(value.includes(" ") || value.includes("\n")){
+      setError("No space allowed in links");
+    }
+    else{
+      setError(null)
+    }
+  }
 
   return (
 		<div className={styles.container}>
@@ -60,15 +73,15 @@ export default function PostJob() {
 							<option value="File">YouTube</option>
 							<option value="screenshot">Instagram</option>
 							<option value="Links">Twitter</option>
-							<option value="Links">Telegram</option> 
-							<option value="Links">Twitch</option> 
-							<option value="Links">App Download</option> 
+							<option value="Links">Telegram</option>
+							<option value="Links">Twitch</option>
+							<option value="Links">App Download</option>
 						</select>
 					</div>
 
 					<div className={styles.formGroup}>
 						<label>Instructions</label>
-						<input
+						<textarea
 							type="text"
 							placeholder="Subscribe to my YouTube channel"
 							required
@@ -95,11 +108,13 @@ export default function PostJob() {
 					<div className={styles.formGroup}>
 						<label>Input Link</label>
 						<input
-							type="text"
+							type="url"
 							placeholder="www.youtube.com"
+							required
 							value={inputLink}
 							onChange={(e) => {
 								setinputLink(e.target.value);
+								checkLink(e.target.value);
 							}}
 						/>
 					</div>
@@ -128,22 +143,20 @@ export default function PostJob() {
 							}}
 						/>
 					</div>
-
-					<div className={styles.formCheckBox}>
-						<input type="checkbox" id="deduct" />
-						<label htmlFor="deduct">Deduct total budget from wallet</label>
-					</div>
+						<p style={{opacity: .7}}>
+							<b>
+								<i>Total Deducted from wallet</i>
+							</b>
+						</p>
+					<p style={{color: "red", fontWeight:500}}>{Error}</p>
 
 					<div className={styles.formActions}>
-          <button type="button" className={`${styles.btn} ${styles.draft}`}>
+						<button type="button" className={`${styles.btn} ${styles.draft}`}>
 							Save to Draft
 						</button>
 						<button
 							type="submit"
 							className={styles.btn}
-							onClick={() => {
-								console.log(PostJobData);
-							}}
 						>
 							Post Job
 						</button>
