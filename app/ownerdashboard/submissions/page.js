@@ -59,7 +59,7 @@ export default function Submissions() {
     { id: 50, title: "Like my Instagram Post" },
   ];
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Submissions</h1>
 
       <div style={{ justifySelf: "right" }}>

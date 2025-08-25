@@ -1,9 +1,11 @@
 
 .fundWallet{
-    padding: 20px;
     border-radius: 8px;
-    max-width: 600px;
-    margin: auto;
+    /* max-width: 600px; */
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    gap: 80px;
 }
 .paymentMethods{
     background: white;
@@ -27,8 +29,15 @@
 .paymentMethods div{
     display: flex;
     justify-content: center;
-    padding: 5px 0;
+    word-break: keep-all;
+    padding: 5px 30px;
     font-weight: 600;
     color: rgba(75, 85, 99, 1);
     font-family: var(--font-inter);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.paymentMethods div:hover{
+    font-weight: 800;
+    /* border-radius: 5px; */
 }

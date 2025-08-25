@@ -1,6 +1,6 @@
 import Navbar from "../components/navbar";
 import styles from "./page.module.css"
-import Submissions from "./submissions/page";
+
 
 export default function DashboardLayout({ children }) {
     const task = [1,2,3,4]
