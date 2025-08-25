@@ -65,7 +65,7 @@ export default function Submissions() {
   );
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Submissions</h1>
 
       <div style={{ justifySelf: "right" }}>
