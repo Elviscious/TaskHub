@@ -13,6 +13,8 @@ export default function Card() {
 								name="cardName"
 								id="cardName"
 								autoComplete="cc-name"
+                                placeholder="John Doe"
+                                required
 							/>
 						</div>
 						<div className={styles.inputField}>
@@ -22,6 +24,7 @@ export default function Card() {
 								name="cardNumber"
 								id="cardNumber"
                                 placeholder="1234 5678 9012 3456"
+                                required
                                 maxLength={16}
 								autoComplete="cc-number"
 							/>
@@ -34,6 +37,7 @@ export default function Card() {
 									name="cardExp"
 									id="cardExp"
 									placeholder="8/25"
+                                    required
 									autoComplete="cc-exp"
 								/>
 							</div>
@@ -44,6 +48,7 @@ export default function Card() {
 									name="cvv"
 									id="cvv"
 									placeholder="123"
+                                    required
 									autoComplete="cc-csc"
 									maxLength={4}
 								/>
@@ -56,11 +61,19 @@ export default function Card() {
 								name="amount"
 								id="amount"
 								placeholder="0.00"
+                                required
 								inputMode="decimal"
 								pattern="\d+(\.\d{2})?"
 							/>
 						</div>
 					</div>
+                    <div className={styles.saveDetails}>
+                        <input type="checkbox" id="detailsCheck" name="detailsCheck"/>
+                        <label htmlFor="detailsCheck">Save my card details</label>
+                    </div>
+                    <button type="submit" className={styles.payButton}>
+                        Pay
+                    </button>
 				</form>
 			</div>
 		);
