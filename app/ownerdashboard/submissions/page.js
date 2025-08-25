@@ -1,63 +1,69 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/app/ownerdashboard/submissions/page.module.css";
 
 export default function Submissions() {
+  const [searchTitle, setSearchTitle] = useState("");
   const tasks = [
-    { id: 1, title: "Subscribe to my YouTube" },
-    { id: 2, title: "Like and retweet" },
-    { id: 3, title: "Follow my Instagram" },
-    { id: 4, title: "Subscribe my YouTube" },
-    { id: 5, title: "Like and retweet" },
-    { id: 6, title: "Follow my Facebook" },
-    { id: 7, title: "Like my Instagram Post" },
-    { id: 8, title: "Like my Instagram Post" },
-    { id: 9, title: "Like my Instagram Post" },
-    { id: 10, title: "Like my Instagram Post" },
-    { id: 11, title: "Like my Instagram Post" },
-    { id: 12, title: "Like my Instagram Post" },
-    { id: 13, title: "Like my Instagram Post" },
-    { id: 14, title: "Like my Instagram Post" },
-    { id: 15, title: "Like my Instagram Post" },
-    { id: 16, title: "Like my Instagram Post" },
-    { id: 17, title: "Like my Instagram Post" },
-    { id: 18, title: "Like my Instagram Post" },
-    { id: 19, title: "Like my Instagram Post" },
-    { id: 20, title: "Like my Instagram Post" },
-    { id: 21, title: "Like my Instagram Post" },
-    { id: 22, title: "Like my Instagram Post" },
-    { id: 23, title: "Like my Instagram Post" },
-    { id: 24, title: "Like my Instagram Post" },
-    { id: 25, title: "Like my Instagram Post" },
-    { id: 26, title: "Like my Instagram Post" },
-    { id: 27, title: "Like my Instagram Post" },
-    { id: 28, title: "Like my Instagram Post" },
-    { id: 29, title: "Like my Instagram Post" },
-    { id: 30, title: "Like my Instagram Post" },
-    { id: 31, title: "Like my Instagram Post" },
-    { id: 32, title: "Like my Instagram Post" },
-    { id: 33, title: "Like my Instagram Post" },
-    { id: 34, title: "Like my Instagram Post" },
-    { id: 35, title: "Like my Instagram Post" },
-    { id: 36, title: "Like my Instagram Post" },
-    { id: 37, title: "Like my Instagram Post" },
-    { id: 38, title: "Like my Instagram Post" },
-    { id: 39, title: "Like my Instagram Post" },
-    { id: 40, title: "Like my Instagram Post" },
-    { id: 41, title: "Like my Instagram Post" },
-    { id: 42, title: "Like my Instagram Post" },
-    { id: 43, title: "Like my Instagram Post" },
-    { id: 44, title: "Like my Instagram Post" },
-    { id: 45, title: "Like my Instagram Post" },
-    { id: 46, title: "Like my Instagram Post" },
-    { id: 47, title: "Like my Instagram Post" },
-    { id: 48, title: "Like my Instagram Post" },
-    { id: 49, title: "Like my Instagram Post" },
-    { id: 50, title: "Like my Instagram Post" },
+    { id: 1, title: "Follow my YouTube" },
+    { id: 2, title: "Like my Instagram post" },
+    { id: 3, title: "Retweet my tweet" },
+    { id: 4, title: "Comment on my Facebook post" },
+    { id: 5, title: "Follow my Instagram" },
+    { id: 6, title: "Subscribe to my YouTube channel" },
+    { id: 7, title: "Like my TikTok video" },
+    { id: 8, title: "Follow my Twitter account" },
+    { id: 9, title: "Comment on my Instagram post" },
+    { id: 10, title: "Like my Facebook post" },
+    { id: 11, title: "Follow my TikTok" },
+    { id: 12, title: "Retweet my tweet" },
+    { id: 13, title: "Like my Instagram post" },
+    { id: 14, title: "Follow my YouTube" },
+    { id: 15, title: "Comment on my TikTok video" },
+    { id: 16, title: "Subscribe to my YouTube channel" },
+    { id: 17, title: "Follow my Twitter account" },
+    { id: 18, title: "Share my Facebook post" },
+    { id: 19, title: "Like my TikTok video" },
+    { id: 20, title: "Follow my Instagram" },
+    { id: 21, title: "Subscribe to my newsletter" },
+    { id: 22, title: "Follow my LinkedIn profile" },
+    { id: 23, title: "Like my Pinterest pin" },
+    { id: 24, title: "Comment on my LinkedIn post" },
+    { id: 25, title: "Join my Telegram group" },
+    { id: 26, title: "Share my Instagram story" },
+    { id: 27, title: "Follow my Snapchat" },
+    { id: 28, title: "Like my YouTube video" },
+    { id: 29, title: "Retweet my tweet" },
+    { id: 30, title: "Comment on my Facebook post" },
+    { id: 31, title: "Follow my Discord server" },
+    { id: 32, title: "Like my Instagram post" },
+    { id: 33, title: "Share my TikTok video" },
+    { id: 34, title: "Follow my Twitch channel" },
+    { id: 35, title: "Subscribe to my YouTube channel" },
+    { id: 36, title: "Follow my Twitter account" },
+    { id: 37, title: "Comment on my Instagram post" },
+    { id: 38, title: "Like my Facebook post" },
+    { id: 39, title: "Follow my TikTok" },
+    { id: 40, title: "Retweet my tweet" },
+    { id: 41, title: "Like my Instagram post" },
+    { id: 42, title: "Follow my YouTube" },
+    { id: 43, title: "Comment on my TikTok video" },
+    { id: 44, title: "Subscribe to my YouTube channel" },
+    { id: 45, title: "Follow my Twitter account" },
+    { id: 46, title: "Share my Facebook post" },
+    { id: 47, title: "Like my TikTok video" },
+    { id: 48, title: "Follow my Instagram" },
+    { id: 49, title: "Join my WhatsApp group" },
+    { id: 50, title: "Like my Reddit post" },
   ];
+
+  const filteredTitle = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchTitle.toLowerCase())
+  );
+
   return (
     <div>
       <h1>Submissions</h1>
@@ -65,20 +71,33 @@ export default function Submissions() {
       <div style={{ justifySelf: "right" }}>
         <div className={styles.inputContainer}>
           <Image src="/Search.png" alt="search" width={20} height={20} />
-          <input placeholder="Search here..." className={styles.input} />
+          <input
+            placeholder="Search here..."
+            className={styles.input}
+            value={searchTitle}
+            onChange={(e) => {
+              setSearchTitle(e.target.value);
+            }}
+          />
         </div>
       </div>
 
       <div className={styles.listContainer}>
         <ul style={{ listStyle: "none" }}>
-          {tasks.map((task) => (
-            <li key={task.id} className={styles.taskList}>
-              <p style={{ color: "black", fontSize: 18 }}>{task.title}</p>
-              <Link href={`/ownerdashboard/submissions/${task.id}`}>
-                <p style={{ color: "#3b82f6", fontSize: 12 }}>View Table</p>
-              </Link>
-            </li>
-          ))}
+          {filteredTitle.length > 0 ? (
+            filteredTitle.map((task) => (
+              <li key={task.id} className={styles.taskList}>
+                <p style={{ color: "black", fontSize: 18, fontWeight: "500" }}>
+                  Task: {task.title}
+                </p>
+                <Link href={`/ownerdashboard/submissions/${task.id}`}>
+                  <p style={{ color: "#3b82f6", fontSize: 12 }}>View Table</p>
+                </Link>
+              </li>
+            ))
+          ) : (
+            <p>No Submissions available</p>
+          )}
         </ul>
       </div>
     </div>
