@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/app/workerdashboard/page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Navbar from "../components/navbar";
+import otherstyles from "@/app/ownerdashboard/dashboard.module.css";
 
 function Dashboard() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ function Dashboard() {
 	}, [isOpen]);
 
 	return (
-			<div>
+			<div className={otherstyles.mainContent}>
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
 				</div>
