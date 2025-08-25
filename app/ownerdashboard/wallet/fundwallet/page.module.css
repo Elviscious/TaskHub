@@ -1,0 +1,14 @@
+
+.fundWallet{
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+}
+.paymentMethods{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}

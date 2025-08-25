@@ -21,29 +21,7 @@ function Dashboard() {
 	}, [isOpen]);
 
 	return (
-		<div className={styles.container}>
-			{/* Hamburger menu for mobile view */}
-
-			<Navbar
-				name="worker"
-				list1="Dashboard"
-				list2="My Task"
-				list3="Submitted Tasks"
-				list4="Earning History"
-				list5="Wallet"
-				src1="/Home.png"
-				src2="/book.png"
-				src3="/upload.png"
-				src4="/Folders_line.png"
-				src5="/Wallet.png"
-				link1="/workerdashboard"
-				link2="/workerdashboard/mytask"
-				link3="/workerdashboard/submittedtask"
-				link4="/workerdashboard/earninghistory"
-				link5="/workerdashboard/wallet"
-				link6="/workerdashboard/settings"
-			/>
-			<div className={styles.mainContent}>
+			<div>
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
 				</div>
@@ -83,7 +61,6 @@ function Dashboard() {
 					<h2>$2,000.00</h2>
 				</div>
 			</div>
-		</div>
 	);
 }
 
