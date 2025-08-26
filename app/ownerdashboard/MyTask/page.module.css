@@ -55,6 +55,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin: 10px;
 }
 .imgBtn{
     background: transparent;
@@ -65,7 +66,7 @@
     transition: background-color 0.3s ease;
 }
 .imgBtn:hover{
-    background-color: #3B82F6;
+    background-color: #dfe5f0;
 }
 
 @media (max-width: 800px) {
@@ -77,4 +78,73 @@
     .table{
         min-width: 800px;
     }
+}
+
+
+
+
+
+
+
+
+
+/* Popup overlay */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Popup box */
+.popupMenu {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 600px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: fadeIn 0.2s ease-in-out;
+  overflow-y: auto;
+}
+
+.popupMenu p {
+  margin: 10px 0;
+}
+
+.popupMenu a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.closeBtn {
+  margin-top: 15px;
+  padding: 8px 12px;
+  border: none;
+  background: blue;
+  color: white;
+  border-radius: 8px;
+  max-height: 80vh;
+  cursor: pointer;
+}
+
+/* Fade in effect */
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+
+@media (max-width: 600px) {
+  .popupMenu {
+    width: 90%;
+    padding: 20px;
+  }
 }
