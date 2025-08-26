@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
 				list5="Wallet"
 				src1="/Home.png"
 				src2="/book.png"
-				src3="/upload.png"
+				src3="/Upload.png"
 				src4="/Folders_line.png"
 				src5="/Wallet.png"
 				link1="/workerdashboard"

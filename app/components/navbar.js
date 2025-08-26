@@ -53,6 +53,9 @@ function Navbar(props) {
 									: isActive(link.href) && index !== 1;
 
 							const isOwnerSecondLink = props.name === "owner" && index === 1;
+							const isworkerNavbar = props.name === "worker"  && index === 3;
+
+							if (isworkerNavbar) return;
 
 							return (
 								<li
