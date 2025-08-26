@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/app/ownerdashboard/page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Navbar from "../components/navbar";
+import otherstyles from "./dashboard.module.css";
 
 function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ function Dashboard() {
 			{/* Hamburger menu for mobile view */}
 
 				
-			<div >
+			<div className={otherstyles.mainContent}>
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
 				</div>

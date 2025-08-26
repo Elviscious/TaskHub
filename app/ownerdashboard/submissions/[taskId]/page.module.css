@@ -34,8 +34,20 @@
   padding: 12px 16px;
   vertical-align: middle;
   text-align: left;
-}
 
+  word-wrap: break-word; /* ✅ break long words */
+  word-break: break-word; /* ✅ force break if needed */
+  white-space: normal; /* ✅ allow wrapping */
+  max-width: 200px; /* optional: limit cell width */
+}
+.buttonData {
+  padding: 12px 16px;
+  vertical-align: middle;
+  text-align: left;
+  white-space: nowrap;
+  word-wrap: normal;
+  word-break: normal;
+}
 .menu {
   position: absolute;
   top: 100%; /* show below the dots */
@@ -68,13 +80,13 @@
   cursor: pointer;
 }
 
-@media (max-width: 1050px) {
-  .table {
-    /* min-width: 600px; */
-    min-width: 100%;
+@media (max-width: 800px) {
+  .tableContainer {
+    overflow-x: auto; /* enable horizontal scrolling */
+    height: 800px;
   }
 
-  .tableContainer {
-    overflow-x: auto;
+  .table {
+    min-width: 800px; /* force table to be wider than container */
   }
 }

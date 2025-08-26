@@ -566,7 +566,7 @@ export default function TaskDetailsPage() {
                 <td className={styles.tableData}>{item.proof}</td>
                 <td className={styles.tableData}>{item.time}</td>
                 <td className={styles.tableData}>{item.status}</td>
-                <td className={styles.tableData}>
+                <td className={styles.buttonData}>
                   <div style={{ position: "relative" }}>
                     {/* Dots Button */}
 
@@ -612,7 +612,7 @@ export default function TaskDetailsPage() {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 340,
+          justifyContent: "space-between",
         }}
       >
         <div>
