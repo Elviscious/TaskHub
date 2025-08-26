@@ -1,0 +1,141 @@
+
+.fundWallet{
+    border-radius: 8px;
+    /* max-width: 600px; */
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    gap: 10px;
+    padding: 40px 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.paymentMethods{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    /* margin-top: 30%; */
+    max-width: 300px;
+    padding: 20px 0px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    span{
+        background: #3b8cf6;
+        width: 100%;
+        height: .5px;
+        display: block;
+        /* margin: 0px 20px; */
+    }
+}
+.method.active {
+    color: #3b8cf6;
+}
+.method{
+    display: flex;
+    flex-direction: column  ;
+    justify-content: center;
+    word-break: keep-all;
+    padding: 5px 30px;
+    font-weight: 600;
+    color: rgba(75, 85, 99, 1);
+    font-family: var(--font-inter);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+ .method:hover{
+    font-weight: 800;
+    /* border-radius: 5px; */
+}
+
+.card{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 40px 30px;
+    min-width: 40%;
+}
+
+.card h2{
+    padding-bottom: 40px ;
+}
+
+.inputGroup{
+    display: flex;
+    flex-direction: column ;
+    gap: 25px;
+}
+
+.inputField{
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    gap: 5px;
+}
+
+.inputField input{
+    padding: 10px;
+    background: none;
+    color: #000;
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    border-radius: 10px;
+}
+.Ec{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+.saveDetails{
+    padding: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.payButton{
+    padding: 10px;
+    background: #3b8cf6;
+    color: #fff;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;   
+    font-size: 20px;
+    font-weight: 600;
+    transition: all .3s ease-in-out;
+}
+.payButton:hover{
+    box-shadow: 0 1px 10px 1px rgba(59, 140, 246, 0.603);
+    transform: translateY(-1px);
+}
+
+.transfer{
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h2{
+        color: #3b8cf6;
+    }
+}
+.accountDetails{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h2{
+        display: inline;
+    }
+}
+
+@media(max-width:520px){
+    .card{
+        min-width: 90%;
+    }
+    .Ec{
+        flex-direction: column;
+    }
+}

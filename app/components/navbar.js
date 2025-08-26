@@ -32,9 +32,10 @@ function Navbar(props) {
 			text: "Settings",
 		},
 	];
+
 	const isActive = (href) => {
-		if (href === "/ownerdashboard") {
-			return pathname === "/ownerdashboard"; // only exact dashboard
+		if (href === "/ownerdashboard" || href === "/workerdashboard") {
+			return pathname === href;
 		}
 		return pathname.startsWith(href);
 	};
@@ -45,69 +46,82 @@ function Navbar(props) {
 				<nav>
 					<h1>MAIN MENU</h1>
 					<ul className={styles.navUl}>
-						{links.map((link, index) => (
-							<li
-								key={index}
-								className={`${
-									isActive(link.href) && index !== 1 ? styles.active : ""
-								}`}
-								style={{ position: "relative" }}
-								onClick={() => (index === 1 ? setdropDown(!dropDown) : null)}
-							>
-								<Link
-									href={index !== 1 ? link.href : ""}
-									className={styles.navItem}
-								>
-									<Image src={link.src} alt="" width={30} height={30} />
-									<p>{link.text}</p>
-									{index === 1 && props.name === "owner" ? (
-										<Image
-											src="/down.png"
-											alt=""
-											width={15}
-											height={10}
-											style={{
-												position: "absolute",
-												right: "0%",
-												transform: dropDown ? "rotate(180deg)" : "rotate(0deg)",
+						{links.map((link, index) => {
+							const shouldBeActive =
+								props.name === "worker"
+									? isActive(link.href)
+									: isActive(link.href) && index !== 1;
 
-												transition: "transform 0.3s ease",
-											}}
-											onClick={() => setdropDown(!dropDown)}
-										/>
-									) : null}
-								</Link>
-								{index === 1 && props.name === "owner" && dropDown ? (
-									<ul
-										className={styles.dropdown}
-										onClick={(e) => {
-											e.stopPropagation(); // Prevents triggering parent onClick
-										}}
+							const isOwnerSecondLink = props.name === "owner" && index === 1;
+
+							return (
+								<li
+									key={index}
+									className={`${shouldBeActive ? styles.active : ""}`}
+									style={{ position: "relative" }}
+									onClick={() =>
+										isOwnerSecondLink ? setdropDown(!dropDown) : null
+									}
+								>
+									<Link
+										href={isOwnerSecondLink ? "" : link.href}
+										className={styles.navItem}
 									>
-										<Link
-											href={props.link2}
-											className={`${
-												pathname === "/ownerdashboard/PostJob"
-													? styles.active
-													: ""
-											}`}
+										<Image src={link.src} alt="" width={30} height={30} />
+										<p>{link.text}</p>
+										{isOwnerSecondLink ? (
+											<Image
+												src="/down.png"
+												alt=""
+												width={15}
+												height={10}
+												style={{
+													position: "absolute",
+													right: "0%",
+													transform: dropDown
+														? "rotate(180deg)"
+														: "rotate(0deg)",
+													transition: "transform 0.3s ease",
+												}}
+												onClick={(e) => {
+													e.preventDefault();
+													setdropDown(!dropDown);
+												}}
+											/>
+										) : null}
+									</Link>
+									{isOwnerSecondLink && dropDown ? (
+										<ul
+											className={styles.dropdown}
+											onClick={(e) => {
+												e.stopPropagation();
+											}}
 										>
-											<li>Post Job</li>
-										</Link>
-										<Link
-											href="/ownerdashboard/draft"
-											className={`${
-												pathname === "/ownerdashboard/draft"
-													? styles.active
-													: ""
-											}`}
-										>
-											<li>View Draft</li>
-										</Link>
-									</ul>
-								) : null}
-							</li>
-						))}
+											<Link
+												href="/ownerdashboard/PostJob"
+												className={`${
+													pathname === "/ownerdashboard/PostJob"
+														? styles.active
+														: ""
+												}`}
+											>
+												<li>Post Job</li>
+											</Link>
+											<Link
+												href="/ownerdashboard/draft"
+												className={`${
+													pathname === "/ownerdashboard/draft"
+														? styles.active
+														: ""
+												}`}
+											>
+												<li>View Draft</li>
+											</Link>
+										</ul>
+									) : null}
+								</li>
+							);
+						})}
 					</ul>
 					<div
 						className={styles.logOut}

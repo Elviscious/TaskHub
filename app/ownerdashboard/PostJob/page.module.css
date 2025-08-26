@@ -1,0 +1,132 @@
+.container{
+  padding: 40px 60px;
+}
+
+.formContainer {
+  min-width: 50%;
+  border-radius: 6px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.jobForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Each label + input row */
+.formGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: right;
+}
+
+.formGroup label {
+  flex: 0 0 140px; /* fixed label width */
+  font-weight: 500;
+}
+
+.formGroup input, .dropDown, .formGroup textarea {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #3b82f6;
+  background-color: #fff;
+  color: black;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+  min-width: 200px;
+  height: 50px;
+}
+.formGroup input[type="number"]::-webkit-outer-spin-button,
+.formGroup input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.formGroup textarea{
+  height: 70px;
+  padding: 20px 20px;
+  scrollbar-width: none;
+}
+/* Checkbox row */
+.formCheckBox {
+  display: flex;
+  align-items: center;
+  accent-color: #3b82f6;
+  gap: 8px;
+  margin-left: 160px;
+  font-size: 14px;
+}
+
+/* Buttons row */
+.formActions {
+  display: flex;
+  justify-content: right;
+  gap: 60px;
+  margin-top: 10px;
+}
+.jobForm p{
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  width: 120px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+}
+.draft.btn{
+  background: rgba(0, 128, 0, 1);
+}
+.dropDown {
+  /* padding: 10px;
+  border: 2px solid #3b82f6;
+  background-color: #fff;
+  border-radius: 6px;
+  color: black;
+  width: 350px; */
+}
+.dropDown:focus {
+  border: 2.5px solid #3b82f6;
+}
+.dropDown:active {
+  border: 2.5px solid #3b82f6;
+}
+
+@media (max-width: 800px) {
+  .formGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .formGroup label {
+    flex: unset;
+    margin-bottom: 4px;
+  }
+
+  .formGroup input {
+    width: 100%;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .formCheckBox {
+    margin-left: 0;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
