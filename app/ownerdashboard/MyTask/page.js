@@ -41,7 +41,7 @@ export default function MyTask(){
  ]);
 
   return(
-  <div >
+  <div className={styles.container}>
     <h1>My Tasks</h1>
 
       {/* <p style={{color: 'green'}}>my name</p> */}
