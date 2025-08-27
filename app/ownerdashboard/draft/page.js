@@ -14,7 +14,7 @@ function DraftsTable() {
     { id: 8, title: "Subscribe to my YouTube channel" },
     { id: 9, title: "Subscribe to my YouTube channel" },
     { id: 10, title: "Subscribe to my YouTube channel" },
-    { id: 11, title: "Subscribe to my YouTube chgannel" },
+    { id: 11, title: "Subscribe to my YouTube channel" },
     { id: 12, title: "Subscribe to my YouTube channel" },
     { id: 13, title: "Subscribe to my YouTube channel" },
     { id: 14, title: "Subscribe to my YouTube channel" },
@@ -29,6 +29,10 @@ function DraftsTable() {
     setDrafts((prev) => prev.filter((draft) => draft.id !== deleteId));
     setDeleteId(null); // close modal
   };
+  const handleEdit = () => {
+  router.push("/ownerdashboard/PostJob"); 
+};
+
 
   const handleCancelDelete = () => {
     setDeleteId(null); // close modal without deleting
@@ -40,7 +44,9 @@ return (
     <div className={styles.draftsContainer}>
       <h2>Drafts</h2>
       <a href="#" className={styles.backIcon}>←Back</a>
-                 <table className={styles.draftsTable}>
+                 
+    <div className={styles.tableContainer}>
+       <table className={styles.draftsTable}>
         <thead>
           <tr>
             <th>S/N</th>
@@ -48,14 +54,17 @@ return (
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.draftBody}>
           {drafts.map((draft, index) => (
             <tr key={draft.id}>
               <td>{index + 1}</td>
               <td>{draft.title}</td>
               
               <td className={styles.actionsBtn}>     
-              <button className={styles.imgBtn}> <img src="\pen.png" alt="edit" className={styles.iconBtn}/></button>
+         <button className={styles.imgBtn} onClick={() => handleEdit(draft.id)} >
+  <img src="/pen.png" alt="edit" className={styles.iconBtn} />
+</button>
+
               <button className={styles.imgBtn} onClick={() => handleDelete(draft.id)}><img src="\waste.png" alt="delete" className={styles.iconBtn}/> </button>
               </td>
             </tr>
@@ -63,6 +72,7 @@ return (
         </tbody>
     
         </table>
+          </div>
     {/* 🔥 Confirmation Modal */}
       {deleteId !== null && (
         <div className={styles.modalOverlay}>
