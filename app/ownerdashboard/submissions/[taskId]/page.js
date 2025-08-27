@@ -546,7 +546,7 @@ export default function TaskDetailsPage() {
   }, [declined]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2>Task ID: {taskId}</h2>
       <div className={styles.tableContainer}>
         <table className={styles.table}>

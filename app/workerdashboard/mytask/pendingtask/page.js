@@ -1,19 +1,13 @@
 import React from "react";
-import styles from "@/app/workerdashboard/mytask/page.module.css";
-import Link from "next/link";
-import { getTasks } from "./lib/getTasks";
+import styles from "@/app/workerdashboard/mytask/pendingtask/page.module.css";
+// import Link from "next/link";
+import { getPendingTask } from "../lib/getTasks";
 
 export default async function MyTask() {
-  const availableTask = await getTasks();
+  const pendingTask = await getPendingTask();
   return (
     <div className={styles.container}>
-      <h1 style={{ margin: 0 }}>Available Tasks</h1>
-
-      <div style={{ justifySelf: "right" }}>
-        <Link href={`/workerdashboard/mytask/pendingtask`}>
-          <button className={styles.button}>View Pending</button>
-        </Link>
-      </div>
+      <h1 style={{ margin: 0 }}>Pending Tasks</h1>
 
       <div className={styles.tableContainer}>
         <table className={styles.table}>
@@ -27,15 +21,13 @@ export default async function MyTask() {
           </thead>
 
           <tbody>
-            {availableTask.map((task) => (
+            {pendingTask.map((task) => (
               <tr key={task.id} className={styles.tableRow}>
                 <td className={styles.tableData}>{task.id}</td>
                 <td className={styles.tableTitle}>{task.title}</td>
                 <td className={styles.tableData}>{task.status}</td>
                 <td className={styles.tableData}>
-                  <Link href={`/workerdashboard/mytask/${task.id}`}>
-                    <button className={styles.buttonData}>View</button>
-                  </Link>
+                  <button className={styles.buttonData}>Complete</button>
                 </td>
               </tr>
             ))}
