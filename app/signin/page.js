@@ -84,9 +84,11 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(signUpData),
+        credentials: "include"
       });
 
       const data = await response.json();
+      // const token = data.Token;  
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to sign up");
@@ -104,7 +106,7 @@ const SignUp = () => {
 
       const errorMessages = error.message.split(",").map((msg) => msg.trim());
       const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
-      setApiError(emailError || "Email error occurred");
+      setApiError(emailError || error.message);
     } finally {
       setLoading(false);
     }
