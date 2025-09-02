@@ -52,12 +52,11 @@ const Login = () => {
       console.log("Sign up successful:", data);
       setLoggedIn(true);
       document.cookie = `loggedIn=true; path=/; max-age=3600`;
-    if (data.message.includes("Worker")) {
-			router.push("/workerdashboard")
-		} else if (data.message.includes("Owner")) {
-			router.push("/ownerdashboard");
-		}
-      
+      if (data.message.includes("Worker")) {
+        router.push("/workerdashboard");
+      } else if (data.message.includes("Owner")) {
+        router.push("/ownerdashboard");
+      }
     } catch (error) {
       console.error("Error during sign up:", error.message);
 
@@ -68,14 +67,14 @@ const Login = () => {
           ? "Wrong password"
           : error.message
       );
-    } finally{
+    } finally {
       setLoading(false);
     }
   };
 
   return (
     <div className={styles.loginBg}>
-        <Logo route={router}/>
+      <Logo route={router} />
       <div className={styles.loginContainer}>
         <form
           className={styles.loginForm}
@@ -150,8 +149,16 @@ const Login = () => {
             </div>
             <p className={styles.errorMessage}>{passwordError}</p>
           </div>
-          <button type="submit" className={styles.btn} disabled={loading} style={{cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1}}>
-            {loading? "Logging In...": "Login"}
+          <button
+            type="submit"
+            className={styles.btn}
+            disabled={loading}
+            style={{
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.7 : 1,
+            }}
+          >
+            {loading ? "Logging In..." : "Login"}
           </button>
         </form>
       </div>

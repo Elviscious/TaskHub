@@ -84,11 +84,11 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(signUpData),
-        credentials: "include"
+        // credentials: "include"
       });
 
       const data = await response.json();
-      // const token = data.Token;  
+      // const token = data.Token;
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to sign up");
