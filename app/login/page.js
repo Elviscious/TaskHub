@@ -45,6 +45,8 @@ const Login = () => {
       });
 
       const data = await response.json();
+      const token = data.Token;
+      localStorage.setItem("token", token);
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to sign up");
