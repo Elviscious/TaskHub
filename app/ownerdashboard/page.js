@@ -2,29 +2,54 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "@/app/ownerdashboard/page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import otherstyles from "./dashboard.module.css";
+import { AppContext } from "../context/context";
 
 function Dashboard() {
-  const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+	const [isOpen, setIsOpen] = useState(false);
+	const router = useRouter();
+	const { baseUrl } = useContext(AppContext);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("navOpen");
-    } else {
-      document.body.classList.remove("navOpen");
-    }
-  }, [isOpen]);
+	useEffect(() => {
+		if (isOpen) {
+			document.body.classList.add("navOpen");
+		} else {
+			document.body.classList.remove("navOpen");
+		}
+	}, [isOpen]);
 
-  return (
-		<div >
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		console.log(token);
+		async function fetchData() {
+			try {
+				const response = await fetch(`${baseUrl}/api/MainServices/Dashboard`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`, // Add token here
+					},
+				});
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+
+				const result = await response.json();
+				console.log(result);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		}
+		fetchData();
+	}, []);
+	return (
+		<div>
 			{/* Hamburger menu for mobile view */}
 
-				
 			<div className={otherstyles.mainContent}>
 				<div className={styles.topMenu}>
 					<h1>Overview</h1>
@@ -34,15 +59,15 @@ function Dashboard() {
 				<div className={styles.myTaskContainer}>
 					<div className={styles.taskContainer}>
 						<p>All Jobs</p>
-						<h2>7</h2>
+						<h2>0</h2>
 					</div>
 					<div className={styles.taskContainer}>
 						<p>Active Jobs</p>
-						<h2>3</h2>
+						<h2>0</h2>
 					</div>
 					<div className={styles.taskContainer}>
 						<p>Paused Jobs</p>
-						<h2>9</h2>
+						<h2>0</h2>
 					</div>
 				</div>
 
@@ -51,22 +76,22 @@ function Dashboard() {
 					<div className={styles.myTaskContainer}>
 						<div className={styles.taskContainer}>
 							<p>Approved</p>
-							<h2>5</h2>
+							<h2>0</h2>
 						</div>
 						<div className={styles.taskContainer}>
 							<p>Pending</p>
-							<h2>3</h2>
+							<h2>0</h2>
 						</div>
 						<div className={styles.taskContainer}>
 							<p>Rejected</p>
-							<h2>10</h2>
+							<h2>0</h2>
 						</div>
 					</div>
 				</div>
 
 				<div className={styles.walletBalance}>
 					<p>Wallet Balance</p>
-					<h2>$2,000.00</h2>
+					<h2>$0</h2>
 				</div>
 			</div>
 		</div>
