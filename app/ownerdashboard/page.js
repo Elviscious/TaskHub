@@ -13,6 +13,13 @@ function Dashboard() {
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
 	const { baseUrl } = useContext(AppContext);
+	const [jobCount, setJobCount] = useState(0);
+	const [activeJobCount, setactiveJobCount] = useState(0);
+	const [completedJobCount, setCompletedJobCount] = useState(0);
+	const [rejectedSubmissionsCount, setRejectedSubmissionsCount] = useState(0);
+	const [approvedSubmissionsCount, setApprovedSubmissionsCount] = useState(0);
+	const [pendingSubmissionsCount, setPendingSubmissionsCount] = useState(0);
+	const [walletBalance, setWalletBalance] = useState(0);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -39,6 +46,13 @@ function Dashboard() {
 				}
 
 				const result = await response.json();
+				setJobCount(result.JobsCount);
+				setactiveJobCount(result.ActiveJobsCount);
+				setCompletedJobCount(result.CompletedJobsCount);
+				setRejectedSubmissionsCount(result.RejectedSubmissionCount);
+				setApprovedSubmissionsCount(result.ApprovedSubmissionCount);
+				setPendingSubmissionsCount(result.PendingSubmissionCount);
+				setWalletBalance(result.WalletBalance);
 				console.log(result);
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -59,15 +73,15 @@ function Dashboard() {
 				<div className={styles.myTaskContainer}>
 					<div className={styles.taskContainer}>
 						<p>All Jobs</p>
-						<h2>0</h2>
+						<h2>{jobCount}</h2>
 					</div>
 					<div className={styles.taskContainer}>
 						<p>Active Jobs</p>
-						<h2>0</h2>
+						<h2>{activeJobCount}</h2>
 					</div>
 					<div className={styles.taskContainer}>
-						<p>Paused Jobs</p>
-						<h2>0</h2>
+						<p>Completed Jobs</p>
+						<h2>{completedJobCount}</h2>
 					</div>
 				</div>
 
@@ -76,22 +90,22 @@ function Dashboard() {
 					<div className={styles.myTaskContainer}>
 						<div className={styles.taskContainer}>
 							<p>Approved</p>
-							<h2>0</h2>
+							<h2>{approvedSubmissionsCount}</h2>
 						</div>
 						<div className={styles.taskContainer}>
 							<p>Pending</p>
-							<h2>0</h2>
+							<h2>{pendingSubmissionsCount}</h2>
 						</div>
 						<div className={styles.taskContainer}>
 							<p>Rejected</p>
-							<h2>0</h2>
+							<h2>{rejectedSubmissionsCount}</h2>
 						</div>
 					</div>
 				</div>
 
 				<div className={styles.walletBalance}>
 					<p>Wallet Balance</p>
-					<h2>$0</h2>
+					<h2>${walletBalance}</h2>
 				</div>
 			</div>
 		</div>
