@@ -10,9 +10,10 @@ export default function PostJob() {
   const [instructions, setInstructions] = useState("");
   const [budget, setBudget] = useState("");
   const [worker, setWorker] = useState("");
+  const [proof, setProof] = useState("");
   const [inputLink, setinputLink] = useState("");
   const [linkError, setlinkError] = useState(null);
-  const baseUrl = useContext(AppContext);
+  const { baseUrl } = useContext(AppContext);
 
   //   useEffect(() => {
   //     console.log(PostJobData);
@@ -25,19 +26,22 @@ export default function PostJob() {
     }
 
     const PostJobData = {
-      title: jobTitle,
-      type: jobType,
-      instruction: instructions,
+      JobTitle: jobTitle,
+      Platform: jobType,
+      Instructions: instructions,
       budget: budget,
       numberOfWorker: worker,
-      country: inputLink,
+      Link: inputLink,
+      RequiredProof: proof,
     };
 
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`${baseUrl}/api/MainServices/CreateTaskPost`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(PostJobData),
       });
@@ -50,6 +54,14 @@ export default function PostJob() {
 
       alert("Submit successful");
       console.log("This is ur message", data);
+
+      setJobTitle("");
+      setJobType("");
+      setInstructions("");
+      setBudget("");
+      setWorker("");
+      setinputLink("");
+      setlinkError(null);
     } catch (error) {
       console.log(error.message);
     }
@@ -87,15 +99,16 @@ export default function PostJob() {
             <select
               id="requiredProof"
               name="requiredProof"
+              onChange={(e) => setJobType(Number(e.target.value))}
               className={styles.dropDown}
             >
               <option value="">Select Plaform</option>
-              <option value="File">YouTube</option>
-              <option value="screenshot">Instagram</option>
-              <option value="Links">Twitter</option>
-              <option value="Links">Telegram</option>
-              <option value="Links">Twitch</option>
-              <option value="Links">App Download</option>
+              <option value={0}>Facebook</option>
+              <option value={1}>Instagram</option>
+              <option value={2}>Twitter</option>
+              <option value={3}>LinkedIn</option>
+              <option value={4}>TikTok</option>
+              <option value={5}>YouTube</option>
             </select>
           </div>
 
@@ -117,12 +130,13 @@ export default function PostJob() {
             <select
               id="requiredProof"
               name="requiredProof"
+              onChange={(e) => setProof(Number(e.target.value))}
               className={styles.dropDown}
             >
               <option value="">Select a Proof</option>
-              <option value="File">File</option>
-              <option value="screenshot">Screenshot</option>
-              <option value="Links">Links</option>
+              <option value={0}>Image</option>
+              <option value={1}>Link</option>
+              <option value={2}>Document</option>
             </select>
           </div>
           <div className={styles.formGroup}>
