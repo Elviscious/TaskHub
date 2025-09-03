@@ -29,8 +29,8 @@ export default function PostJob() {
       JobTitle: jobTitle,
       Platform: jobType,
       Instructions: instructions,
-      budget: budget,
-      numberOfWorker: worker,
+      Budget: budget,
+      NumberOfWorkers: worker,
       Link: inputLink,
       RequiredProof: proof,
     };
