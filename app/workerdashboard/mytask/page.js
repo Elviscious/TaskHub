@@ -1,10 +1,22 @@
-import React from "react";
+"use client";
+import React, {useContext, useEffect, useState} from "react";
 import styles from "@/app/workerdashboard/mytask/page.module.css";
 import Link from "next/link";
 import { getTasks } from "./lib/getTasks";
+import { AppContext } from "@/app/context/context";
 
-export default async function MyTask() {
-  const availableTask = await getTasks();
+export default function MyTask() {
+  const { baseUrl } = useContext(AppContext);
+  const [availableTask, setAvailableTask] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getTasks(baseUrl);
+      setAvailableTask(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.container}>
       <h1 style={{ margin: 0 }}>Available Tasks</h1>
@@ -27,13 +39,13 @@ export default async function MyTask() {
           </thead>
 
           <tbody>
-            {availableTask.map((task) => (
-              <tr key={task.id} className={styles.tableRow}>
-                <td className={styles.tableData}>{task.id}</td>
-                <td className={styles.tableTitle}>{task.title}</td>
-                <td className={styles.tableData}>{task.status}</td>
+            {availableTask.map((task, index) => (
+              <tr key={index} className={styles.tableRow}>
+                <td className={styles.tableData}>{index + 1}</td>
+                <td className={styles.tableTitle}>{task.JobTitle}</td>
+                <td className={styles.tableData}>New</td>
                 <td className={styles.tableData}>
-                  <Link href={`/workerdashboard/mytask/${task.id}`}>
+                  <Link href={`/workerdashboard/mytask/${task.Id}`}>
                     <button className={styles.buttonData}>View</button>
                   </Link>
                 </td>

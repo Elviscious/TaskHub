@@ -29,6 +29,62 @@
   word-wrap: break-word;
   margin-bottom: 30px;
 }
+.hiddenInput {
+  display: none;
+}
+
+.fileButton {
+  background-color: #3b82f6;
+  border-radius: 7px;
+  padding: 12px 35px;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  transition: background 0.2s ease-in-out;
+}
+.fileName{
+  font-size: 12px;
+  display: block;
+  padding: 10px;
+  text-decoration: underline;
+}
+
+.startBtn {
+  background-color: #3b82f6;
+  border-radius: 7px;
+  padding: 12px 35px;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 40px;
+  border: 0;
+  cursor: pointer;
+}
+
+.link {
+  cursor: pointer;
+  color: #3b82f6;
+  text-decoration: underline;
+  word-wrap: break-word;
+  margin-bottom: 30px;
+}
+
+.inputLink {
+  border: 1px solid #3b82f6;
+  border-radius: 7px;
+  padding: 10px 25px;
+  background-color: #fff;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.inputLink:focus {
+  border: 2px solid #3b82f6;
+  outline: none;
+}
 
 @media (max-width: 600px) {
   .container {

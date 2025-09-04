@@ -62,6 +62,7 @@ export default function PostJob() {
       setWorker("");
       setinputLink("");
       setlinkError(null);
+      setProof("")
     } catch (error) {
       console.log(error.message);
     }
@@ -98,6 +99,7 @@ export default function PostJob() {
             <label>Platform</label>
             <select
               id="requiredProof"
+              value={jobType}
               name="requiredProof"
               onChange={(e) => setJobType(Number(e.target.value))}
               className={styles.dropDown}
@@ -130,6 +132,7 @@ export default function PostJob() {
             <select
               id="requiredProof"
               name="requiredProof"
+              value={proof}
               onChange={(e) => setProof(Number(e.target.value))}
               className={styles.dropDown}
             >

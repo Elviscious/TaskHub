@@ -2,15 +2,17 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "@/app/workerdashboard/page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import otherstyles from "@/app/ownerdashboard/dashboard.module.css";
+import { AppContext } from "@/app/context/context";
 
 function Dashboard() {
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
+	const { baseUrl } = useContext(AppContext);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -20,47 +22,68 @@ function Dashboard() {
 		}
 	}, [isOpen]);
 
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		const fetchData = async () => {
+			try {
+				const res = await fetch(`${baseUrl}/api/TaskSubmission/Dashboard`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`,
+					},
+				});
+
+				const data = await res.json();
+				console.log("Dashboard data:", data);
+			} catch (error) {
+				console.error("Error fetching dashboard data:", error);
+			}
+		};
+		fetchData();
+	}, []);
+
 	return (
-			<div className={otherstyles.mainContent}>
-				<div className={styles.topMenu}>
-					<h1>Overview</h1>
-				</div>
+		<div className={otherstyles.mainContent}>
+			<div className={styles.topMenu}>
+				<h1>Overview</h1>
+			</div>
 
-				<h2>My Tasks</h2>
-				<div className={styles.myTaskContainer}>
-					<div className={styles.taskContainer}>
-						<p>Available</p>
-						<h2>7</h2>
-					</div>
-					<div className={styles.taskContainer}>
-						<p>Pending</p>
-						<h2>3</h2>
-					</div>
-					<div className={styles.taskContainer}>
-						<p>Completed</p>
-						<h2>9</h2>
-					</div>
+			<h2>My Tasks</h2>
+			<div className={styles.myTaskContainer}>
+				<div className={styles.taskContainer}>
+					<p>Available</p>
+					<h2>7</h2>
 				</div>
-
-				<div className={styles.submissions}>
-					<h2>Submissions</h2>
-					<div className={styles.myTaskContainer}>
-						<div className={styles.taskContainer}>
-							<p>Approved</p>
-							<h2>5</h2>
-						</div>
-						<div className={styles.taskContainer}>
-							<p>Rejected</p>
-							<h2>10</h2>
-						</div>
-					</div>
+				<div className={styles.taskContainer}>
+					<p>Pending</p>
+					<h2>3</h2>
 				</div>
-
-				<div className={styles.walletBalance}>
-					<p>Wallet Balance</p>
-					<h2>$2,000.00</h2>
+				<div className={styles.taskContainer}>
+					<p>Completed</p>
+					<h2>9</h2>
 				</div>
 			</div>
+
+			<div className={styles.submissions}>
+				<h2>Submissions</h2>
+				<div className={styles.myTaskContainer}>
+					<div className={styles.taskContainer}>
+						<p>Approved</p>
+						<h2>5</h2>
+					</div>
+					<div className={styles.taskContainer}>
+						<p>Rejected</p>
+						<h2>10</h2>
+					</div>
+				</div>
+			</div>
+
+			<div className={styles.walletBalance}>
+				<p>Wallet Balance</p>
+				<h2>$2,000.00</h2>
+			</div>
+		</div>
 	);
 }
 
