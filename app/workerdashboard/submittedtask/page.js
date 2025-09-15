@@ -1,12 +1,25 @@
 "use client";
-import {useState} from "react";
-import { data } from "./data/tasks";
+import {useState, useEffect, useContext} from "react";
+import { getTasks } from "./api/getTasks";
 import styles from "./page.module.css"
+import { AppContext } from "@/app/context/context";
+
 export default function SubmittedTask() {
   const [filter, setFilter] = useState("All");
+  const { baseUrl } = useContext(AppContext);
+  const [ data, setData] = useState([]);
 
+
+    useEffect(() => {
+	  const fetchData = async () => {
+		const data = await getTasks(baseUrl);
+		setData(data);
+	  };
+	  fetchData();
+	}, []);
+  
    const filteredData = 
-   filter === "All" ? data : data.filter((task) => task.status === filter);
+   filter === "All" ? data : data.filter((task) => task.Status === Number(filter));
 	return (
 	<div className={styles.container}>
       <h1>Tasks Table</h1>
@@ -31,9 +44,9 @@ export default function SubmittedTask() {
                     onChange={(e) => setFilter(e.target.value)}
                   >
                     <option value="All">All</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Declined">Declined</option>
+                    <option value="1">Approved</option>
+                    <option value="0">Pending</option>
+                    <option value="2">Declined</option>
                   </select>
                 </span>
 					</th>
@@ -41,17 +54,17 @@ export default function SubmittedTask() {
 			</thead>
 			<tbody>
 				{filteredData.map((task, index) => (
-					<tr key={task.id}>
+					<tr key={task.Id}>
 						<td>{index + 1}</td>
-						<td>{task.title}</td>
+						<td>{task.JobTitle}</td>
 						<td>
-							{task.status ==="Approved" && (
+							{task.Status === 1 && (
 							<button className={styles.approved}>Approved</button>
 						    )}
-							{task.status ==="Declined" && (
+							{task.Status === 2 && (
 							<button className={styles.declined}>Declined</button>
 						    )}
-							{task.status ==="Pending" && (
+							{task.Status === 0 && (
 							<button className={styles.pending}>Pending</button>
 						    )}
 						</td>
