@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AppContext } from "@/app/context/context";
 import styles from "@/app/ownerdashboard/submissions/page.module.css";
 
 export default function Submissions() {
   const [searchTitle, setSearchTitle] = useState("");
+  const [submissions, setSubmissions] = useState("");
+  const { baseUrl } = useContext(AppContext);
   const tasks = [
     { id: 1, title: "Follow my YouTube" },
     { id: 2, title: "Like my Instagram post" },
@@ -60,6 +63,31 @@ export default function Submissions() {
     { id: 50, title: "Like my Reddit post" },
   ];
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${baseUrl}/api/MainServices/AllTaskSubmissions`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log("this is data", data);
+        setSubmissions(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const filteredTitle = tasks.filter((task) =>
     task.title.toLowerCase().includes(searchTitle.toLowerCase())
   );
@@ -84,13 +112,17 @@ export default function Submissions() {
 
       <div className={styles.listContainer}>
         <ul style={{ listStyle: "none" }}>
-          {filteredTitle.length > 0 ? (
-            filteredTitle.map((task) => (
-              <li key={task.id} className={styles.taskList}>
+          {submissions.length > 0 ? (
+            submissions.map((task) => (
+              <li key={task.TaskPostId} className={styles.taskList}>
                 <p style={{ color: "black", fontSize: 18, fontWeight: "500" }}>
-                  Task: {task.title}
+                  Task: {task.JobTitle}
                 </p>
-                <Link href={`/ownerdashboard/submissions/${task.id}`}>
+                <Link
+                  href={`/ownerdashboard/submissions/${
+                    task.TaskPostId
+                  }?title=${encodeURIComponent(task.JobTitle)}`}
+                >
                   <p style={{ color: "#3b82f6", fontSize: 12 }}>View Table</p>
                 </Link>
               </li>

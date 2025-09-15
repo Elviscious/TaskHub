@@ -1,10 +1,11 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import { useParams, useSearchParams } from "next/navigation";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import styles from "@/app/ownerdashboard/submissions/[taskId]/page.module.css";
-
+import { AppContext } from "@/app/context/context";
+import { useRouter } from "next/navigation";
 // If u don't want to type it manually
 // const submissions = Array.from({ length: 40 }, (_, i) => ({
 //   id: i + 1,
@@ -509,45 +510,125 @@ const submissionsData = {
 
 export default function TaskDetailsPage() {
   const { taskId } = useParams();
-  //   const submissions = submissionsData[taskId] || [];
-  const [submissions, setSubmissions] = useState(
-    (submissionsData[taskId] || []).map((s) => ({ ...s, status: "pending" }))
-  );
+  const searchParams = useSearchParams();
+  const JobTitle = searchParams.get("title");
+  const { baseUrl } = useContext(AppContext);
+  const [workers, setWorkers] = useState([]);
+  const [preview, setPreview] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${baseUrl}/api/MainServices/${taskId}/PostTaskSubmissions`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+        setWorkers(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [taskId]);
+
+  // useEffect(() => {
+  //   console.log("Worker data:", workers);
+  // }, [workers]);
+
+  function timeAgo(submittedAt) {
+    const submitted = new Date(submittedAt);
+    const now = new Date();
+
+    // difference in total minutes
+    const diffMinutes = Math.floor((now - submitted) / 60000);
+
+    if (diffMinutes < 60) {
+      return `${diffMinutes} min${diffMinutes === 1 ? "" : "s"} ago`;
+    }
+
+    const diffHours = Math.floor(diffMinutes / 60);
+    return `${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
+  }
+
+  function isImage(url) {
+    return /\.(jpe?g|png|gif|webp|bmp)$/i.test(url);
+  }
+
+  function getFileName(url) {
+    const name = url.split("/").pop().split("?")[0]; // strip query params if any
+    return name.length > 20 ? name.slice(0, 17) + "…" : name; // optional truncate
+  }
 
   const [openMenuId, setOpenMenuId] = useState(null);
-  const [accepted, setAccepted] = useState([]);
-  const [declined, setDeclined] = useState([]);
 
   const toggleMenuId = (id) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
 
-  const handleAccept = (taskId, submission) => {
-    setAccepted((prev) => [
-      ...prev,
-      { ...submission, taskId, status: "accepted" },
-    ]);
-    setSubmissions((prev) => prev.filter((s) => s.id !== submission.id));
+  const handleAccept = (id) => {
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/MainServices/${id}/approve`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = res.json();
+        console.log(data);
+
+        router.push("/ownerdashboard/submissions");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   };
 
-  const handleDecline = (taskId, submission) => {
-    setDeclined((prev) => [
-      ...prev,
-      { ...submission, taskId, status: "declined" },
-    ]);
-    setSubmissions((prev) => prev.filter((s) => s.id !== submission.id));
-  };
+  const handleDecline = (id) => {
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/MainServices/${id}/reject`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  useEffect(() => {
-    console.log("Accepted updated:", accepted);
-  }, [accepted]);
-  useEffect(() => {
-    console.log("Declined updated:", declined);
-  }, [declined]);
+        const data = res.json();
+        console.log(data);
+
+        router.push("/ownerdashboard/submissions");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  };
 
   return (
     <div className={styles.container}>
-      <h2>Task ID: {taskId}</h2>
+      <h2>Task: {JobTitle}</h2>
       <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead className={styles.tableHead}>
@@ -555,89 +636,87 @@ export default function TaskDetailsPage() {
               <th className={styles.tableHeader}>Username</th>
               <th className={styles.tableHeader}>Proof</th>
               <th className={styles.tableHeader}>Submitted</th>
-              <th className={styles.tableHeader}>Status</th>
               <th className={styles.tableHeader}>Actions</th>
             </tr>
           </thead>
           <tbody className={styles.tableBody}>
-            {submissions.map((item) => (
-              <tr key={`${taskId}-${item.id}`} className={styles.tableRow}>
-                <td className={styles.tableData}>{item.username}</td>
-                <td className={styles.tableData}>{item.proof}</td>
-                <td className={styles.tableData}>{item.time}</td>
-                <td className={styles.tableData}>{item.status}</td>
-                <td className={styles.buttonData}>
-                  <div style={{ position: "relative" }}>
-                    {/* Dots Button */}
-
-                    <Image
-                      src="/dots.png"
-                      alt="dots"
-                      width={20}
-                      height={20}
-                      onClick={() => toggleMenuId(`${taskId}-${item.id}`)}
-                      style={{ cursor: "pointer" }}
-                    />
-
-                    {/* Dropdown Menu */}
-                    {openMenuId === `${taskId}-${item.id}` && (
-                      <div className={styles.menu}>
-                        <button
-                          className={styles.accept}
-                          onClick={() => {
-                            handleAccept(taskId, item);
-                          }}
-                        >
-                          Accept
-                        </button>
-                        <button
-                          className={styles.decline}
-                          onClick={() => {
-                            handleDecline(taskId, item);
-                          }}
-                        >
-                          Decline
-                        </button>
-                      </div>
+            {workers &&
+              workers.map((item) => (
+                <tr key={item.Id} className={styles.tableRow}>
+                  <td className={styles.tableData}>{item.WorkerName}</td>
+                  <td className={styles.tableData}>
+                    {isImage(item.ProofFileUrl) ? (
+                      <button
+                        className={styles.linkBtn}
+                        onClick={() => setPreview(item.ProofFileUrl)}
+                      >
+                        {/* {getFileName(item.ProofFileUrl)} */}
+                        Image.png
+                      </button>
+                    ) : (
+                      <a
+                        href={item.ProofFileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {getFileName(item.ProofFileUrl)}
+                      </a>
                     )}
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className={styles.tableData}>
+                    {timeAgo(item.SubmittedAt)}
+                  </td>
+                  <td className={styles.buttonData}>
+                    <div style={{ position: "relative" }}>
+                      {/* Dots Button */}
+
+                      <Image
+                        src="/dots.png"
+                        alt="dots"
+                        width={20}
+                        height={20}
+                        onClick={() => toggleMenuId(`${taskId}-${item.Id}`)}
+                        style={{ cursor: "pointer" }}
+                      />
+
+                      {/* Dropdown Menu */}
+                      {openMenuId === `${taskId}-${item.Id}` && (
+                        <div className={styles.menu}>
+                          <button
+                            className={styles.accept}
+                            onClick={() => {
+                              handleAccept(item.Id);
+                            }}
+                          >
+                            Accept
+                          </button>
+                          <button
+                            className={styles.decline}
+                            onClick={() => {
+                              handleDecline(item.Id);
+                            }}
+                          >
+                            Decline
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
-      </div>
 
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <div>
-          <h3>Accepted</h3>
-          {accepted.map((item) => (
-            <ul key={`accepted-${item.taskId}-${item.id}`}>
-              <li>{item.username}</li>
-              <li>{item.proof}</li>
-              <li>{item.time}</li>
-              <li>{item.status}</li>
-            </ul>
-          ))}
-        </div>
-        <div>
-          <h3>Declined</h3>
-          {declined.map((item) => (
-            <ul key={`declined-${item.taskId}-${item.id}`}>
-              <li>{item.username}</li>
-              <li>{item.proof}</li>
-              <li>{item.time}</li>
-              <li>{item.status}</li>
-            </ul>
-          ))}
-        </div>
-      </div> */}
+        {preview && (
+          <div className={styles.overlay} onClick={() => setPreview(null)}>
+            <img
+              src={preview}
+              alt="proof preview"
+              className={styles.previewImg}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

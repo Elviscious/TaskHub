@@ -1,4 +1,4 @@
-.container{
+.container {
   padding: 40px 60px;
 }
 
@@ -30,7 +30,9 @@
   font-weight: 500;
 }
 
-.formGroup input, .dropDown, .formGroup textarea {
+.formGroup input,
+.dropDown,
+.formGroup textarea {
   flex: 1;
   padding: 10px;
   border: 2px solid #3b82f6;
@@ -48,9 +50,9 @@
   margin: 0;
 }
 
-.formGroup textarea{
+.formGroup textarea {
   height: 70px;
-  padding: 20px 20px;
+  padding: 20px 10px;
   scrollbar-width: none;
 }
 /* Checkbox row */
@@ -70,7 +72,7 @@
   gap: 60px;
   margin-top: 10px;
 }
-.jobForm p{
+.jobForm p {
   font-size: 13px;
   text-align: center;
 }
@@ -85,7 +87,7 @@
   background: #3b82f6;
   color: white;
 }
-.draft.btn{
+.draft.btn {
   background: rgba(0, 128, 0, 1);
 }
 .dropDown {
@@ -101,6 +103,46 @@
 }
 .dropDown:active {
   border: 2.5px solid #3b82f6;
+}
+
+.successful {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.successfulContent {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  /* width: 600px; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+  overflow-y: auto;
+}
+.checkImage {
+  width: 200px;
+  height: 200px;
+  margin: 0 45px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 800px) {

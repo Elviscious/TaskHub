@@ -3,9 +3,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "@/app/ownerdashboard/PostJob/page.module.css";
 import { AppContext } from "@/app/context/context";
+import { useRouter } from "next/navigation";
 
 export default function PostJob() {
   const [jobTitle, setJobTitle] = useState("");
+  const [platform, setPlatform] = useState("");
   const [jobType, setJobType] = useState("");
   const [instructions, setInstructions] = useState("");
   const [budget, setBudget] = useState("");
@@ -14,6 +16,8 @@ export default function PostJob() {
   const [inputLink, setinputLink] = useState("");
   const [linkError, setlinkError] = useState(null);
   const { baseUrl } = useContext(AppContext);
+  const [successful, setSuccessful] = useState(false);
+  const router = useRouter();
 
   //   useEffect(() => {
   //     console.log(PostJobData);
@@ -27,7 +31,8 @@ export default function PostJob() {
 
     const PostJobData = {
       JobTitle: jobTitle,
-      Platform: jobType,
+      Platform: platform,
+      Type: jobType,
       Instructions: instructions,
       Budget: budget,
       NumberOfWorkers: worker,
@@ -52,17 +57,18 @@ export default function PostJob() {
         throw new Error(data.error || "Failed to submit");
       }
 
-      alert("Submit successful");
+      setSuccessful(true);
       console.log("This is ur message", data);
 
       setJobTitle("");
+      setPlatform("");
       setJobType("");
       setInstructions("");
       setBudget("");
       setWorker("");
       setinputLink("");
       setlinkError(null);
-      setProof("")
+      setProof("");
     } catch (error) {
       console.log(error.message);
     }
@@ -86,7 +92,7 @@ export default function PostJob() {
             <label>Job Title</label>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Subscribe to my channel"
               required
               value={jobTitle}
               onChange={(e) => {
@@ -99,9 +105,9 @@ export default function PostJob() {
             <label>Platform</label>
             <select
               id="requiredProof"
-              value={jobType}
+              value={platform}
               name="requiredProof"
-              onChange={(e) => setJobType(Number(e.target.value))}
+              onChange={(e) => setPlatform(Number(e.target.value))}
               className={styles.dropDown}
             >
               <option value="">Select Plaform</option>
@@ -111,6 +117,28 @@ export default function PostJob() {
               <option value={3}>LinkedIn</option>
               <option value={4}>TikTok</option>
               <option value={5}>YouTube</option>
+            </select>
+          </div>
+          <div className={styles.formGroup}>
+            <label>Job Type</label>
+            <select
+              id="jobType"
+              value={jobType}
+              name="jobType"
+              onChange={(e) => setJobType(Number(e.target.value))}
+              className={styles.dropDown}
+            >
+              <option value="">Select Job type</option>
+              <option value={0}>Like</option>
+              <option value={1}>Share</option>
+              <option value={2}>Comment</option>
+              <option value={3}>Follow</option>
+              <option value={4}>Subscribe</option>
+              <option value={5}>Post</option>
+              <option value={6}>Repost</option>
+              <option value={7}>Like and Comment</option>
+              <option value={8}>Like and Share</option>
+              <option value={9}>Like, Comment and Share</option>
             </select>
           </div>
 
@@ -197,6 +225,43 @@ export default function PostJob() {
           </div>
         </form>
       </div>
+
+      {successful && (
+        <div className={styles.successful}>
+          <div
+            className={styles.successfulContent}
+            onClick={() => setSuccessful(false)}
+          >
+            <img
+              src="/Check_ring_light.png"
+              alt="check"
+              className={styles.checkImage}
+            />
+
+            <p
+              style={{
+                color: "black",
+                fontSize: 24,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              Task post was successful!
+            </p>
+            <p style={{ textAlign: "center", fontSize: 24 }}>
+              View in{" "}
+              <span
+                onClick={() => {
+                  router.push("/ownerdashboard/MyTask");
+                }}
+                style={{ color: "#3b82f6" }}
+              >
+                My Task
+              </span>
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

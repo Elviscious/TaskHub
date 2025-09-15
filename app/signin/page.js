@@ -93,7 +93,9 @@ const SignUp = () => {
       localStorage.setItem("token", token);
 
       if (!response.ok) {
+        // throw new Error(data.error || "Failed to sign up");
         throw new Error(data.error || "Failed to sign up");
+        // console.error(data.error || "Failed to sign up");
       }
       console.log("Sign up successful:", data);
       setLoggedIn(true);
@@ -104,7 +106,7 @@ const SignUp = () => {
         router.push("/ownerdashboard");
       }
     } catch (error) {
-      console.error("Error during sign up:", error.message);
+      console.log("Error during sign up:", error.message);
 
       const errorMessages = error.message.split(",").map((msg) => msg.trim());
       const emailError = errorMessages.find((msg) => msg.startsWith("Email"));

@@ -4,87 +4,102 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import styles from "@/app/workerdashboard/page.module.css";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import otherstyles from "@/app/ownerdashboard/dashboard.module.css";
 import { AppContext } from "@/app/context/context";
 
 function Dashboard() {
-	const [isOpen, setIsOpen] = useState(false);
-	const router = useRouter();
-	const { baseUrl } = useContext(AppContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const { baseUrl } = useContext(AppContext);
+  const [availableTask, setAvailabelTask] = useState(0);
+  const [pendingTask, setPendingTask] = useState(0);
+  const [completedTask, setCompletedTask] = useState(0);
+  const [approvedSubmissions, setApprovedSubmissions] = useState(0);
+  const [rejectedSubmissions, setRejectedSubmissions] = useState(0);
+  const [walletBalance, setWalletBalance] = useState(0);
 
-	useEffect(() => {
-		if (isOpen) {
-			document.body.classList.add("navOpen");
-		} else {
-			document.body.classList.remove("navOpen");
-		}
-	}, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("navOpen");
+    } else {
+      document.body.classList.remove("navOpen");
+    }
+  }, [isOpen]);
 
-	useEffect(() => {
-		const token = localStorage.getItem("token");
-		const fetchData = async () => {
-			try {
-				const res = await fetch(`${baseUrl}/api/TaskSubmission/Dashboard`, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-				});
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/TaskSubmission/Dashboard`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-				const data = await res.json();
-				console.log("Dashboard data:", data);
-			} catch (error) {
-				console.error("Error fetching dashboard data:", error);
-			}
-		};
-		fetchData();
-	}, []);
+        const data = await res.json();
+        console.log("Dashboard data:", data);
 
-	return (
-		<div className={otherstyles.mainContent}>
-			<div className={styles.topMenu}>
-				<h1>Overview</h1>
-			</div>
+        // const pendingTask =
+        //   JSON.parse(localStorage.getItem("pendingTask")) || [];
+        // setPendingTask(pendingTask.length);
 
-			<h2>My Tasks</h2>
-			<div className={styles.myTaskContainer}>
-				<div className={styles.taskContainer}>
-					<p>Available</p>
-					<h2>7</h2>
-				</div>
-				<div className={styles.taskContainer}>
-					<p>Pending</p>
-					<h2>3</h2>
-				</div>
-				<div className={styles.taskContainer}>
-					<p>Completed</p>
-					<h2>9</h2>
-				</div>
-			</div>
+        setAvailabelTask(data.AvailableTasks);
+        setPendingTask(data.PendingTasks);
+        setApprovedSubmissions(data.ApprovedSubmissions);
+        setRejectedSubmissions(data.RejectedSubmissions);
+        setWalletBalance(data.WalletBalance);
+        setCompletedTask(data.CompletedTasks);
+      } catch (error) {
+        console.log("Error fetching dashboard data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-			<div className={styles.submissions}>
-				<h2>Submissions</h2>
-				<div className={styles.myTaskContainer}>
-					<div className={styles.taskContainer}>
-						<p>Approved</p>
-						<h2>5</h2>
-					</div>
-					<div className={styles.taskContainer}>
-						<p>Rejected</p>
-						<h2>10</h2>
-					</div>
-				</div>
-			</div>
+  return (
+    <div className={otherstyles.mainContent}>
+      <div className={styles.topMenu}>
+        <h1>Overview</h1>
+      </div>
 
-			<div className={styles.walletBalance}>
-				<p>Wallet Balance</p>
-				<h2>$2,000.00</h2>
-			</div>
-		</div>
-	);
+      <h2>My Tasks</h2>
+      <div className={styles.myTaskContainer}>
+        <div className={styles.taskContainer}>
+          <p>Available</p>
+          <h2>{availableTask}</h2>
+        </div>
+        <div className={styles.taskContainer}>
+          <p>Pending</p>
+          <h2>{pendingTask}</h2>
+        </div>
+        <div className={styles.taskContainer}>
+          <p>Completed</p>
+          <h2>{completedTask}</h2>
+        </div>
+      </div>
+
+      <div className={styles.submissions}>
+        <h2>Submissions</h2>
+        <div className={styles.myTaskContainer}>
+          <div className={styles.taskContainer}>
+            <p>Approved</p>
+            <h2>{approvedSubmissions}</h2>
+          </div>
+          <div className={styles.taskContainer}>
+            <p>Rejected</p>
+            <h2>{rejectedSubmissions}</h2>
+          </div>
+          <div className={styles.walletBalance}>
+            <p>Wallet Balance</p>
+            <h2>${walletBalance}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;
