@@ -659,7 +659,8 @@ export default function TaskDetailsPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {getFileName(item.ProofFileUrl)}
+                        {/* {getFileName(item.ProofFileUrl)} */}
+                        Link
                       </a>
                     )}
                   </td>

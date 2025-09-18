@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "@/app/ownerdashboard/PostJob/page.module.css";
 import { AppContext } from "@/app/context/context";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function PostJob() {
   const [jobTitle, setJobTitle] = useState("");
@@ -17,12 +18,46 @@ export default function PostJob() {
   const [linkError, setlinkError] = useState(null);
   const { baseUrl } = useContext(AppContext);
   const [successful, setSuccessful] = useState(false);
+  const [Id, setId] = useState("");
   const [draft, setDraft] = useState(false);
   const router = useRouter();
+  const { id } = useParams();
 
-  //   useEffect(() => {
-  //     console.log(PostJobData);
-  //   }, [PostJob]);
+  useEffect(() => {
+    if (!id) return;
+    const token = localStorage.getItem("token");
+
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${baseUrl}/api/MainServices/GetTaskDraftById/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+        console.log(data);
+        setJobType(data.Type);
+        setBudget(data.Budget);
+        setInstructions(data.Instructions);
+        setJobTitle(data.JobTitle);
+        setWorker(data.NumberOfWorkers);
+        setinputLink(data.Link);
+        setPlatform(data.Platform);
+        setProof(data.RequiredProof);
+        setId(data.Id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +66,7 @@ export default function PostJob() {
     }
 
     const PostJobData = {
+      TaskDraftId: Id,
       JobTitle: jobTitle,
       Platform: platform,
       Type: jobType,
