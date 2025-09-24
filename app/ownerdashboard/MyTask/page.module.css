@@ -5,17 +5,17 @@
 .tableContainer{
   border: 1px solid #3B82F6;
   border-radius: 8px;
-  max-height: 480px;
   width: 100%;
   overflow-y: auto;
   scrollbar-width: none;
   /* padding: 20px; */
+  max-height: 480px;
   /* border-radius: 20px; */
 }
 .tableHeader{
   width: 100%;
   border-collapse: collapse;
-  padding-left: 0px;
+  /* padding-left: 20px; */
   text-align: left;
   /* margin: 20px; */
     /* border: 2px solid blue; */
@@ -41,6 +41,7 @@
 
 .tableHeader td{
    padding: 10px;
+   padding-left: 20px;
    border: none;
 }
 
@@ -72,20 +73,10 @@
 @media (max-width: 800px) {
     .tableContainer{
         overflow-x: auto;
-        height: 800px;
+        max-width: 800px;
     }
 
-    .table{
-        min-width: 800px;
-    }
 }
-
-
-
-
-
-
-
 
 
 /* Popup overlay */
@@ -146,5 +137,22 @@
   .popupMenu {
     width: 90%;
     padding: 20px;
+  }
+}
+@media (max-width: 395px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1{
+      font-size: 1.5em;
+    }
+  }
+  .tableContainer{
+    width: 80vw;
+    margin: 0;;
+  }
+  .tableHeader{
+    min-width: 200px;
   }
 }
