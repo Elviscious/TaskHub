@@ -53,7 +53,7 @@ function Navbar(props) {
 									: isActive(link.href) && index !== 1;
 
 							const isOwnerSecondLink = props.name === "owner" && index === 1;
-							const isworkerNavbar = props.name === "worker"  && index === 3;
+							const isworkerNavbar = props.name === "worker" && index === 3;
 
 							if (isworkerNavbar) return;
 
@@ -69,6 +69,10 @@ function Navbar(props) {
 									<Link
 										href={isOwnerSecondLink ? "" : link.href}
 										className={styles.navItem}
+										onClick={() => {
+											if (!isOwnerSecondLink) setIsOpen(false);
+											if (isOwnerSecondLink) setdropDown(!dropDown);
+										}}
 									>
 										<Image src={link.src} alt="" width={30} height={30} />
 										<p>{link.text}</p>
@@ -86,10 +90,10 @@ function Navbar(props) {
 														: "rotate(0deg)",
 													transition: "transform 0.3s ease",
 												}}
-												onClick={(e) => {
-													e.preventDefault();
-													setdropDown(!dropDown);
-												}}
+												// onClick={(e) => {
+												// 	e.preventDefault();
+												// 	setdropDown(!dropDown);
+												// }}
 											/>
 										) : null}
 									</Link>
@@ -107,6 +111,7 @@ function Navbar(props) {
 														? styles.active
 														: ""
 												}`}
+												onClick={() => setIsOpen(false)}
 											>
 												<li>Post Job</li>
 											</Link>
@@ -117,6 +122,7 @@ function Navbar(props) {
 														? styles.active
 														: ""
 												}`}
+												onClick={() => setIsOpen(false)}
 											>
 												<li>View Draft</li>
 											</Link>
