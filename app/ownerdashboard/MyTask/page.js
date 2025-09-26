@@ -159,24 +159,21 @@ export default function MyTask() {
 		<div className={styles.container}>
 			<h1>My Tasks</h1>
 
-			{/* <p style={{color: 'green'}}>my name</p> */}
-			<div className={styles.tableContainer}>
-				<table className={styles.tableHeader}>
-					<thead>
-						<tr>
-							<th>S/N</th>
-							<th>Titles</th>
-							{/* <th>Status</th> */}
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						{data.length == 0 ? (
+			{data.length == 0 ? (
+				<p>No task yet...</p>
+			) : (
+				<div className={styles.tableContainer}>
+					<table className={styles.tableHeader}>
+						<thead>
 							<tr>
-								<td colSpan={3} style={{textAlign: "center"}}>No task yet...</td>
+								<th>S/N</th>
+								<th>Titles</th>
+								{/* <th>Status</th> */}
+								<th>Action</th>
 							</tr>
-						) : (
-							data.map((task, index) => (
+						</thead>
+						<tbody>
+							{data.map((task, index) => (
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>{task.JobTitle}</td>
@@ -197,11 +194,11 @@ export default function MyTask() {
                           </button> */}
 									</td>
 								</tr>
-							))
-						)}
-					</tbody>
-				</table>
-			</div>
+							))}
+						</tbody>
+					</table>
+				</div>
+			)}
 
 			{selectedTask && (
 				<div

@@ -9,12 +9,21 @@
   padding: 10px 20px;
   border: none;
 }
+.header{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  text-align: center;
+}
 
 .tableContainer {
   margin-top: 20px;
   border: 1px solid #3b82f6;
   border-radius: 8px;
-  height: 480px;
+  max-height: 480px;
   overflow-y: auto; /* only vertical scroll inside container */
   scrollbar-width: none;
 }
@@ -79,7 +88,7 @@
 @media (max-width: 800px) {
   .tableContainer {
     overflow-x: auto; /* enable horizontal scrolling */
-    height: 800px;
+    max-height: 800px;
   }
 
   .table {

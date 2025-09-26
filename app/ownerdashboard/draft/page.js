@@ -116,22 +116,22 @@ export default function DraftsTable() {
 		<div className={styles.draftsContainer}>
 			<h2>Drafts</h2>
 
-			<div className={styles.tableContainer}>
-				<table className={styles.draftsTable}>
-					<thead>
-						<tr>
-							<th>S/N</th>
-							<th>Title</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody className={styles.draftBody}>
-						{drafts.length === 0 ? (
+			{drafts.length === 0 ? (
+				
+					<p>No Drafts found...</p>
+				
+			) : (
+				<div className={styles.tableContainer}>
+					<table className={styles.draftsTable}>
+						<thead>
 							<tr>
-								<td colSpan={3}>No Drafts found...</td>
+								<th>S/N</th>
+								<th>Title</th>
+								<th>Actions</th>
 							</tr>
-						) : (
-							drafts.map((item, index) => (
+						</thead>
+						<tbody className={styles.draftBody}>
+							{drafts.map((item, index) => (
 								<tr key={index} className={styles.tableRow}>
 									<td className={styles.tableData}>{index + 1}</td>
 									<td className={styles.tableData}>{item.JobTitle}</td>
@@ -164,11 +164,11 @@ export default function DraftsTable() {
 										</div>
 									</td>
 								</tr>
-							))
-						)}
-					</tbody>
-				</table>
-			</div>
+							))}
+						</tbody>
+					</table>
+				</div>
+			)}
 		</div>
 	);
 }
