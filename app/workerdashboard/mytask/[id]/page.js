@@ -19,6 +19,7 @@ export default function TaskDetails() {
   const { baseUrl } = useContext(AppContext);
   const [proof, setProof] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchTask() {
@@ -57,6 +58,8 @@ export default function TaskDetails() {
     }
 
     let userKey;
+
+    setLoading(true);
 
     try {
       const decoded = jwtDecode(token);
@@ -97,6 +100,8 @@ export default function TaskDetails() {
         setIsPending(true);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -113,6 +118,7 @@ export default function TaskDetails() {
     }
 
     let userKey;
+    setLoading(true);
 
     try {
       const decoded = jwtDecode(token);
@@ -175,6 +181,7 @@ export default function TaskDetails() {
       }
       alert("Proof submitted successfully!");
 
+      console.log(new Date().toISOString());
       // Removing the task from pending
       const pendingTask = JSON.parse(localStorage.getItem(userKey)) || [];
       const updated = pendingTask.filter(
@@ -187,12 +194,22 @@ export default function TaskDetails() {
       router.push("/workerdashboard/mytask");
     } catch (error) {
       console.log("Error uploading proof:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className={styles.container}>
-      <h1>Task Details</h1>
+      <h1 style={{ margin: 0 }}>Task Details</h1>
+      <span
+        onClick={() => {
+          router.push("/workerdashboard/mytask");
+        }}
+        style={{ cursor: "pointer", color: "black" }}
+      >
+        Go Back
+      </span>
 
       {detailTasks && (
         <div className={styles.contentDetails}>
@@ -253,12 +270,23 @@ export default function TaskDetails() {
             <button
               className={styles.startBtn}
               onClick={() => handleStart(detailTasks.Id)}
+              style={{
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.7 : 1,
+              }}
             >
-              Start
+              {loading ? "Starting..." : "Start"}
             </button>
           ) : (
-            <button className={styles.startBtn} onClick={() => handleSubmit()}>
-              Submit
+            <button
+              className={styles.startBtn}
+              onClick={() => handleSubmit()}
+              style={{
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.7 : 1,
+              }}
+            >
+              {loading ? "Submitting..." : "Submit"}
             </button>
           )}
         </div>

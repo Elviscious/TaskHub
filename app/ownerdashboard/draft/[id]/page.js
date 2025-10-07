@@ -18,6 +18,8 @@ export default function PostJob() {
   const [linkError, setlinkError] = useState(null);
   const { baseUrl } = useContext(AppContext);
   const [successful, setSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [Id, setId] = useState("");
   const [draft, setDraft] = useState(false);
   const router = useRouter();
@@ -65,6 +67,8 @@ export default function PostJob() {
       return;
     }
 
+    setLoading(true);
+
     const PostJobData = {
       TaskDraftId: Id,
       JobTitle: jobTitle,
@@ -108,10 +112,14 @@ export default function PostJob() {
       setProof("");
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDraft = async () => {
+    setSaving(true);
+
     const DraftData = {
       JobTitle: jobTitle,
       Platform: platform,
@@ -154,6 +162,8 @@ export default function PostJob() {
       setProof("");
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -167,7 +177,15 @@ export default function PostJob() {
 
   return (
     <div className={styles.container}>
-      <h1>Post Job</h1>
+      <h1 style={{ margin: 0 }}>Post Job</h1>
+      <span
+        onClick={() => {
+          router.push("/ownerdashboard/draft");
+        }}
+        style={{ cursor: "pointer", color: "black" }}
+      >
+        Go Back
+      </span>
 
       <div className={styles.formContainer}>
         <form className={styles.jobForm} onSubmit={handleSubmit}>
@@ -303,11 +321,22 @@ export default function PostJob() {
               type="button"
               className={`${styles.btn} ${styles.draft}`}
               onClick={() => handleDraft()}
+              style={{
+                cursor: saving ? "not-allowed" : "pointer",
+                opacity: saving ? 0.7 : 1,
+              }}
             >
-              Save to Draft
+              {saving ? "Saving..." : "Save to Draft"}
             </button>
-            <button type="submit" className={styles.btn}>
-              Post Job
+            <button
+              type="submit"
+              className={styles.btn}
+              style={{
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.7 : 1,
+              }}
+            >
+              {loading ? "Posting..." : "Post Job"}
             </button>
           </div>
         </form>

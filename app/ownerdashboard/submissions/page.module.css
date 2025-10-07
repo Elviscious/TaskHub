@@ -1,4 +1,4 @@
-.container{
+.container {
   padding: 40px 60px;
 }
 
@@ -41,6 +41,9 @@
 }
 
 @media (max-width: 800px) {
+  .container {
+    padding: 40px 20px;
+  }
   .listContainer {
     height: 800px;
   }

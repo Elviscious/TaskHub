@@ -111,6 +111,9 @@
 }
 
 @media (max-width: 800px) {
+  .container {
+    padding: 40px 20px;
+  }
   .tableContainer {
     overflow-x: auto; /* enable horizontal scrolling */
     height: 800px;

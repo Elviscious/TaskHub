@@ -11,7 +11,6 @@ import { AppContext } from "../context/context";
 
 function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
   const { baseUrl } = useContext(AppContext);
   const [jobCount, setJobCount] = useState(0);
   const [activeJobCount, setactiveJobCount] = useState(0);
@@ -64,7 +63,7 @@ function Dashboard() {
     <div>
       {/* Hamburger menu for mobile view */}
 
-      <div className={otherstyles.mainContent}>
+      <div className={styles.divContainer}>
         <div className={styles.topMenu}>
           <h1>Overview</h1>
         </div>

@@ -1,0 +1,22 @@
+.container {
+  padding: 40px 60px;
+}
+
+.settingContent {
+  margin-top: 70px;
+  margin-left: 50px;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+.content h2 {
+  margin-bottom: 7px;
+  font-size: 23px;
+}
+.content p {
+  margin-bottom: 7px;
+  margin-left: 15px;
+  font-size: 18px;
+}

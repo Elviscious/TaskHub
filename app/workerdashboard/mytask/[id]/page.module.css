@@ -2,6 +2,10 @@
   padding: 40px 60px;
 }
 
+.contentDetails {
+  margin-top: 40px;
+}
+
 .details {
   border: 1px solid #3b82f6;
   border-radius: 7px;
@@ -46,7 +50,7 @@
   display: inline-block;
   transition: background 0.2s ease-in-out;
 }
-.fileName{
+.fileName {
   font-size: 12px;
   display: block;
   padding: 10px;

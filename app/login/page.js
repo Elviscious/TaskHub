@@ -147,7 +147,7 @@ const Login = () => {
                 required
               />
             </div>
-            {apiError && <p className={styles.errorMessage}>{apiError}</p>}
+            {/* {apiError && <p className={styles.errorMessage}>{apiError}</p>} */}
             <div className={styles.info}>
               <Link href="/resetpassword" className={styles.highlight}>
                 <p>Forgot Password?</p>

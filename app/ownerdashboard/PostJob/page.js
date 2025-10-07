@@ -18,15 +18,40 @@ export default function PostJob() {
   const { baseUrl } = useContext(AppContext);
   const [successful, setSuccessful] = useState(false);
   const [draft, setDraft] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const router = useRouter();
 
   //   useEffect(() => {
   //     console.log(PostJobData);
   //   }, [PostJob]);
 
+  const platformPatterns = {
+    0: /^https?:\/\/(www\.)?facebook\.com\//i,
+    1: /^https?:\/\/(www\.)?instagram\.com\//i,
+    2: /^https?:\/\/(www\.)?(twitter\.com|x\.com)\//i,
+    3: /^https?:\/\/(www\.)?linkedin\.com\//i,
+    4: /^https?:\/\/(www\.)?tiktok\.com\//i,
+    5: /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i,
+  };
+
+  const validatLink = (platformCode, link) => {
+    const patterns = platformPatterns[platformCode];
+    if (!patterns) return false;
+
+    return patterns.test(link);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (linkError) {
+      return;
+    }
+
+    setLoading(true);
+
+    if (!validatLink(platform, inputLink)) {
+      alert("Link does not match with selected platform");
       return;
     }
 
@@ -72,10 +97,14 @@ export default function PostJob() {
       setProof("");
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDraft = async () => {
+    setSaving(true);
+
     const DraftData = {
       JobTitle: jobTitle,
       Platform: platform,
@@ -118,6 +147,8 @@ export default function PostJob() {
       setProof("");
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -267,11 +298,22 @@ export default function PostJob() {
               type="button"
               className={`${styles.btn} ${styles.draft}`}
               onClick={() => handleDraft()}
+              style={{
+                cursor: saving ? "not-allowed" : "pointer",
+                opacity: saving ? 0.7 : 1,
+              }}
             >
-              Save to Draft
+              {saving ? "Saving..." : "Save to Draft"}
             </button>
-            <button type="submit" className={styles.btn}>
-              Post Job
+            <button
+              type="submit"
+              className={styles.btn}
+              style={{
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.7 : 1,
+              }}
+            >
+              {loading ? "Posting..." : "Post Job"}
             </button>
           </div>
         </form>

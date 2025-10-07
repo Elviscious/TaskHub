@@ -13,6 +13,10 @@
   width: 100%;
 }
 
+.divContainer {
+  padding: 40px 60px;
+}
+
 .navigationBar {
   background: #fff;
   width: 400px;
@@ -98,7 +102,6 @@
       hue-rotate(200deg) brightness(100%) contrast(100%);
   }
 }
-
 
 .logOut {
   display: flex;
@@ -227,6 +230,9 @@
   .container {
     flex-direction: column;
   }
+  .divContainer {
+    padding: 40px 20px;
+  }
 
   .navigationBar {
     position: fixed;
@@ -261,7 +267,7 @@
     max-width: 150px;
   }
   .topMenu h1 {
-    margin: auto 20px;
+    margin: auto 0;
   }
   /* .open + .hamburger {
     position: fixed;
@@ -315,7 +321,7 @@
   .taskContainer,
   .walletBalance {
     width: 100%;
-    max-width: 350px;
+    max-width: 650px;
     min-height: 130px;
     padding: 15px;
     display: flex;
