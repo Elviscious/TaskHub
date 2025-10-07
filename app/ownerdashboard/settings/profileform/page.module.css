@@ -1,0 +1,109 @@
+.container {
+  padding: 40px 60px;
+}
+
+.formContainer {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.uploadContainer {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 20px;
+}
+
+.uploadBtn {
+  position: relative;
+  width: 120px; /* diameter of the circle */
+  height: 120px;
+  border-radius: 50%; /* makes it round */
+  background: #dcecff; /* light blue background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+
+.uploadBtn:hover {
+  background: #c4e0ff;
+}
+
+.uploadBtn input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* hide the actual input */
+  cursor: pointer;
+}
+
+.uploadText {
+  font-size: 16px;
+  color: #6b7280; /* gray text */
+  margin-bottom: 8px;
+}
+
+.signupInfo {
+  margin-top: 10px;
+
+  h2 {
+    margin-bottom: 5px;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  input {
+    background-color: white;
+    border: 1px solid #3b82f6;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px 10px;
+    color: black;
+    /* min-width: 520px; */
+    max-width: 700px;
+  }
+  input:hover {
+    border: 1.5px solid #3b82f6;
+  }
+  input:active {
+    border: 2px solid #3b82f6;
+  }
+}
+.dropDown {
+  background-color: white;
+  border: 1px solid #3b82f6;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px 10px;
+  color: black;
+  /* min-width: 520px; */
+  max-width: 700px;
+}
+.submitBtn {
+  background-color: #3b82f6;
+  color: white;
+  text-align: center;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+@media (max-width: 800px) {
+  .formContainer {
+    margin: 0;
+  }
+}

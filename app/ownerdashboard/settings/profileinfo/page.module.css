@@ -1,0 +1,89 @@
+.container {
+  padding: 40px 60px;
+}
+
+.profileContainer {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.imageContainer {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 20px;
+}
+
+.imageText {
+  font-size: 16px;
+  color: #6b7280; /* gray text */
+  margin-bottom: 8px;
+}
+
+.image {
+  position: relative;
+  width: 120px; /* diameter of the circle */
+  height: 120px;
+  border-radius: 50%; /* makes it round */
+  background: #dcecff; /* light blue background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+  transition: background 0.3s;
+  overflow: hidden;
+}
+
+.detailContainer {
+  margin-top: 30px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: self-start;
+  gap: 160px;
+}
+
+.detailInfo {
+  margin-top: 20px;
+
+  h3 {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+}
+
+.businessContainer {
+  margin-top: 20px;
+}
+.businessInfo {
+  margin-top: 30px;
+
+  h3 {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  background-color: #3b82f6;
+  color: white;
+  text-align: center;
+  padding: 7px 25px;
+  border: none;
+  border-radius: 5px;
+}
+
+@media (max-width: 800px) {
+  .profileContainer {
+    margin: 0;
+  }
+  .detailContainer {
+    display: block;
+  }
+}
