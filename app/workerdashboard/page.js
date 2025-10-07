@@ -102,7 +102,7 @@ function Dashboard() {
         </div>
       </div>
 
-      {!profile && (
+      {/* {!profile && (
         <div className={styles.successful}>
           <div className={styles.successfulContent}>
             <img
@@ -132,7 +132,7 @@ function Dashboard() {
             </p>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
