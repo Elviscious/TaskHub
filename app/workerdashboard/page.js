@@ -2,130 +2,139 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "@/app/workerdashboard/page.module.css";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+// import otherstyles from "@/app/ownerdashboard/dashboard.module.css";
+import { AppContext } from "@/app/context/context";
 
 function Dashboard() {
-	const [isOpen, setIsOpen] = useState(false);
-	const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const { baseUrl } = useContext(AppContext);
+  const { profile } = useContext(AppContext);
+  const [availableTask, setAvailabelTask] = useState(0);
+  const [pendingTask, setPendingTask] = useState(0);
+  const [completedTask, setCompletedTask] = useState(0);
+  const [approvedSubmissions, setApprovedSubmissions] = useState(0);
+  const [rejectedSubmissions, setRejectedSubmissions] = useState(0);
+  const [walletBalance, setWalletBalance] = useState(0);
 
-	useEffect(() => {
-		if (isOpen) {
-			document.body.classList.add("navOpen");
-		} else {
-			document.body.classList.remove("navOpen");
-		}
-	}, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("navOpen");
+    } else {
+      document.body.classList.remove("navOpen");
+    }
+  }, [isOpen]);
 
-	return (
-		<div className={styles.container}>
-			{/* Hamburger menu for mobile view */}
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/TaskSubmission/Dashboard`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-			<div className={`${styles.navigationBar} ${isOpen ? styles.open : ""}`}>
-				<nav>
-					<h1>MAIN MENU</h1>
-					<ul className={styles.navUl}>
-						<li className={`${styles.navItem} ${styles.active}`}>
-							<Image src="/Home.png" alt="" width={30} height={30} />
-							<p
-								style={{
-									color: "#3b82f6",
-								}}
-							>
-								Dashboard
-							</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Paper.png" alt="" width={30} height={30} />
-							<p>Available Tasks</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Upload.png" alt="" width={30} height={30} />
-							<p>Submitted Tasks</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Folders_line.png" alt="" width={30} height={30} />
-							<p>Earning History</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image src="/Wallet.png" alt="" width={30} height={30} />
-							<p>Wallet</p>
-						</li>
-						<li className={styles.navItem}>
-							<Image
-								src="/Setting_alt_line.png"
-								alt=""
-								width={30}
-								height={30}
-							/>
-							<p>Settings</p>
-						</li>
-					</ul>
-					<div
-						className={styles.logOut}
-						onClick={() => {
-							document.cookie = "loggedIn=false; path=/; max-age=0";
-							router.push("/login");
-						}}
-					>
-						<Image src="/Sign_out_squre.png" alt="" width={30} height={30} />
-						<p>Log Out</p>
-					</div>
-				</nav>
-			</div>
+        const data = await res.json();
+        console.log("Dashboard data:", data);
 
-			<button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
-				<Image
-					src={isOpen ? "/Close_round.png" : "/Menu.png"}
-					alt="menu toggle"
-					width={44}
-					height={44}
-				/>
-			</button>
-			<div className={styles.mainContent}>
-				<div className={styles.topMenu}>
-					<h1>Overview</h1>
-				</div>
+        // const pendingTask =
+        //   JSON.parse(localStorage.getItem("pendingTask")) || [];
+        // setPendingTask(pendingTask.length);
 
-				<h2>My Tasks</h2>
-				<div className={styles.myTaskContainer}>
-					<div className={styles.taskContainer}>
-						<p>Available</p>
-						<h2>7</h2>
-					</div>
-					<div className={styles.taskContainer}>
-						<p>Pending</p>
-						<h2>3</h2>
-					</div>
-					<div className={styles.taskContainer}>
-						<p>Completed</p>
-						<h2>9</h2>
-					</div>
-				</div>
+        setAvailabelTask(data.AvailableTasks);
+        setPendingTask(data.PendingTasks);
+        setApprovedSubmissions(data.ApprovedSubmissions);
+        setRejectedSubmissions(data.RejectedSubmissions);
+        setWalletBalance(data.WalletBalance);
+        setCompletedTask(data.CompletedTasks);
+      } catch (error) {
+        console.log("Error fetching dashboard data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-				<div className={styles.submissions}>
-					<h2>Submissions</h2>
-					<div className={styles.myTaskContainer}>
-						<div className={styles.taskContainer}>
-							<p>Approved</p>
-							<h2>5</h2>
-						</div>
-						<div className={styles.taskContainer}>
-							<p>Rejected</p>
-							<h2>10</h2>
-						</div>
-					</div>
-				</div>
+  return (
+    <div>
+      <div className={styles.divContainer}>
+        <div className={styles.topMenu}>
+          <h1>Overview</h1>
+        </div>
 
-				<div className={styles.walletBalance}>
-					<p>Wallet Balance</p>
-					<h2>$2,000.00</h2>
-				</div>
-			</div>
-		</div>
-	);
+        <h2>My Tasks</h2>
+        <div className={styles.myTaskContainer}>
+          <div className={styles.taskContainer}>
+            <p>Available</p>
+            <h2>{availableTask}</h2>
+          </div>
+          <div className={styles.taskContainer}>
+            <p>Pending</p>
+            <h2>{pendingTask}</h2>
+          </div>
+          <div className={styles.taskContainer}>
+            <p>Completed</p>
+            <h2>{completedTask}</h2>
+          </div>
+        </div>
+
+        <div className={styles.submissions}>
+          <h2>Submissions</h2>
+          <div className={styles.myTaskContainer}>
+            <div className={styles.taskContainer}>
+              <p>Approved</p>
+              <h2>{approvedSubmissions}</h2>
+            </div>
+            <div className={styles.taskContainer}>
+              <p>Rejected</p>
+              <h2>{rejectedSubmissions}</h2>
+            </div>
+            <div className={styles.walletBalance}>
+              <p>Wallet Balance</p>
+              <h2>${walletBalance}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* {!profile && (
+        <div className={styles.successful}>
+          <div className={styles.successfulContent}>
+            <img
+              src="/User_alt_light.svg"
+              alt="check"
+              className={styles.checkImage}
+            />
+
+            <p
+              style={{
+                color: "black",
+                fontSize: 24,
+                textAlign: "center",
+              }}
+            >
+              Please set up Profile to access all features
+            </p>
+            <p style={{ textAlign: "center", fontSize: 24 }}>
+              <span
+                onClick={() => {
+                  router.push("/workerdashboard/settings/profileinfo");
+                }}
+                style={{ color: "#3b82f6" }}
+              >
+                Profile info
+              </span>
+            </p>
+          </div>
+        </div>
+      )} */}
+    </div>
+  );
 }
 
 export default Dashboard;

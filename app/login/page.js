@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AppContext } from "../context/context";
 import Logo from "../components/logo";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -45,21 +46,32 @@ const Login = () => {
       });
 
       const data = await response.json();
+      const token = data.Token;
+      localStorage.setItem("token", token);
 
+      const decoded = jwtDecode(token);
+      console.log(decoded);
       if (!response.ok) {
         throw new Error(data.error || "Failed to sign up");
       }
       console.log("Sign up successful:", data);
       setLoggedIn(true);
       document.cookie = `loggedIn=true; path=/; max-age=3600`;
-    if (data.message.includes("Worker")) {
-			router.push("/workerdashboard")
-		} else if (data.message.includes("Owner")) {
-			router.push("/ownerdashboard");
-		}
-      
+      if (
+        decoded[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        ] === "Owner"
+      ) {
+        router.push("/ownerdashboard");
+      } else if (
+        decoded[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        ] === "Worker"
+      ) {
+        router.push("/workerdashboard");
+      }
     } catch (error) {
-      console.error("Error during sign up:", error.message);
+      console.log("Error during sign up:", error.message);
 
       // const errorMessages = error.message.split(",").map((msg) => msg.trim());
       // const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
@@ -68,14 +80,14 @@ const Login = () => {
           ? "Wrong password"
           : error.message
       );
-    } finally{
+    } finally {
       setLoading(false);
     }
   };
 
   return (
     <div className={styles.loginBg}>
-        <Logo route={router}/>
+      <Logo route={router} />
       <div className={styles.loginContainer}>
         <form
           className={styles.loginForm}
@@ -135,7 +147,7 @@ const Login = () => {
                 required
               />
             </div>
-            {apiError && <p className={styles.errorMessage}>{apiError}</p>}
+            {/* {apiError && <p className={styles.errorMessage}>{apiError}</p>} */}
             <div className={styles.info}>
               <Link href="/resetpassword" className={styles.highlight}>
                 <p>Forgot Password?</p>
@@ -150,8 +162,16 @@ const Login = () => {
             </div>
             <p className={styles.errorMessage}>{passwordError}</p>
           </div>
-          <button type="submit" className={styles.btn} disabled={loading} style={{cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1}}>
-            {loading? "Logging In...": "Login"}
+          <button
+            type="submit"
+            className={styles.btn}
+            disabled={loading}
+            style={{
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.7 : 1,
+            }}
+          >
+            {loading ? "Logging In..." : "Login"}
           </button>
         </form>
       </div>

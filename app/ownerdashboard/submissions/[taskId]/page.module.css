@@ -1,0 +1,125 @@
+.container {
+  padding: 40px 60px;
+}
+
+.tableContainer {
+  margin-top: 20px;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  height: 480px;
+  overflow-y: auto; /* only vertical scroll inside container */
+  scrollbar-width: none;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+}
+
+.tableHead th {
+  background-color: #3b82f6;
+  color: white;
+  padding: 12px 16px;
+  font-weight: 600;
+  text-align: center;
+
+  position: sticky; /* ✅ makes header stick */
+  top: 0; /* stick to top of container */
+  z-index: 2; /* stay above rows */
+}
+
+.tableRow {
+  background: white;
+}
+
+.tableData {
+  padding: 12px 16px;
+  vertical-align: middle;
+  text-align: center;
+
+  word-wrap: break-word; /* ✅ break long words */
+  word-break: break-word; /* ✅ force break if needed */
+  white-space: normal; /* ✅ allow wrapping */
+  max-width: 200px; /* optional: limit cell width */
+}
+.buttonData {
+  padding: 12px 16px;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  word-break: normal;
+}
+.menu {
+  position: absolute;
+  top: 100%; /* show below the dots */
+  right: 100;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.accept {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.decline {
+  background: #b91c1c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.linkBtn {
+  background: none;
+  border: none;
+  color: black; /* blue link look */
+  cursor: pointer;
+  /* text-decoration: underline; */
+  font-size: 14px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0; /* full screen */
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.previewImg {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #000;
+}
+
+@media (max-width: 800px) {
+  .container {
+    padding: 40px 20px;
+  }
+  .tableContainer {
+    overflow-x: auto; /* enable horizontal scrolling */
+    height: 800px;
+  }
+
+  .table {
+    min-width: 800px; /* force table to be wider than container */
+  }
+}
