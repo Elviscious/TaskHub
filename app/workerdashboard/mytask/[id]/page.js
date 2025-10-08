@@ -20,6 +20,7 @@ export default function TaskDetails() {
   const [proof, setProof] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [successful, setSuccessful] = useState(false);
 
   useEffect(() => {
     async function fetchTask() {
@@ -179,7 +180,7 @@ export default function TaskDetails() {
       if (!response.ok) {
         throw new Error("Failed to submit proof");
       }
-      alert("Proof submitted successfully!");
+      setSuccessful(true);
 
       console.log(new Date().toISOString());
       // Removing the task from pending
@@ -200,95 +201,136 @@ export default function TaskDetails() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1 style={{ margin: 0 }}>Task Details</h1>
-      <span
-        onClick={() => {
-          router.push("/workerdashboard/mytask");
-        }}
-        style={{ cursor: "pointer", color: "black" }}
-      >
-        Go Back
-      </span>
+    <div>
+      <div className={styles.container}>
+        <h1 style={{ margin: 0 }}>Task Details</h1>
+        <span
+          onClick={() => {
+            router.push("/workerdashboard/mytask");
+          }}
+          style={{ cursor: "pointer", color: "black" }}
+        >
+          Go Back
+        </span>
 
-      {detailTasks && (
-        <div className={styles.contentDetails}>
-          <div className={styles.details}>
-            <p>
-              <strong>Title:</strong> {detailTasks.JobTitle}
-            </p>
-            <p>
-              <strong>Platform:</strong> {platform[detailTasks.Platform]}
-            </p>
-            <p>
-              <strong>Instructions:</strong> {detailTasks.Instructions}
-            </p>
-            <p>
-              <strong>Required Proof:</strong>{" "}
-              {requiredProof[detailTasks.RequiredProof]}
-            </p>
-            <p>
-              <strong>Link:</strong>
-              {detailTasks.Link}
-            </p>
-            {(isPending && detailTasks.RequiredProof === 0) ||
-            (isPending && detailTasks.RequiredProof === 2) ? (
-              <div>
-                <input
-                  type="file"
-                  id="fileUpload"
-                  className={styles.hiddenInput}
-                  onChange={(e) => setProof(e.target.files[0])}
-                />
-                {proof && <span className={styles.fileName}>{proof.name}</span>}
-                <label
-                  htmlFor="fileUpload"
-                  className={styles.fileButton}
-                  onClick={() => {
-                    console.log(proof);
-                  }}
-                >
-                  Upload File
-                </label>
-              </div>
+        {detailTasks && (
+          <div className={styles.contentDetails}>
+            <div className={styles.details}>
+              <p>
+                <strong>Title:</strong> {detailTasks.JobTitle}
+              </p>
+              <p>
+                <strong>Platform:</strong> {platform[detailTasks.Platform]}
+              </p>
+              <p>
+                <strong>Instructions:</strong> {detailTasks.Instructions}
+              </p>
+              <p>
+                <strong>Required Proof:</strong>{" "}
+                {requiredProof[detailTasks.RequiredProof]}
+              </p>
+              <p>
+                <strong>Link:</strong>
+                {detailTasks.Link}
+              </p>
+              {(isPending && detailTasks.RequiredProof === 0) ||
+              (isPending && detailTasks.RequiredProof === 2) ? (
+                <div>
+                  <input
+                    type="file"
+                    id="fileUpload"
+                    className={styles.hiddenInput}
+                    onChange={(e) => setProof(e.target.files[0])}
+                  />
+                  {proof && (
+                    <span className={styles.fileName}>{proof.name}</span>
+                  )}
+                  <label
+                    htmlFor="fileUpload"
+                    className={styles.fileButton}
+                    onClick={() => {
+                      console.log(proof);
+                    }}
+                  >
+                    Upload File
+                  </label>
+                </div>
+              ) : (
+                isPending && (
+                  <input
+                    type="text"
+                    placeholder="Paste proof link"
+                    className={styles.inputLink}
+                    value={proof}
+                    onChange={(e) => setProof(e.target.value)}
+                  />
+                )
+              )}
+            </div>
+
+            {/* Toogle between the Start and Submit button */}
+
+            {!isPending ? (
+              <button
+                className={styles.startBtn}
+                onClick={() => handleStart(detailTasks.Id)}
+                style={{
+                  cursor: loading ? "not-allowed" : "pointer",
+                  opacity: loading ? 0.7 : 1,
+                }}
+              >
+                {loading ? "Starting..." : "Start"}
+              </button>
             ) : (
-              isPending && (
-                <input
-                  type="text"
-                  placeholder="Paste proof link"
-                  className={styles.inputLink}
-                  value={proof}
-                  onChange={(e) => setProof(e.target.value)}
-                />
-              )
+              <button
+                className={styles.startBtn}
+                onClick={() => handleSubmit()}
+                style={{
+                  cursor: loading ? "not-allowed" : "pointer",
+                  opacity: loading ? 0.7 : 1,
+                }}
+              >
+                {loading ? "Submitting..." : "Submit"}
+              </button>
             )}
           </div>
+        )}
+      </div>
 
-          {/* Toogle between the Start and Submit button */}
+      {successful && (
+        <div className={styles.successful}>
+          <div
+            className={styles.successfulContent}
+            onClick={() => setSuccessful(false)}
+          >
+            <img
+              src="/Check_ring_light.png"
+              alt="check"
+              className={styles.checkImage}
+            />
 
-          {!isPending ? (
-            <button
-              className={styles.startBtn}
-              onClick={() => handleStart(detailTasks.Id)}
+            <p
               style={{
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.7 : 1,
+                color: "black",
+                fontSize: 24,
+                fontWeight: "bold",
+                textAlign: "center",
               }}
             >
-              {loading ? "Starting..." : "Start"}
-            </button>
-          ) : (
-            <button
-              className={styles.startBtn}
-              onClick={() => handleSubmit()}
-              style={{
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.7 : 1,
-              }}
-            >
-              {loading ? "Submitting..." : "Submit"}
-            </button>
-          )}
+              Your submissions was successful
+            </p>
+            {/* <p style={{ textAlign: "center", fontSize: 24 }}>
+              View in{" "}
+              <span
+                onClick={() => {
+                  router.push("/ownerdashboard/MyTask");
+                }}
+                style={{ color: "#3b82f6" }}
+              >
+                My Task
+              </span>
+            </p> */}
+          </div>
         </div>
       )}
     </div>

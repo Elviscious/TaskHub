@@ -75,11 +75,19 @@ const Login = () => {
 
       // const errorMessages = error.message.split(",").map((msg) => msg.trim());
       // const emailError = errorMessages.find((msg) => msg.startsWith("Email"));
-      setApiError(
-        error.message === "Invalid login attempt."
-          ? "Wrong password"
-          : error.message
-      );
+
+      if (error.message === "Invalid login attempt.") {
+        setApiError("Wrong Password");
+      } else if (
+        error.message === "Invalid token specified: must be a string"
+      ) {
+        setApiError("User not found");
+      }
+      // setApiError(
+      //   error.message === "Invalid login attempt."
+      //     ? "Wrong password"
+      //     : error.message
+      // );
     } finally {
       setLoading(false);
     }
@@ -147,7 +155,7 @@ const Login = () => {
                 required
               />
             </div>
-            {/* {apiError && <p className={styles.errorMessage}>{apiError}</p>} */}
+            {apiError && <p className={styles.errorMessage}>{apiError}</p>}
             <div className={styles.info}>
               <Link href="/resetpassword" className={styles.highlight}>
                 <p>Forgot Password?</p>

@@ -15,6 +15,7 @@ export default function Settings() {
           <h2>Account</h2>
           <p
             onClick={() => router.push("/ownerdashboard/settings/profileinfo")}
+            style={{ cursor: "pointer" }}
           >
             Profile information
           </p>
