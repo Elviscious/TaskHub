@@ -170,7 +170,7 @@ export default function PostJob() {
             <label>Job Title</label>
             <input
               type="text"
-              placeholder="Subscribe to my channel"
+              placeholder="e.g Subscribe to my channel"
               required
               value={jobTitle}
               onChange={(e) => {
@@ -224,7 +224,7 @@ export default function PostJob() {
             <label>Instructions</label>
             <textarea
               type="text"
-              placeholder="Subscribe to my YouTube channel"
+              placeholder="e.g Subscribe to my YouTube channel"
               required
               value={instructions}
               onChange={(e) => {
@@ -252,7 +252,7 @@ export default function PostJob() {
             <label>Input Link</label>
             <input
               type="url"
-              placeholder="www.youtube.com"
+              placeholder="input your link here"
               required
               value={inputLink}
               onChange={(e) => {

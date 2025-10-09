@@ -79,10 +79,11 @@
 .inputLink {
   border: 1px solid #3b82f6;
   border-radius: 7px;
-  padding: 10px 25px;
+  padding: 10px;
   background-color: #fff;
   color: black;
   margin-bottom: 30px;
+  height: 40px;
 }
 
 .inputLink:focus {

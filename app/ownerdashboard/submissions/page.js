@@ -96,19 +96,23 @@ export default function Submissions() {
     <div className={styles.container}>
       <h1>Submissions</h1>
 
-      <div style={{ justifySelf: "right" }}>
-        <div className={styles.inputContainer}>
-          <Image src="/Search.png" alt="search" width={20} height={20} />
-          <input
-            placeholder="Search here..."
-            className={styles.input}
-            value={searchTitle}
-            onChange={(e) => {
-              setSearchTitle(e.target.value);
-            }}
-          />
+      {submissions.length > 0 ? (
+        <div style={{ justifySelf: "right" }}>
+          <div className={styles.inputContainer}>
+            <Image src="/Search.png" alt="search" width={20} height={20} />
+            <input
+              placeholder="Search here..."
+              className={styles.input}
+              value={searchTitle}
+              onChange={(e) => {
+                setSearchTitle(e.target.value);
+              }}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <p></p>
+      )}
 
       <div className={styles.listContainer}>
         <ul style={{ listStyle: "none" }}>

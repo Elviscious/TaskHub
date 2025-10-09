@@ -73,6 +73,7 @@
     border-radius: 5px;
     outline: none;
     padding: 5px 10px;
+    height: 40px;
     color: black;
     /* min-width: 520px; */
     max-width: 700px;
@@ -90,6 +91,7 @@
   border-radius: 5px;
   outline: none;
   padding: 5px 10px;
+  height: 40px;
   color: black;
   /* min-width: 520px; */
   max-width: 700px;
