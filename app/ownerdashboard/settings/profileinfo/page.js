@@ -62,7 +62,6 @@ export default function ProfileInfo() {
         setNumber(data.PhoneNumber);
         setIndustry(data.Industry);
         setPreview(data.ProfilePictureUrl);
-        setLastUpdated(data.LastUpdated);
       } catch (error) {
         console.log(error.message);
       }

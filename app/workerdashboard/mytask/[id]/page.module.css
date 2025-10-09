@@ -116,7 +116,9 @@
 .checkImage {
   width: 200px;
   height: 200px;
-  margin: 0 45px;
+  /* margin: 0 45px; */
+  display: flex;
+  justify-self: center;
 }
 
 @media (max-width: 600px) {

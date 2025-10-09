@@ -651,6 +651,14 @@ export default function TaskDetailsPage() {
   return (
     <div className={styles.container}>
       <h2>Task: {JobTitle}</h2>
+      <span
+        onClick={() => {
+          router.push("/ownerdashboard/submissions");
+        }}
+        style={{ cursor: "pointer", color: "black" }}
+      >
+        Go Back
+      </span>
       <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead className={styles.tableHead}>
@@ -665,7 +673,9 @@ export default function TaskDetailsPage() {
             {workers &&
               workers.map((item) => (
                 <tr key={item.Id} className={styles.tableRow}>
-                  <td className={styles.tableData}>{item.WorkerName}</td>
+                  <td className={styles.tableData}>
+                    {item.WorkerSocialHandle}
+                  </td>
                   <td className={styles.tableData}>
                     {isImage(item.ProofFileUrl) ? (
                       <button

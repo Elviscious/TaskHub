@@ -191,8 +191,6 @@ export default function TaskDetails() {
       localStorage.setItem(userKey, JSON.stringify(updated));
       setIsPending(false);
       setProof("");
-
-      router.push("/workerdashboard/mytask");
     } catch (error) {
       console.log("Error uploading proof:", error);
     } finally {
@@ -301,7 +299,10 @@ export default function TaskDetails() {
         <div className={styles.successful}>
           <div
             className={styles.successfulContent}
-            onClick={() => setSuccessful(false)}
+            onClick={() => {
+              setSuccessful(false);
+              router.push("/workerdashboard/mytask");
+            }}
           >
             <img
               src="/Check_ring_light.png"
