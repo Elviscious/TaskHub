@@ -214,62 +214,7 @@ export default function Wallet() {
   // };
 
   // verifyPayment.js
-  const verifyPayment = async (ref, retries = 3, delay = 3000) => {
-    // retries = how many times to recheck if payment is complete
-    // delay = how long to wait (in ms) between checks
 
-    const token = localStorage.getItem("token");
-
-    for (let attempt = 1; attempt <= retries; attempt++) {
-      console.log(`Verifying payment... Attempt ${attempt}`);
-
-      try {
-        const res = await fetch(`${baseUrl}/api/payment/VerifyPayment/${ref}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await res.json();
-
-        // If verification API itself failed
-        if (!data.status) {
-          console.warn("Verification API returned an error");
-          continue;
-        }
-
-        const txStatus = data.data?.status;
-        console.log("This is txStatus:", txStatus);
-
-        if (txStatus === "success") {
-          console.log("✅ Payment verified successfully!");
-          await fetchWalletBalance();
-          // Handle success (e.g., update wallet or database)
-          return data;
-        }
-
-        if (txStatus === "failed") {
-          console.log("❌ Payment failed");
-          return data;
-        }
-
-        // If abandoned or pending, wait and retry
-        if (txStatus === "abandoned" || txStatus === "pending") {
-          console.log("⏳ Payment not completed yet, retrying...");
-          await new Promise((resolve) => setTimeout(resolve, delay));
-
-          // setPaymentFailed(true);
-        }
-      } catch (error) {
-        console.error("Error verifying payment:", error);
-      }
-    }
-
-    console.warn("⚠️ Payment verification retries exhausted.");
-    setPaymentFailed(true);
-    return null;
-  };
   const handlePayment = async () => {
     const token = localStorage.getItem("token");
 
