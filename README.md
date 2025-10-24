@@ -16,10 +16,6 @@ TaskHub is a responsive task marketplace built with Next.js and React.js, design
 - **Deployment**: Vercel
 - **Other**: JavaScript, CSS (optimized with Next.js styling)
 
-## 📸 Screenshots
-![TaskHub Dashboard](path/to/screenshot1.png) <!-- Replace with uploaded image path, e.g., /images/dashboard.png -->
-![Mobile Task View](path/to/screenshot2.png) <!-- Replace with uploaded image path -->
-
 ## 🚀 Getting Started
 
 ### Prerequisites
