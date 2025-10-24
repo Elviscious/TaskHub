@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import WalletClient from "./WalletClient";
+import WalletClient from "./components/walletclient";
 
 export default function WalletPage() {
   return (

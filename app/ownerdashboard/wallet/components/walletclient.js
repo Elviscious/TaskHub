@@ -7,7 +7,7 @@ import WalletLayout from "./components/walletlayout";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-export default function Wallet() {
+export default function WalletClient() {
   const {
     fundWallet,
     setFundWallet,
