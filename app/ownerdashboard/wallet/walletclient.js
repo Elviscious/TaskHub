@@ -2,8 +2,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "@/app/ownerdashboard/wallet/page.module.css";
 import { AppContext } from "@/app/context/context";
-import WalletHeader from "./components/walletheader";
-import WalletLayout from "./components/walletlayout";
+// import WalletHeader from "./components/walletheader";
+import WalletHeader from "@/app/workerdashboard/wallet/components/walletheader";
+// import WalletLayout from "./components/walletlayout";
+import WalletLayout from "@/app/workerdashboard/wallet/components/walletlayout";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
