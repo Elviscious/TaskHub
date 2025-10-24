@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskHub
 
-## Getting Started
+[![Vercel Deployment](https://img.shields.io/badge/Deployed%20on-Vercel-brightgreen)](https://your-taskhub-vercel-url.vercel.app) [![Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?logo=next.js)](https://nextjs.org)
 
-First, run the development server:
+TaskHub is a responsive task marketplace built with Next.js and React.js, designed during my internship at Complus Tech Limited. Users can post micro-tasks (e.g., follow an Instagram account, comment on a YouTube video) and get paid by others willing to complete them, fostering a simple gig economy platform.
 
-```bash
+## ✨ Features
+- **Task Posting**: Users can create tasks with details like type (e.g., social media actions) and payment offers.
+- **Task Completion**: Workers browse and complete tasks, earning rewards for verified actions.
+- **Responsive Design**: Mobile-friendly interface using Next.js for seamless access across devices.
+- **Reusable Components**: Modular React components for scalable task management and user interaction.
+- **Deployment-Ready**: Hosted on Vercel for fast, global availability.
+
+## 🛠️ Tech Stack
+- **Frontend**: React.js, Next.js
+- **Deployment**: Vercel
+- **Other**: JavaScript, CSS (optimized with Next.js styling)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm, yarn, pnpm, or bun
+
+### Installation
+1. Clone the repository:
+git clone https://github.com/Elviscious/TaskHub.git
+cd TaskHub
+text2. Install dependencies:
+npm install
+or yarn install, pnpm install, or bun install
+text3. Run the development server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+textOpen [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Usage Example
+- **Post a Task**: Navigate to the "Create Task" page, enter task details (e.g., "Follow @example"), and set a payment amount.
+- **Complete a Task**: Browse the task list, select a task, and submit proof (e.g., screenshot) to earn payment.
+- (Add more steps or adjust based on actual functionality)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🌐 Deployment
+Deployed on Vercel—check it live at [your-taskhub-vercel-url.vercel.app](https://your-taskhub-vercel-url.vercel.app). For custom deployment, follow the [Vercel guide](https://vercel.com/docs).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🤝 Contributing
+1. Fork the repository and create a feature branch (`git checkout -b feature/new-task-type`).
+2. Commit your changes (`git commit -m 'Add new task type feature'`).
+3. Push to the branch (`git push origin feature/new-task-type`).
+4. Open a Pull Request with a clear description.
 
-## Learn More
+## 👋 Contact
+Built by interns at Complus Tech
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
