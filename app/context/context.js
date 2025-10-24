@@ -10,7 +10,7 @@ export function AppProvider({ children }) {
   const [selectedRadio, setSelectedRadio] = useState("worker");
   const [profile, setProfile] = useState(false);
   const [fundWallet, setFundWallet] = useState(false);
-  const [walletBalance, setWalletBalance] = useState(0);
+  const [walletBalance, setWalletBalance] = useState(null);
   const [token, setToken] = useState("");
   // Base URL for API requests, can be changed based on environment
   const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";

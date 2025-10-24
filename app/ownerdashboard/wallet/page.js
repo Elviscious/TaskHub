@@ -22,9 +22,8 @@ export default function Wallet() {
   const [amountError, setAmountError] = useState("");
   const [scriptLoaded, setScriptLoaded] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const reference = searchParams.get("reference");
+
   //   const [reference, setReference] = useState("");
   const data = [
     {
@@ -116,28 +115,7 @@ export default function Wallet() {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${baseUrl}/api/ProfileSetup/GetOwnerProfile`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await res.json();
-        console.log(data);
-        setUserEmail(data.Email);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
+    const reference = searchParams.get("reference");
     if (reference) {
       const verifyPayment = async (reference) => {
         const token = localStorage.getItem("token");
@@ -159,7 +137,14 @@ export default function Wallet() {
 
           if (data.data?.status === "success") {
             setPaymentSuccessful(true);
-            // await fetchWalletBalance();
+            await fetchWalletBalance();
+
+            // To remove reference from page URL
+            window.history.replaceState(
+              {},
+              document.title,
+              window.location.pathname
+            );
           } else {
             setPaymentFailed(true);
           }
@@ -308,11 +293,13 @@ export default function Wallet() {
         return;
       }
 
-      window.open(data?.data?.authorization_url);
+      window.open(data?.data?.authorization_url, "_self");
     } catch (error) {
       console.error("💥 Payment Error:", error);
     } finally {
       setLoading(false);
+      setAmount("");
+      setFundWallet(false);
     }
   };
 
