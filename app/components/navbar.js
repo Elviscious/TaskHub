@@ -10,7 +10,7 @@ import { AppContext } from "../context/context";
 function Navbar(props) {
   const [dropDown, setdropDown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { logOut } = useContext(AppContext);
+  // const { logOut } = useContext(AppContext);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -141,11 +141,11 @@ function Navbar(props) {
           </ul>
           <div
             className={styles.logOut}
-            // onClick={() => {
-            //   document.cookie = "loggedIn=false; path=/; max-age=0";
-            //   router.push("/login");
-            // }}
-            onClick={handleLogOut}
+            onClick={() => {
+              document.cookie = "loggedIn=false; path=/; max-age=0";
+              router.push("/login");
+            }}
+            // onClick={handleLogOut}
           >
             <Image src="/Sign_out_squre.png" alt="" width={30} height={30} />
             <p>Log Out</p>

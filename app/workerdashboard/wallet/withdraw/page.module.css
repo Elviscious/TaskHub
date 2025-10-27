@@ -1,94 +1,96 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
 }
-.card{
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 40px 30px;
-    width: clamp(400px, 40%, 80%);
-    box-shadow: 0 0 12px 1px #3b8cf6be;
-    /* width: 40%; */
-    /* max-width: 90%; */
-}
-
-.card h2{
-    padding-bottom: 40px ;
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 40px 30px;
+  width: clamp(400px, 40%, 80%);
+  box-shadow: 0 0 12px 1px #3b8cf6be;
+  margin-top: 170px;
+  /* width: 40%; */
+  /* max-width: 90%; */
 }
 
-.inputGroup{
-    display: flex;
-    flex-direction: column ;
-    gap: 25px;
+.card h2 {
+  padding-bottom: 40px;
 }
 
-.inputField{
-    display: flex;
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  gap: 5px;
+}
+
+.inputField input {
+  padding: 10px;
+  background: none;
+  color: #000;
+  border: 2px solid rgba(59, 130, 246, 0.6);
+  border-radius: 10px;
+  width: 100%;
+}
+
+.saveDetails {
+  padding: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.payButton {
+  padding: 10px;
+  margin-top: 25px;
+  background: #3b8cf6;
+  color: #fff;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+.payButton:hover {
+  box-shadow: 0 1px 10px 1px rgba(59, 140, 246, 0.603);
+  transform: translateY(-1px);
+}
+
+.transfer {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  h2 {
+    color: #3b8cf6;
+  }
+}
+.accountDetails {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h2 {
+    display: inline;
+  }
+}
+
+@media (max-width: 520px) {
+  .card {
+    min-width: 90%;
+  }
+  .Ec {
     flex-direction: column;
-    height: 70px;
-    gap: 5px;
-}
-
-.inputField input{
-    padding: 10px;
-    background: none;
-    color: #000;
-    border: 2px solid rgba(59, 130, 246, 0.6);
-    border-radius: 10px;
-    width:100% ;
-}
-
-.saveDetails{
-    padding: 20px 0;
-    display: flex;
-    gap: 10px;
-}
-
-.payButton{
-    padding: 10px;
-    background: #3b8cf6;
-    color: #fff;
-    width: 100%;
-    height: 50px;
-    border: none;
-    border-radius: 10px;   
-    font-size: 20px;
-    font-weight: 600;
-    transition: all .3s ease-in-out;
-}
-.payButton:hover{
-    box-shadow: 0 1px 10px 1px rgba(59, 140, 246, 0.603);
-    transform: translateY(-1px);
-}
-
-.transfer{
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    h2{
-        color: #3b8cf6;
-    }
-}
-.accountDetails{
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    h2{
-        display: inline;
-    }
-}
-
-@media(max-width:520px){
-    .card{
-        min-width: 90%;
-    }
-    .Ec{
-        flex-direction: column;
-    }
+  }
 }
