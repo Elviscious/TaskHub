@@ -24,6 +24,7 @@ export default function WalletClient() {
   const [amountError, setAmountError] = useState("");
   const [scriptLoaded, setScriptLoaded] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [payOutData, setPayOutData] = useState([]);
   const searchParams = useSearchParams();
   const reference = searchParams.get("reference");
   //   const [reference, setReference] = useState("");
@@ -94,26 +95,30 @@ export default function WalletClient() {
   ];
 
   useEffect(() => {
-    if (window.PaystackPop) {
-      setScriptLoaded(true);
-      return;
-    }
+    const token = localStorage.getItem("token");
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/WalletServices/transactions`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    const script = document.createElement("script");
-    script.src = "https://js.paystack.co/v1/inline.js";
-    script.async = true;
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
 
-    script.onload = () => {
-      console.log("✅ Paystack script loaded");
-      setScriptLoaded(true);
+        const data = await res.json();
+        console.log(data);
+        setPayOutData(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    script.onerror = () => {
-      console.error("❌ Failed to load Paystack script");
-      alert("Failed to load Paystack payment system. Please refresh the page.");
-    };
-
-    document.body.appendChild(script);
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -308,11 +313,8 @@ export default function WalletClient() {
     <div className={styles.Container}>
       <div>
         <h1>Wallet</h1>
-        <WalletHeader
-          text="Funding History"
-          link="/ownerdashboard/wallet/fundinghistory"
-        />
-        <WalletLayout title="Payout History" payoutData={data} />
+        <WalletHeader />
+        <WalletLayout title="Transaction History" payoutData={payOutData} />
       </div>
 
       {fundWallet && (

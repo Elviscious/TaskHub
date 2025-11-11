@@ -27,9 +27,6 @@ export default function WalletHeader({ text, link }) {
         />
       </div>
       <div className={styles.walletActions}>
-        <Link className={styles.addFundsButton} href={link}>
-          {text}
-        </Link>
         <Link href="/workerdashboard/wallet/withdraw">
           <button className={styles.withdrawButton}>
             <Image

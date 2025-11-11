@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "@/app/ownerdashboard/PostJob/page.module.css";
 import { AppContext } from "@/app/context/context";
 import { useRouter } from "next/navigation";

@@ -6,7 +6,7 @@ import { AppContext } from "@/app/context/context";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function WalletHeader({ text, link }) {
+export default function WalletHeader() {
   const [viewFunds, setViewFunds] = useState(true);
   const { setFundWallet, walletBalance, fetchWalletBalance } =
     useContext(AppContext);
@@ -29,10 +29,6 @@ export default function WalletHeader({ text, link }) {
         />
       </div>
       <div className={styles.walletActions}>
-        <Link className={styles.addFundsButton} href={link}>
-          {text}
-        </Link>
-
         <button
           className={styles.withdrawButton}
           onClick={() => setFundWallet(true)}

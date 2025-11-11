@@ -1,247 +1,236 @@
-.Container{
-    max-width: 100%;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    padding: 40px 60px;
+.Container {
+  /* max-width: 100%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  padding: 40px 60px;
 }
 
 .walletHeader {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 30px 20px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #3b82f6;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    color: white;
-    max-width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 30px 20px;
+  justify-content: space-between;
+  /* align-items: center; */
+  background-color: #3b82f6;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.walletBalance{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    position: relative;
-    gap: 20px;
-    justify-content: center;
-    background-color: white;
-    color: #000;
-    border-radius: 10px;
-    padding: 20px 20px;
-    padding-right: 70px;
+.walletBalance {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: relative;
+  gap: 20px;
+  justify-content: center;
+  background-color: white;
+  color: #000;
+  border-radius: 10px;
+  padding: 20px 20px;
+  padding-right: 70px;
 
-    img{
-        position: absolute;
-        left: 80%;
-        top: 20%;
-        cursor: pointer;
-    }
-}
-
-.walletActions{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.addFundsButton:hover{
-    text-decoration: underline;
-}
-.withdrawButton{
-    display: flex;
-    padding: 10px;
-    gap: 5px;
-    background-color: white;
-    border-radius: 10px;
-    border: none;
-    color: #3b82f6;
-    align-items: center;
+  img {
+    position: absolute;
+    left: 80%;
+    top: 20%;
     cursor: pointer;
+  }
 }
 
-.WalletLayout{
-    border: 1px solid #3b82f6;
-    height: 400px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    padding: 20px 30px;
-    max-width: 100%;
+.walletActions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.titleBar{
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    flex-wrap: wrap;
-    /* padding: 20px; */
-    h2{
-        font-size: 18px;
-    }
-    
+.addFundsButton:hover {
+  text-decoration: underline;
+}
+.withdrawButton {
+  display: flex;
+  padding: 10px;
+  gap: 5px;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  color: #3b82f6;
+  align-items: center;
+  cursor: pointer;
 }
 
-.filter{
-    display: flex;
-    align-items: center;
+.WalletLayout {
+  border: 1px solid #3b82f6;
+  height: 400px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px 30px;
+  max-width: 100%;
 }
-.payoutLists{
-    margin-top: 10px;
-    max-height: 320px;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
+.titleBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  /* padding: 20px; */
+  h2 {
+    font-size: 18px;
+  }
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+}
+.payoutLists {
+  margin-top: 10px;
+  max-height: 320px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 .payoutLists::-webkit-scrollbar {
-    width: 6px;
-    /* thinner scrollbar */
+  width: 6px;
+  /* thinner scrollbar */
 }
 
 .payoutLists::-webkit-scrollbar-track {
-    background: transparent;
-    /* no track background */
+  background: transparent;
+  /* no track background */
 }
 
 .payoutLists::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.25);
-    /* soft gray thumb */
-    border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  /* soft gray thumb */
+  border-radius: 10px;
 }
 
 .payoutLists::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.4);
-    /* slightly darker on hover */
+  background: rgba(0, 0, 0, 0.4);
+  /* slightly darker on hover */
 }
 
-.payout{
+.payout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  flex-wrap: wrap;
+  min-width: 0;
+  .money {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 5px 0;
-    flex-wrap: wrap;
-     min-width: 0;
-    .money{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        p{
-            font-weight: 550;
-        }
+    gap: 10px;
+    p {
+      font-weight: 550;
     }
-    .money + p{
-        font-size: 14px;
-        font-weight: 300;
-    }
+  }
+  .money + p {
+    font-size: 14px;
+    font-weight: 300;
+  }
 }
-.hiddenSelect{
-    /* pointer-events: none;s */
+.hiddenSelect {
+  /* pointer-events: none;s */
 }
 
 .customDropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .selected {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 120px;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 140px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .dropdownList {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    width: 120px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 8px 0;
-    margin: 0;
-    z-index: 10;
-    height: 200px;
-    overflow-y: scroll;
-    scrollbar-width: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 140px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  z-index: 10;
+  height: 140px;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .dropdownList li {
-    padding: 8px 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .dropdownList li:hover {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width:800px) {
-    .Container{
-        /* top:10%; */
-        transform: translate(-50%,10%);
-    }
+@media (max-width: 800px) {
+  .Container {
+    /* top:10%; */
+    /* transform: translate(-50%, 10%); */
+    padding: 40px 20px;
+  }
 }
 
-@media (max-width:435px) {
-    .walletBalance{
-        width: 140px;
-        padding: 10px 15px ;
-        padding-right: 10px;
-        gap: 5px;
-        img{
-            top: 50%;
-        }
+@media (max-width: 435px) {
+  .walletBalance {
+    width: 140px;
+    padding: 10px 15px;
+    padding-right: 10px;
+    gap: 5px;
+    img {
+      top: 50%;
     }
-    .WalletLayout{
-    }
-    .walletHeader{
-        justify-content: center;
-        gap: 25px;
-        padding: 20px 10px;
-    }
-    
-    .walletActions{
-        gap: 5px;
-    }
+  }
+  .WalletLayout {
+  }
+  .walletHeader {
+    justify-content: center;
+    gap: 25px;
+    padding: 20px 10px;
+  }
+
+  .walletActions {
+    gap: 5px;
+  }
 }
 
-@media(max-width:380px){
-    .titleBar{
-        justify-content: center;
-        gap: 5px;
-        margin: 0;
-        padding: 0;
-    }
-    .walletHeader{
-        gap: 10px;
-    }
-    .WalletLayout{
-        padding: 15px 15px;
-        height: 360px;
-    }
-    .payoutLists{
-        height: 260px;
-    }
+@media (max-width: 380px) {
+  .titleBar {
+    justify-content: center;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+  }
+  .walletHeader {
+    gap: 10px;
+  }
+  .WalletLayout {
+    padding: 15px 15px;
+    height: 360px;
+  }
+  .payoutLists {
+    height: 260px;
+  }
 }
