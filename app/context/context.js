@@ -17,6 +17,7 @@ export function AppProvider({ children }) {
   const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
   const payStackKey = "pk_test_d92b377495b5cad6b95b209b463a988d39f89305";
   const secretKey = "sk_test_9e531ed1d83a16b43e802ea534ff64fcb102ae3b";
+  const publicKey = "FLWPUBK-dcb2c3d7a40710253a632b3d6e20468e-X";
 
   //   Restore the token on page load
   // useEffect(() => {
@@ -131,6 +132,7 @@ export function AppProvider({ children }) {
         fetchWorkerBalance,
         payStackKey,
         secretKey,
+        publicKey,
       }}
     >
       {children}
