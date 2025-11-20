@@ -10,7 +10,7 @@ export default function WalletLayout({ title, payoutData }) {
   const [selectedType, setSelectedType] = useState("All");
   const dropdownRef = useRef(null);
 
-  const transactionsList = ["Earning", "Withdraw"];
+  const transactionsList = ["Earning", "Withdrawal"];
 
   const handleDropDown = () => {
     setDropDown(!dropDown);

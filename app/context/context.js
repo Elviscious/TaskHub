@@ -12,6 +12,7 @@ export function AppProvider({ children }) {
   const [fundWallet, setFundWallet] = useState(false);
   const [walletBalance, setWalletBalance] = useState(null);
   const [workerWalletBalance, setWorkerWalletBalance] = useState(null);
+  const [transferCode, setTransferCode] = useState("");
   const [token, setToken] = useState("");
   // Base URL for API requests, can be changed based on environment
   const baseUrl = "https://fxdt20jg-7098.uks1.devtunnels.ms";
@@ -133,6 +134,8 @@ export function AppProvider({ children }) {
         payStackKey,
         secretKey,
         publicKey,
+        transferCode,
+        setTransferCode,
       }}
     >
       {children}

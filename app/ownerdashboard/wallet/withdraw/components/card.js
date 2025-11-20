@@ -181,10 +181,14 @@ export default function Card() {
 
       setTimeout(() => {
         setSuccessful(true);
+      }, 1000);
+
+      setTimeout(() => {
+        setSuccessful(false);
         setAccountNumber("");
         setSelectedBankCode("");
         setAccountName("");
-        router.push("/workerdashboard/wallet/payout");
+        router.push("/ownerdashboard/wallet/payout");
       }, 3000);
     } catch (error) {
       console.log(error);
@@ -196,25 +200,15 @@ export default function Card() {
     <div style={{ paddingTop: 40 }}>
       <h1
         style={{ marginLeft: 30, marginBottom: 7 }}
-        onClick={() => {
-          setTimeout(() => {
-            setSuccessful(true);
-          }, 1000);
-
-          setTimeout(() => {
-            setSuccessful(false);
-            setAccountNumber("");
-            setSelectedBankCode("");
-            setAccountName("");
-            router.push("/workerdashboard/wallet/payout");
-          }, 3000);
-        }}
+        // onClick={() => {
+        //   router.push("/workerdashboard/wallet/otp");
+        // }}
       >
         Withdrawal Details
       </h1>
       <span
         onClick={() => {
-          router.push("/workerdashboard/wallet");
+          router.push("/ownerdashboard/wallet");
         }}
         style={{ cursor: "pointer", color: "black", marginLeft: 30 }}
       >
@@ -297,10 +291,10 @@ export default function Card() {
         <div className={styles.successful}>
           <div
             className={styles.successfulContent}
-            onClick={() => {
-              setSuccessful(false);
-              router.push("/workerdashboard/wallet/payout");
-            }}
+            // onClick={() => {
+            //   setSuccessful(false);
+            //   router.push("/workerdashboard/wallet/payout");
+            // }}
           >
             <img
               src="/Check_ring_light.png"
@@ -325,9 +319,9 @@ export default function Card() {
         <div className={styles.successful}>
           <div
             className={styles.successfulContent}
-            onClick={() => {
-              setfailed(false);
-            }}
+            // onClick={() => {
+            //   setfailed(false);
+            // }}
           >
             <img
               src="/Dell_light.png"

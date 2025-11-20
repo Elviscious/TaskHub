@@ -101,64 +101,75 @@ export default function WalletLayout({ title, payoutData }) {
         </div>
       </div>
       <div className={styles.payoutLists}>
-        {filterData === 0 ? (
+        {filterData.length === 0 ? (
           <p>No transaction history...</p>
         ) : (
-          filterData.map((data, index) => (
-            <div key={index} className={styles.payout}>
-              <div className="listFirst">
-                <div className={styles.money}>
-                  <Image src="/Money.png" alt="money" height={30} width={30} />
-                  <p>{data.Type}</p>
-                  {data.Type === "TaskPostingFee" && (
+          filterData.map((data, index) => {
+            if (data.Status !== "Success") {
+              return null;
+            }
+
+            return (
+              <div key={index} className={styles.payout}>
+                <div className="listFirst">
+                  <div className={styles.money}>
                     <Image
-                      src="/down.png"
-                      id={index}
-                      onClick={(e) => {
-                        settaskIndex(taskIndex === index ? "" : index);
-                      }}
-                      alt="down"
-                      width={10}
-                      height={5}
-                      style={{
-                        marginLeft: "20px",
-                        cursor: "pointer",
-                        transform:
-                          taskIndex === index
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                        transition: "transform 0.3s ease",
-                      }}
+                      src="/Money.png"
+                      alt="money"
+                      height={30}
+                      width={30}
                     />
+                    <p>{data.Type}</p>
+                    {data.Type === "TaskPostingFee" && (
+                      <Image
+                        src="/down.png"
+                        id={index}
+                        onClick={(e) => {
+                          settaskIndex(taskIndex === index ? "" : index);
+                        }}
+                        alt="down"
+                        width={10}
+                        height={5}
+                        style={{
+                          marginLeft: "20px",
+                          cursor: "pointer",
+                          transform:
+                            taskIndex === index
+                              ? "rotate(180deg)"
+                              : "rotate(0deg)",
+                          transition: "transform 0.3s ease",
+                        }}
+                      />
+                    )}
+                  </div>
+                  <p>{formatDate(data.CreatedAt)}</p>
+                  {data.Type === "TaskPostingFee" && taskIndex === index && (
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        paddingLeft: "10px",
+                        paddingTop: "10px",
+                      }}
+                    >
+                      <b>Task: </b>
+                      {data.TaskTitle}
+                    </p>
                   )}
                 </div>
-                <p>{formatDate(data.CreatedAt)}</p>
-                {data.Type === "TaskPostingFee" && taskIndex === index && (
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      paddingLeft: "10px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    <b>Task: </b>
-                    {data.TaskTitle}
-                  </p>
-                )}
+                <p
+                  style={
+                    data.Type === "Funding"
+                      ? { color: "green" }
+                      : { color: "red" }
+                  }
+                >
+                  {data.Type === "Funding"
+                    ? `+${data.Amount}`
+                    : `-${data.Amount}`}
+                </p>
               </div>
-              <p
-                style={
-                  data.Type === "Funding"
-                    ? { color: "green" }
-                    : { color: "red" }
-                }
-              >
-                {data.Type === "Funding"
-                  ? `+${data.Amount}`
-                  : `-${data.Amount}`}
-              </p>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

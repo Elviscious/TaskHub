@@ -19,6 +19,14 @@ export default function Settings() {
           >
             Profile information
           </p>
+          <p
+            onClick={() => {
+              router.push("/ownerdashboard/settings/bankDetails");
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            Bank Account Setup
+          </p>
           <p>Password & Security</p>
         </div>
         <div className={styles.content}>

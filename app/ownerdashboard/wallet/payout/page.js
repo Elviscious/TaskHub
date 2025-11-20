@@ -1,6 +1,7 @@
 "use client";
 
-import styles from "@/app/workerdashboard/wallet/withdraw/page.module.css";
+// import styles from "@/app/ownerdashboard/wallet/withdraw/page.module.css";
+import styles from "@/app/ownerdashboard/wallet/withdraw/page.module.css";
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "@/app/context/context";
 import { useRouter } from "next/navigation";
@@ -70,7 +71,7 @@ export default function PayOut() {
       setTransferCode(data?.data?.transfer_code);
 
       setTimeout(() => {
-        router.push("/workerdashboard/wallet/otp");
+        router.push("/ownerdashboard/wallet/otp");
       }, 2000);
     } catch (error) {
       console.log(error);
@@ -90,9 +91,9 @@ export default function PayOut() {
             bankCode === "" &&
             bankName === ""
           ) {
-            router.push("/workerdashboard/wallet/withdraw");
+            router.push("/ownerdashboard/wallet/withdraw");
           } else {
-            router.push("/workerdashboard/wallet");
+            router.push("/ownerdashboard/wallet");
           }
         }}
         style={{ cursor: "pointer", color: "black", marginLeft: 30 }}
